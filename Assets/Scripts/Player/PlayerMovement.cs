@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// 플레이어 움직임 컴포넌트
+/// </summary>
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody _rigidbody;
