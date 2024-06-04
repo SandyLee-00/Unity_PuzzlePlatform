@@ -7,7 +7,7 @@ public enum EquippableItemType
 }
 
 [CreateAssetMenu(fileName = "New EquippableItemData", menuName = "SOData/ItemData/EquippableItem")]
-public class EquipableItemData : ItemData
+public class EquippableItemData : ItemData
 {
     [Header("Equip Info")]
     public EquippableItemType type;
