@@ -10,7 +10,7 @@ public enum BuffItemType
 public class BuffItemData : ItemData
 {
     [Header("Buff Info")]
-    public BuffItemType buffType;
+    public BuffItemType type;
     public float duration;
     public float multiplierValue;
 }
