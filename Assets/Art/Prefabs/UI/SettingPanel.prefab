@@ -87,8 +87,9 @@ GameObject:
   - component: {fileID: 1445489296700544127}
   - component: {fileID: 8219353011572970346}
   - component: {fileID: 8466460856044674934}
+  - component: {fileID: 9082563447875445}
   m_Layer: 5
-  m_Name: CloseBtn
+  m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,6 +153,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9082563447875445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2684692540729704066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00bf853adb39c44da93dfa32838451a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3056355391816684864
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,7 +869,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8286493608177218417}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -980,7 +993,7 @@ MonoBehaviour:
   m_text: Setting
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 166e3f2416e60874592ce89117097294, type: 2}
-  m_sharedMaterial: {fileID: -3879118847503531721, guid: 166e3f2416e60874592ce89117097294, type: 2}
+  m_sharedMaterial: {fileID: -253778707811189924, guid: 166e3f2416e60874592ce89117097294, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
