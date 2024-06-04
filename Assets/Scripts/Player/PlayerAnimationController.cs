@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Player의 State에 따라 애니메이션을 변경하는 클래스
+/// </summary>
 public class PlayerAnimationController : MonoBehaviour
 {
     Animator animator;

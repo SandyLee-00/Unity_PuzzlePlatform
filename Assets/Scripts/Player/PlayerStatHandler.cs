@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+
 /// <summary>
-/// Stat을 관리하는 핸들러
+/// Player HP, MP 를 제외한 모든 스탯을 관리한다.
 /// </summary>
 public class PlayerStatHandler : MonoBehaviour
 {

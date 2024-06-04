@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Define ¸ğÀ½
+/// Define ëª¨ìŒ
 /// </summary>
 public class Define
 {
@@ -13,4 +13,8 @@ public class Define
         Effect,
         Max,
     }
+
+    public const string GroundTag = "Ground";
+    public const string PlayerTag = "Player";
+
 }

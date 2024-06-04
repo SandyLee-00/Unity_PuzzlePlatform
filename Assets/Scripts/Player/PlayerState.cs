@@ -16,6 +16,9 @@ public enum PlayerStateEnum
 }
 
 
+/// <summary>
+/// Player의 상태를 관리하는 클래스
+/// </summary>
 public class PlayerState : MonoBehaviour
 {
     public PlayerStateEnum State { get { return playerState; } set { playerState = value; } }

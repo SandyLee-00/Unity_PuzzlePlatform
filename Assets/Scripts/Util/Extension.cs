@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Extension ¸ðÀ½
+/// </summary>
 public static class Extension
 {
     static System.Random _random = new System.Random();
