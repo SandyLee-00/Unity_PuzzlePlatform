@@ -23,6 +23,12 @@ public class ButtonClick : MonoBehaviour
             case "PlayButton" or "RetryButton":
                 SceneManager.LoadScene("PlayScene");
                 break;
+            case "ContinueButton":
+                Time.timeScale = 1;
+                break;
+            case "CloseButton":
+                gameObject.SetActive(false);
+                break;
         }
     }
 

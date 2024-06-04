@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     {
         IsGamePlaying = false;
         GameOverPanel.SetActive(true);
+        Time.timeScale = 0;
     }
 
 }
