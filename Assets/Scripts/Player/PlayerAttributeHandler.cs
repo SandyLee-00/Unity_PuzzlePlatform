@@ -14,10 +14,18 @@ public class PlayerAttributeHandler : MonoBehaviour
         CurrentAttribute = new PlayerAttributes();
     }
 
-    // TODO: OnBuff 메서드 하나로 수정
-    public void OnSpeedBuff(BuffItemData buffItemData)
+    public void OnBuff(BuffItemData buffItemData)
     {
-        StartCoroutine(ApplySpeedBuff(buffItemData));
+        switch (buffItemData.type)
+        {
+            case BuffItemType.Speed:
+                StartCoroutine(ApplySpeedBuff(buffItemData));
+                break;
+
+            case BuffItemType.Jump:
+                StartCoroutine(ApplyJumpBuff(buffItemData));
+                break;
+        }
     }
 
     private IEnumerator ApplySpeedBuff(BuffItemData buffItemData)
@@ -28,11 +36,6 @@ public class PlayerAttributeHandler : MonoBehaviour
         yield return new WaitForSeconds(buffItemData.duration);
 
         CurrentAttribute.moveSpeed = baseMoveSpeed;
-    }
-
-    public void OnJumpBuff(BuffItemData buffItemData)
-    {
-        StartCoroutine(ApplyJumpBuff(buffItemData));
     }
 
     private IEnumerator ApplyJumpBuff(BuffItemData buffItemData)
