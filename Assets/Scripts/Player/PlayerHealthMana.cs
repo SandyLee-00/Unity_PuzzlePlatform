@@ -10,7 +10,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerHealthMana : MonoBehaviour
 {
-    public event Action OnChangeStatus;
+    public event Action OnChangeHealthMana;
 
     public event Action OnDamage;
     public event Action OnHeal;
@@ -76,7 +76,7 @@ public class PlayerHealthMana : MonoBehaviour
             return false;
         }
 
-        OnChangeStatus?.Invoke();
+        OnChangeHealthMana?.Invoke();
 
         HPtimeSinceLastChange = 0f;
         CurrentHP += change;
@@ -107,7 +107,7 @@ public class PlayerHealthMana : MonoBehaviour
             return false;
         }
 
-        OnChangeStatus?.Invoke();
+        OnChangeHealthMana?.Invoke();
 
         CurrentMP += change;
         CurrentMP = Mathf.Clamp(CurrentMP, 0, MaxMP);
