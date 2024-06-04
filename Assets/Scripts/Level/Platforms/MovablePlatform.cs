@@ -22,7 +22,6 @@ public class MovablePlatform : Platform
             endPos.x = transform.localPosition.x + maxDistance;
         else if(moveData.movableType == MovablePlatformType.Vertical)
             endPos.y = transform.localPosition.y + maxDistance;
-        Debug.Log(endPos);
     }
 
     private void Update()
@@ -78,16 +77,17 @@ public class MovablePlatform : Platform
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.TryGetComponent(out PlayerMovement playerMovement))
+        if (collision.gameObject.TryGetComponent(out PlayerMovement movement))
         {
-            playerMovement.transform.SetParent(gameObject.transform);
+            movement.transform.SetParent(transform);
         }
+
     }
     private void OnCollisionExit(Collision collision)
     {
-        if(collision.gameObject.TryGetComponent(out PlayerMovement playerMovement))
+        if(collision.gameObject.TryGetComponent(out PlayerMovement movement))
         {
-            collision.transform.SetParent(null);
+            movement.transform.SetParent(null);
         }
     }
 }

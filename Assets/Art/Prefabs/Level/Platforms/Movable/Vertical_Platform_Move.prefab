@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5096580054458259699}
   m_Layer: 0
   m_Name: Vertical_Platform_Move
-  m_TagString: Untagged
+  m_TagString: MovePlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveData: {fileID: 11400000, guid: aff77001dd74c704985ec8a833b14cff, type: 2}
-  maxDistance: 3
+  maxDistance: 2
   watingTime: 2
 --- !u!1001 &7717952228123945203
 PrefabInstance:

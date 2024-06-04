@@ -15,5 +15,5 @@ MonoBehaviour:
   type: 1
   platformName: "\uC0C1\uD558 \uD50C\uB7AB\uD3FC"
   description: "\uC704\uC544\uB798\uB85C \uC6C0\uC9C1\uC774\uB294 \uD50C\uB7AB\uD3FC"
-  movableType: 0
+  movableType: 1
   platformSpeed: 1
