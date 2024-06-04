@@ -8,5 +8,5 @@ public class PlayerAttributes
     public float maxHP = 100;
     public float maxMP = 200;
     public float moveSpeed = 5;
-    public float jumpForce = 5f;
+    public float jumpForce = 2.5f;
 }
