@@ -3,7 +3,8 @@ using UnityEngine;
 public enum TrapPlatformType
 {
     Fire,
-    Spike
+    Spike,
+    Stone
 }
 
 [CreateAssetMenu(fileName = "New TrapPlatformData", menuName = "SOData/PlatformData/TrapPlatform")]
