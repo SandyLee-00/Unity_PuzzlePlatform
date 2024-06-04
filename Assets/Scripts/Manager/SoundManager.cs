@@ -5,6 +5,7 @@ using UnityEngine;
 
 /// <summary>
 /// 사운드 매니저
+/// Bgm, Effect 사운드를 재생한다.
 /// </summary>  
 public class SoundManager : Singleton<SoundManager>
 {

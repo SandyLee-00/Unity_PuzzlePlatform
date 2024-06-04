@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Input System을 사용한 플레이어 입력 컨트롤러
+/// </summary>
 public class PlayerInputController : MonoBehaviour
 {
     public event Action<Vector2> OnMoveEvent;
     public event Action<Vector2> OnLookEvent;
     public event Action OnJumpEvent;
+    public event Action OnInteractEvent;
 
     private Camera _camera;
 
@@ -44,4 +48,8 @@ public class PlayerInputController : MonoBehaviour
         OnJumpEvent?.Invoke();
     }
 
+    public void OnInteract(InputValue value)
+    {
+        OnInteractEvent?.Invoke();
+    }
 }
