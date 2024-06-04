@@ -6,11 +6,12 @@ public class TrapPlatform : Platform
 {
     public TrapPlatformData trapPlatform;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.TryGetComponent(out PlayerMovement playerMovement))
+        if(other.gameObject.TryGetComponent(out PlayerMovement playerMovement))
         {
             Debug.Log("플레이어 데미지");
+            //Player.hp -= trapPlatform.damage;
         }
     }
 }
