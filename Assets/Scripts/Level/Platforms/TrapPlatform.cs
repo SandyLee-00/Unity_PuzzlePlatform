@@ -6,6 +6,8 @@ public class TrapPlatform : Platform
 {
     public TrapPlatformData trapPlatform;
 
+    //지속 데미지 릴레이 추가
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.TryGetComponent(out PlayerHealthMana playerState))
