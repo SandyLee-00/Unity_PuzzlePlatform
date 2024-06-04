@@ -62,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
         {
             _playerStateController.State = PlayerState.Idle;
         }
+
+        
     }
 
     private void Jump()
