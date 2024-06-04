@@ -12,7 +12,8 @@ public enum PlayerState
     Attack,
     Defend,
     GetHit,
-    Die
+    Die,
+    Interact
 }
 
 /// <summary>
@@ -20,29 +21,38 @@ public enum PlayerState
 /// </summary>
 public class PlayerStateController : MonoBehaviour
 {
-    public PlayerState State { get { return playerState; } set { playerState = value; } }
+    public PlayerState State { get { return _playerState; } set { _playerState = value; } }
 
     public event Action<PlayerState> OnStateChangeEvent;
 
     [SerializeField]
-    private PlayerState playerState;
+    private PlayerState _playerState;
 
-    private PlayerInputController playerInputController;
+    private PlayerInputController _playerInputController;
 
-    private PlayerHealthMana PlayerHealthSystem;
+    private PlayerHealthMana _playerHealthMana;
 
 
     private void Awake()
     {
-        playerInputController = gameObject.GetOrAddComponent<PlayerInputController>();
-        PlayerHealthSystem = gameObject.GetOrAddComponent<PlayerHealthMana>();
+        _playerInputController = gameObject.GetOrAddComponent<PlayerInputController>();
+        _playerHealthMana = gameObject.GetOrAddComponent<PlayerHealthMana>();
 
-        PlayerHealthSystem.OnDamage += () => { playerState = PlayerState.GetHit; };
-        PlayerHealthSystem.OnDeath += () => { playerState = PlayerState.Die; };
+        _playerHealthMana.OnDamage += () => { _playerState = PlayerState.GetHit; };
+        _playerHealthMana.OnDeath += () => { _playerState = PlayerState.Die; };
+
+        _playerInputController.OnInteractEvent += () =>
+        {
+            if (_playerState == PlayerState.Idle)
+            {
+                _playerState = PlayerState.Interact;
+                Debug.Log($"PlayerState: {_playerState}");
+            }
+        };
     }
 
     public void InvokeStateChangeEvent()
     {
-        OnStateChangeEvent?.Invoke(playerState);
+        OnStateChangeEvent?.Invoke(_playerState);
     }
 }
