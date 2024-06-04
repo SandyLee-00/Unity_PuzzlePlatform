@@ -57,12 +57,10 @@ public class PlayerMovement : MonoBehaviour
         if (moveDirection.magnitude > 0)
         {
             _playerStateController.State = PlayerState.Walk;
-            _playerStateController.InvokeStateChangeEvent();
         }
         else
         {
             _playerStateController.State = PlayerState.Idle;
-            _playerStateController.InvokeStateChangeEvent();
         }
     }
 
@@ -72,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _rigidbody.AddForce(Vector3.up * _playerAttributeHandler.CurrentAttribute.jumpForce, ForceMode.Impulse);
             _playerStateController.State = PlayerState.Jump;
-            _playerStateController.InvokeStateChangeEvent();
         }
     }
 

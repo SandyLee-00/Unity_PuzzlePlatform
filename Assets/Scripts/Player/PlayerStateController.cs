@@ -22,7 +22,15 @@ public enum PlayerState
 /// </summary>
 public class PlayerStateController : MonoBehaviour
 {
-    public PlayerState State { get { return _playerState; } set { _playerState = value; } }
+    public PlayerState State 
+    { 
+        get { return _playerState; } 
+        set 
+        {
+            _playerState = value; 
+            InvokeStateChangeEvent();
+        } 
+    }
 
     public event Action<PlayerState> OnStateChangeEvent;
 
@@ -52,7 +60,7 @@ public class PlayerStateController : MonoBehaviour
         };
     }
 
-    public void InvokeStateChangeEvent()
+    private void InvokeStateChangeEvent()
     {
         OnStateChangeEvent?.Invoke(_playerState);
     }
