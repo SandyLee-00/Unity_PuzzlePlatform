@@ -11,16 +11,18 @@ public class PlayerAnimationController : MonoBehaviour
     private void Awake()
     {
         playerState = gameObject.GetOrAddComponent<PlayerState>();
-        playerState.OnStateChangeEvent += ChangeAnimation;
+        // playerState.OnStateChangeEvent += ChangeAnimation;
 
     }
 
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        SoundManager.Instance.Play(Define.Sound.Bgm, "footstep05", 0.5f);
+
     }
 
-    private void ChangeAnimation(PlayerStateEnum playerStateEnum)
+    /*private void ChangeAnimation(PlayerStateEnum playerStateEnum)
     {
         switch (playerStateEnum)
         {
@@ -46,6 +48,6 @@ public class PlayerAnimationController : MonoBehaviour
                 animator.CrossFade("Die", 0.1f);
                 break;
         }
-    }
+    }*/
 
 }
