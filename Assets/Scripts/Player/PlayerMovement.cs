@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     public float maxPitchAngle = 20f;
     Camera _camera;
 
-    private const float jumpForce = 5f;
     private const float costMPJump = -40f;
 
     private void Awake()
@@ -71,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_playerStateController.State == PlayerState.Idle && _playerHealthMana.ChangeMP(costMPJump))
         {
-            _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            _rigidbody.AddForce(Vector3.up * _playerAttributeHandler.CurrentAttribute.jumpForce, ForceMode.Impulse);
             _playerStateController.State = PlayerState.Jump;
             _playerStateController.InvokeStateChangeEvent();
         }

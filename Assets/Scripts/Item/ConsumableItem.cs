@@ -9,6 +9,7 @@ public class ConsumableItem : ItemObject
         return $"{consumableItemData.itemName}\n{consumableItemData.description}";
     }
 
+    // TODO: switch 사용 안 하는 방식으로 수정
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out PlayerHealthMana playerStatus))
@@ -20,10 +21,10 @@ public class ConsumableItem : ItemObject
                     Destroy(gameObject);
                     break;
 
-                //case ConsumableItemType.Stamina:
-                //    playerStatus. 스테미나 처리
-                //    Destroy(gameObject);
-                //    break;
+                case ConsumableItemType.Stamina:
+                    playerStatus.ChangeMP(consumableItemData.increaseValue);
+                    Destroy(gameObject);
+                    break;
             }
         }
     }

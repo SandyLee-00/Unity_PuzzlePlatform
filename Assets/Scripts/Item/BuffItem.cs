@@ -9,6 +9,7 @@ public class BuffItem : ItemObject
         return $"{buffItemData.itemName}\n{buffItemData.description}";
     }
 
+    // TODO: switch 사용 안 하는 방식으로 수정
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out PlayerAttributeHandler attributeHandler))
@@ -20,10 +21,10 @@ public class BuffItem : ItemObject
                     Destroy(gameObject);
                     break;
 
-                //case BuffItemType.Speed:
-                //    점프 처리
-                //    Destroy(gameObject);
-                //    break;
+                case BuffItemType.Jump:
+                    attributeHandler.OnJumpBuff(buffItemData);
+                    Destroy(gameObject);
+                    break;
             }
         }
     }
