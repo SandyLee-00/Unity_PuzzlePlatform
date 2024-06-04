@@ -11,11 +11,12 @@ public class TrapHole : MonoBehaviour
             if (player.ChangeHP(-1))
             {
                 Debug.Log("처음부터 시작");
-                player.transform.position = new Vector3(-4, 3, -2);
+                player.transform.position = new Vector3(-4, 3, -2); //시작 지점으로 추가
             }
             else
             {
                 Debug.Log("게임오버");
+                //첫 화면으로 돌아가기
             }
         }
     }
