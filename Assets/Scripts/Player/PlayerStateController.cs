@@ -7,13 +7,14 @@ using UnityEngine;
 public enum PlayerState
 {
     Idle = 0,
-    Move,
+    Walk,
     Jump,
-    Attack,
-    Defend,
     GetHit,
     Die,
-    Interact
+    Interact,
+    Run,
+    Fall,
+    Climb,
 }
 
 /// <summary>

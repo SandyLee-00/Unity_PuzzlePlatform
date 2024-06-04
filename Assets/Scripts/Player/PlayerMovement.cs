@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveDirection.magnitude > 0)
         {
-            _playerStateController.State = PlayerState.Move;
+            _playerStateController.State = PlayerState.Walk;
             _playerStateController.InvokeStateChangeEvent();
         }
         else
@@ -69,17 +69,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (_playerStateController.State == PlayerState.Idle && _playerHealthMana.ChangeMP(costMPJump))
+        if(_rigidbody.velocity.y > 0.1 || _rigidbody.velocity.y < -0.1)
         {
-            _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            _playerStateController.State = PlayerState.Jump;
-            _playerStateController.InvokeStateChangeEvent();
+            return;
         }
+
+        _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        _playerStateController.State = PlayerState.Jump;
+        _playerStateController.InvokeStateChangeEvent();
     }
 
     public void JumpByOther(float jumpForce)
     {
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        _playerStateController.State = PlayerState.Jump;
+        _playerStateController.InvokeStateChangeEvent();
     }
 
     private void Look(Vector2 mouseDelta)
