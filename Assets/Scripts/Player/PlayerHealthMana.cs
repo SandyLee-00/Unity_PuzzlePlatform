@@ -5,12 +5,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// 플레이어 체력 시스템
-/// 필요한 곳에 이벤트를 등록하여 사용하기
+/// 플레이어 현재 HP, MP 관리한다.
+/// 필요한 곳에 이벤트를 등록해서 HP, MP 바뀔 때 사용하기
 /// </summary>
-public class PlayerStatusSystem : MonoBehaviour
+public class PlayerHealthMana : MonoBehaviour
 {
-    public event Action OnChangeStatus;
+    public event Action OnChangeHealthMana;
 
     public event Action OnDamage;
     public event Action OnHeal;
@@ -31,14 +31,14 @@ public class PlayerStatusSystem : MonoBehaviour
 
     public float CurrentHP { get; private set; }
     public float CurrentMP { get; private set; }
-    public float MaxHP => playerStatHandler.CurrentStat.maxHP;
-    public float MaxMP => playerStatHandler.CurrentStat.maxMP;
+    public float MaxHP => playerStatHandler.CurrentAttribute.maxHP;
+    public float MaxMP => playerStatHandler.CurrentAttribute.maxMP;
 
-    private PlayerStatHandler playerStatHandler;
+    private PlayerAttributeHandler playerStatHandler;
 
     private void Awake()
     {
-        playerStatHandler = gameObject.GetOrAddComponent<PlayerStatHandler>();
+        playerStatHandler = gameObject.GetOrAddComponent<PlayerAttributeHandler>();
     }
 
     private void Start()
@@ -76,7 +76,7 @@ public class PlayerStatusSystem : MonoBehaviour
             return false;
         }
 
-        OnChangeStatus?.Invoke();
+        OnChangeHealthMana?.Invoke();
 
         HPtimeSinceLastChange = 0f;
         CurrentHP += change;
@@ -107,7 +107,7 @@ public class PlayerStatusSystem : MonoBehaviour
             return false;
         }
 
-        OnChangeStatus?.Invoke();
+        OnChangeHealthMana?.Invoke();
 
         CurrentMP += change;
         CurrentMP = Mathf.Clamp(CurrentMP, 0, MaxMP);

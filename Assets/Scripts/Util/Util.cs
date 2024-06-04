@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Util ëª¨ìŒ 
+/// </summary>
 public static class Util
 {
     /// <summary>
-    /// ÀÚ½Ä °ÔÀÓ¿ÀºêÁ§Æ®¸¦ Ã£¾Æ¿Â´Ù.
+    /// ìì‹ ê²Œì„ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì•„ì˜¨ë‹¤.
     /// </summary>
     /// <param name="_gameObject"></param>
     /// <param name="name"></param>
@@ -23,7 +26,7 @@ public static class Util
     }
 
     /// <summary>
-    /// ÀÚ½Ä ¿ÀºêÁ§Æ®¿¡ ÀÖ´Â T ÄÄÆ÷³ÍÆ®¸¦ Ã£¾Æ¿Â´Ù.
+    /// ìì‹ ì˜¤ë¸Œì íŠ¸ì— ìˆëŠ” T ì»´í¬ë„ŒíŠ¸ë¥¼ ì°¾ì•„ì˜¨ë‹¤.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="_gameObject"></param>

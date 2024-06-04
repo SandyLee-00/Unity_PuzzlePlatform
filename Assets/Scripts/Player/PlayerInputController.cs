@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Input System을 사용한 플레이어 입력 컨트롤러
+/// </summary>
 public class PlayerInputController : MonoBehaviour
 {
     public event Action<Vector2> OnMoveEvent;
     public event Action<Vector2> OnLookEvent;
     public event Action OnJumpEvent;
+    public event Action OnInteractEvent;
 
     private Camera _camera;
 
@@ -27,7 +31,7 @@ public class PlayerInputController : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// 마우스 움직임에 따라 플레이어 좌우 회전, 카메라 상하좌우 회전
     /// </summary>
     /// <param name="value"></param>
     public void OnLook(InputValue value)
@@ -44,4 +48,8 @@ public class PlayerInputController : MonoBehaviour
         OnJumpEvent?.Invoke();
     }
 
+    public void OnInteract(InputValue value)
+    {
+        OnInteractEvent?.Invoke();
+    }
 }
