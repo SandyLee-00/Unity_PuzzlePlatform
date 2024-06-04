@@ -5,13 +5,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Input SystemÀ» »ç¿ëÇÑ ÇÃ·¹ÀÌ¾î ÀÔ·Â ÄÁÆ®·Ñ·¯
+/// Input Systemì„ ì‚¬ìš©í•œ í”Œë ˆì´ì–´ ì…ë ¥ ì»¨íŠ¸ë¡¤ëŸ¬
 /// </summary>
 public class PlayerInputController : MonoBehaviour
 {
     public event Action<Vector2> OnMoveEvent;
     public event Action<Vector2> OnLookEvent;
     public event Action OnJumpEvent;
+    public event Action OnInteractEvent;
 
     private Camera _camera;
 
@@ -47,4 +48,8 @@ public class PlayerInputController : MonoBehaviour
         OnJumpEvent?.Invoke();
     }
 
+    public void OnInteract(InputValue value)
+    {
+        OnInteractEvent?.Invoke();
+    }
 }
