@@ -102,4 +102,5 @@ public class PlayerMovement : MonoBehaviour
         transform.localEulerAngles = new Vector3(0, yaw, 0);
         _camera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
     }
+
 }
