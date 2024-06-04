@@ -11,12 +11,19 @@ public class MovablePlatform : Platform
     float nowTime = 0;
     Rigidbody rigidbody;
     Vector3 startPos;
+    Vector3 endPos;
 
     private bool isReverse;
 
     void Start()
     {
-        startPos = transform.position;  //원래 자리로 돌아오기 위한 위치
+        startPos = transform.localPosition;  //원래 자리로 돌아오기 위한 위치
+
+        if(moveData.movableType == MovablePlatformType.Horizontal)
+            endPos.x = transform.localPosition.x + maxDistance;
+        else if(moveData.movableType == MovablePlatformType.Vertical)
+            endPos.y = transform.localPosition.y + maxDistance;
+        Debug.Log(endPos);
     }
 
     void Update()
@@ -32,7 +39,7 @@ public class MovablePlatform : Platform
         {
             //x축 이동
             //현재 위치에서 최대 거리보다 넘어가면
-            if (transform.position.x >= startPos.x + maxDistance && !isReverse)
+            if (transform.position.x >= endPos.x && !isReverse)
                 WaitToReverse();
             else if(transform.position.x <= startPos.x && isReverse)
                 WaitToReverse();
@@ -44,7 +51,7 @@ public class MovablePlatform : Platform
         else if (moveData.movableType == MovablePlatformType.Vertical)
         {
             //y축 이동
-            if (transform.position.y >= startPos.y + maxDistance && !isReverse)
+            if (transform.position.y >= endPos.y && !isReverse)
                 WaitToReverse();
             else if (transform.position.y <= startPos.y && isReverse)
                 WaitToReverse();
@@ -58,7 +65,7 @@ public class MovablePlatform : Platform
     void WaitToReverse()    //바꾸기 전까지 대기
     {
         nowTime += Time.deltaTime;
-        if (nowTime > watingTime)
+        if (nowTime >= watingTime)
         {
             nowTime = 0;
             ChangeDirection();
