@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -11,5 +12,20 @@ public class PlayerAttributeHandler : MonoBehaviour
     private void Awake()
     {
         CurrentAttribute = new PlayerAttributes();
+    }
+
+    public void OnSpeedBuff(BuffItemData buffItemData)
+    {
+        StartCoroutine(ApplySpeedBuff(buffItemData));
+    }
+
+    private IEnumerator ApplySpeedBuff(BuffItemData buffItemData)
+    {
+        float baseMoveSpeed = CurrentAttribute.moveSpeed;
+        CurrentAttribute.moveSpeed *= buffItemData.multiplierValue;
+
+        yield return new WaitForSeconds(buffItemData.duration);
+
+        CurrentAttribute.moveSpeed = baseMoveSpeed;
     }
 }
