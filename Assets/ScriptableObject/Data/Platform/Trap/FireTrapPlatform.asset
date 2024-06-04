@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f8e0f7a77f89644b1d1df7434a27e0, type: 3}
-  m_Name: VerMovePlatform
+  m_Script: {fileID: 11500000, guid: a13b52d5c0e8e014e8d26791150cc069, type: 3}
+  m_Name: FireTrapPlatform
   m_EditorClassIdentifier: 
-  type: 1
-  platformName: "\uC0C1\uD558 \uD50C\uB7AB\uD3FC"
-  description: "\uC704\uC544\uB798\uB85C \uC6C0\uC9C1\uC774\uB294 \uD50C\uB7AB\uD3FC"
-  movableType: 1
-  platformSpeed: 1
+  type: 0
+  platformName: "\uD654\uC5FC"
+  description: "\uB2FF\uC73C\uBA74 \uD0C0\uC8FD\uC2B5\uB2C8\uB2E4"
+  trapType: 0
+  damage: 10
