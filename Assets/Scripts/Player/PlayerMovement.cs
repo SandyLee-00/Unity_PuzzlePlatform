@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = new Vector3(moveInput.x, moveInput.y, 0);
 
-        if (moveDirection.magnitude > 0)
+        if (moveDirection.magnitude > 0.01)
         {
             _playerStateController.State = PlayerState.Walk;
         }
@@ -66,16 +66,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (_playerStateController.State == PlayerState.Idle && _playerHealthMana.ChangeMP(costMPJump))
+        if (_playerStateController.State == PlayerState.Jump || _playerStateController.State == PlayerState.Fall)
+        {
+            return;
+        }
+
+        if (_playerStateController.State == PlayerState.Idle)
         {
             _rigidbody.AddForce(Vector3.up * _playerAttributeHandler.CurrentAttribute.jumpForce, ForceMode.Impulse);
             _playerStateController.State = PlayerState.Jump;
         }
     }
 
+    /// <summary>
+    /// 점프 플랫폼에서 호출하는 점프 함수
+    /// State Jump로 변경
+    /// </summary>
+    /// <param name="jumpForce"></param>
     public void JumpByOther(float jumpForce)
     {
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        _playerStateController.State = PlayerState.Jump;
     }
 
     private void Look(Vector2 mouseDelta)
