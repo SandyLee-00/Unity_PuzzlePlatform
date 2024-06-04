@@ -4,51 +4,51 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// PlayerÀÇ State¿¡ µû¶ó ¾Ö´Ï¸ŞÀÌ¼ÇÀ» º¯°æÇÏ´Â Å¬·¡½º
+/// Playerì˜ Stateì— ë”°ë¼ ì• ë‹ˆë©”ì´ì…˜ì„ ë³€ê²½í•˜ëŠ” í´ë˜ìŠ¤
 /// </summary>
 public class PlayerAnimationController : MonoBehaviour
 {
-    Animator animator;
-    PlayerState playerState;
+    Animator _animator;
+    PlayerStateController _playerStateController;
 
     private void Awake()
     {
-        playerState = gameObject.GetOrAddComponent<PlayerState>();
-        // playerState.OnStateChangeEvent += ChangeAnimation;
+        _playerStateController = gameObject.GetOrAddComponent<PlayerStateController>();
+        // _playerStateController.OnStateChangeEvent += ChangeAnimation;
 
     }
 
     private void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         SoundManager.Instance.Play(Define.Sound.Bgm, "footstep05", 0.5f);
 
     }
 
-    /*private void ChangeAnimation(PlayerStateEnum playerStateEnum)
+    /*private void ChangeAnimation(PlayerState playerStateEnum)
     {
         switch (playerStateEnum)
         {
-            case PlayerStateEnum.Idle:
-                animator.CrossFade("Idle_Battle", 0.1f);
+            case PlayerState.Idle:
+                _animator.CrossFade("Idle_Battle", 0.1f);
                 break;
-            case PlayerStateEnum.Move:
-                animator.CrossFade("WalkForwardBattle", 0.1f);
+            case PlayerState.Move:
+                _animator.CrossFade("WalkForwardBattle", 0.1f);
                 break;
-            case PlayerStateEnum.Jump:
-                animator.CrossFade("RunForwardBattle", 0.1f);
+            case PlayerState.Jump:
+                _animator.CrossFade("RunForwardBattle", 0.1f);
                 break;
-            case PlayerStateEnum.Attack:
-                animator.CrossFade("Attack01", 0.1f);
+            case PlayerState.Attack:
+                _animator.CrossFade("Attack01", 0.1f);
                 break;
-            case PlayerStateEnum.Defend:
-                animator.CrossFade("Defend", 0.1f);
+            case PlayerState.Defend:
+                _animator.CrossFade("Defend", 0.1f);
                 break;
-            case PlayerStateEnum.GetHit:
-                animator.CrossFade("GetHit", 0.1f);
+            case PlayerState.GetHit:
+                _animator.CrossFade("GetHit", 0.1f);
                 break;
-            case PlayerStateEnum.Die:
-                animator.CrossFade("Die", 0.1f);
+            case PlayerState.Die:
+                _animator.CrossFade("Die", 0.1f);
                 break;
         }
     }*/
