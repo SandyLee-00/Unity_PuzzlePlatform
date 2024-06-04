@@ -8,11 +8,11 @@ public class TrapPlatform : Platform
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out PlayerMovement playerMovement))
+        if(other.gameObject.TryGetComponent(out PlayerHealthMana playerState))
         {
-            Debug.Log("플레이어 데미지");
-            //Player.hp -= trapPlatform.damage;
-
+            Debug.Log(playerState.CurrentHP);
+            playerState.ChangeHP(-trapPlatform.damage);
+            Debug.Log(playerState.CurrentHP);
             //트랩마다 종류가 있을텐데 trapPlatform에서 타입을 확인하고 결정
         }
     }
