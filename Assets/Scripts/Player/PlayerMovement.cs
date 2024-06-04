@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveDirection.magnitude > 0)
         {
-            _playerStateController.State = PlayerState.Move;
+            _playerStateController.State = PlayerState.Walk;
             _playerStateController.InvokeStateChangeEvent();
         }
         else
