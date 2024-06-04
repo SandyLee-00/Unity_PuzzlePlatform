@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Input System을 사용한 플레이어 입력 컨트롤러
+/// </summary>
 public class PlayerInputController : MonoBehaviour
 {
     public event Action<Vector2> OnMoveEvent;

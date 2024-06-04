@@ -5,8 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// 플레이어 체력 시스템
-/// 필요한 곳에 이벤트를 등록하여 사용하기
+/// 플레이어 HP, MP 관리한다.
+/// 필요한 곳에 이벤트를 등록해서 HP, MP 바뀔 때 사용하기
 /// </summary>
 public class PlayerStatusSystem : MonoBehaviour
 {

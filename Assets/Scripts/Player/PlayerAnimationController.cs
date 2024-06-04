@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Player의 State에 따라 애니메이션을 변경하는 클래스
+/// </summary>
 public class PlayerAnimationController : MonoBehaviour
 {
     Animator animator;
@@ -11,16 +14,18 @@ public class PlayerAnimationController : MonoBehaviour
     private void Awake()
     {
         playerState = gameObject.GetOrAddComponent<PlayerState>();
-        playerState.OnStateChangeEvent += ChangeAnimation;
+        // playerState.OnStateChangeEvent += ChangeAnimation;
 
     }
 
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        SoundManager.Instance.Play(Define.Sound.Bgm, "footstep05", 0.5f);
+
     }
 
-    private void ChangeAnimation(PlayerStateEnum playerStateEnum)
+    /*private void ChangeAnimation(PlayerStateEnum playerStateEnum)
     {
         switch (playerStateEnum)
         {
@@ -46,6 +51,6 @@ public class PlayerAnimationController : MonoBehaviour
                 animator.CrossFade("Die", 0.1f);
                 break;
         }
-    }
+    }*/
 
 }
