@@ -31,7 +31,7 @@ public class PlayerInputController : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// 마우스 움직임에 따라 플레이어 좌우 회전, 카메라 상하좌우 회전
     /// </summary>
     /// <param name="value"></param>
     public void OnLook(InputValue value)
