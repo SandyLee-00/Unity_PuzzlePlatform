@@ -8,14 +8,13 @@ public class MovablePlatform : Platform
     public float maxDistance;   //최대 갈 수 있는 거리
     public float watingTime;    //다시 돌아가기 까지 대기하는 시간
 
-    float nowTime = 0;
-    Rigidbody rigidbody;
-    Vector3 startPos;
-    Vector3 endPos;
+    private float nowTime = 0;
+    private Vector3 startPos;
+    private Vector3 endPos;
 
     private bool isReverse;
 
-    void Start()
+    private void Start()
     {
         startPos = transform.localPosition;  //원래 자리로 돌아오기 위한 위치
 
@@ -23,15 +22,14 @@ public class MovablePlatform : Platform
             endPos.x = transform.localPosition.x + maxDistance;
         else if(moveData.movableType == MovablePlatformType.Vertical)
             endPos.y = transform.localPosition.y + maxDistance;
-        Debug.Log(endPos);
     }
 
-    void Update()
+    private void Update()
     {
         MovePlatform();
     }
 
-    void MovePlatform() //발판 움직임
+    private void MovePlatform() //발판 움직임
     {
         int moveReverse = isReverse ? -1 : 1;
 
@@ -62,7 +60,7 @@ public class MovablePlatform : Platform
         }
     }
 
-    void WaitToReverse()    //바꾸기 전까지 대기
+    private void WaitToReverse()    //바꾸기 전까지 대기
     {
         nowTime += Time.deltaTime;
         if (nowTime >= watingTime)
@@ -72,23 +70,24 @@ public class MovablePlatform : Platform
         }
     }
 
-    void ChangeDirection()  //방향 전환
+    private void ChangeDirection()  //방향 전환
     {
         isReverse = !isReverse;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.TryGetComponent(out PlayerMovement playerMovement))
+        if (collision.gameObject.TryGetComponent(out PlayerMovement movement))
         {
-            playerMovement.transform.SetParent(gameObject.transform);
+            movement.transform.SetParent(transform);
         }
+
     }
     private void OnCollisionExit(Collision collision)
     {
-        if(collision.gameObject.TryGetComponent(out PlayerMovement playerMovement))
+        if(collision.gameObject.TryGetComponent(out PlayerMovement movement))
         {
-            collision.transform.SetParent(null);
+            movement.transform.SetParent(null);
         }
     }
 }
