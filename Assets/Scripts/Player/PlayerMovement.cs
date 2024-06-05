@@ -24,8 +24,9 @@ public class PlayerMovement : MonoBehaviour
     private float yaw = 0f;
     public float maxPitchAngle = 20f;
     Camera _camera;
+    bool isLookable = true;
 
-    private const float costMPRun = -40f;
+    public LayerMask groundLayerMask;
 
     bool isShift = false;
 
@@ -47,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         _camera = Camera.main;
+
+        groundLayerMask = LayerMask.GetMask("Ground");
     }
 
     private void Move(Vector2 moveInput)
@@ -68,16 +71,13 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void Jump()
     {
-        if (_playerStateController.State == PlayerState.Jump || _playerStateController.State == PlayerState.Fall)
+        if (!IsGrounded())
         {
             return;
         }
 
-        if (_playerStateController.State == PlayerState.Idle)
-        {
-            _rigidbody.AddForce(Vector3.up * _playerAttributeHandler.CurrentAttribute.jumpForce, ForceMode.Impulse);
-            _playerStateController.State = PlayerState.Jump;
-        }
+        _rigidbody.AddForce(Vector3.up * _playerAttributeHandler.CurrentAttribute.jumpForce, ForceMode.Impulse);
+        _playerStateController.State = PlayerState.Jump;
     }
 
     /// <summary>
@@ -104,7 +104,17 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MoveFixedUpdate(moveDirection);
-        LookFixedUpdate(mouseDelta);
+        
+        if (isLookable)
+        {
+            LookFixedUpdate(mouseDelta);
+        }
+
+        if (_playerStateController.State == PlayerState.Jump && IsGrounded())
+        {
+            _playerStateController.State = PlayerState.Idle;
+        }
+
     }
 
     private void MoveFixedUpdate(Vector3 moveDirection)
@@ -134,5 +144,33 @@ public class PlayerMovement : MonoBehaviour
 
         transform.localEulerAngles = new Vector3(0, yaw, 0);
         _camera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
+    }
+
+    bool IsGrounded()
+    {
+        Ray[] rays = new Ray[4]
+        {
+            new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (transform.right * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.right * 0.2f) +(transform.up * 0.01f), Vector3.down)
+        };
+
+        for (int i = 0; i < rays.Length; i++)
+        {
+            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
+            {
+                Debug.DrawRay(rays[i].origin, rays[i].direction * 0.1f, Color.red);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void ToggleCursor(bool toggle)
+    {
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        isLookable = !toggle;
     }
 }
