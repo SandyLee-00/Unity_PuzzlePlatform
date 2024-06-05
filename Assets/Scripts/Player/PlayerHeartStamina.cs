@@ -53,7 +53,7 @@ public class PlayerHeartStamina : MonoBehaviour
             }
         }
 
-        Debug.Log($"Heart : {CurrentHeart} / {MaxHeart}, Stamina : {CurrentStamina} / {MaxStamina}");  
+        // Debug.Log($"Heart : {CurrentHeart} / {MaxHeart}, Stamina : {CurrentStamina} / {MaxStamina}");  
 
         // TODO : 마나 회복 코루틴 써서 구현하기
         _staminatimeSinceLastChange += Time.deltaTime;
