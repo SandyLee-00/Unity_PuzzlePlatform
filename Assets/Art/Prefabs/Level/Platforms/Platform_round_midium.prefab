@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1302485063695657561}
   - component: {fileID: 418025469361175345}
   - component: {fileID: 7295363824944452690}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform_round_midium
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,6 +118,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fae303c37f4322b409b9d68399cb2fef, type: 3}
       propertyPath: m_Name
       value: block-grass-overhang-narrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fae303c37f4322b409b9d68399cb2fef, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

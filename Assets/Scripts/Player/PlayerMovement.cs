@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
             _rigidbody.AddForce(Vector3.up * _playerAttributeHandler.CurrentAttribute.jumpForce, ForceMode.Impulse);
             _previousState = _playerStateController.State;
             _playerStateController.State = PlayerState.Jump;
+            Debug.Log($" {_playerStateController.State} 점프는 하는데 왜 점프상태로 안해줘~~~");
         }
     }
 
@@ -113,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
         // 점프 하고 땅에 닿으면 이전 상태로 변경
         if (_playerStateController.State == PlayerState.Jump && IsGrounded())
         {
+            Debug.Log("점프하고 땅에 닿으면 이전상태로 바꿔준다~~~~~~~~~~~");
             _playerStateController.State = _previousState;
         }
 
@@ -129,10 +131,13 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log($"MoveFixedUpdate IsGrounded() : {IsGrounded()}");
         // 땅에서 떨어져있으면 Jump or Fall, 움직이지 못함
-        if (IsGrounded() == false)
+        if (_rigidbody.velocity.y > 0 || IsGrounded() == false)
         {
+            Debug.Log($"{_playerStateController.State} 점프 상테에서 다른 상태로 안바꿔줘야한다~~~~~~~~~~~");
             return;
         }
+
+        Debug.Log($"{_playerStateController.State} 점프 상테에서 다른 상태로 안바꿔줘야한다~~~~~~~~~~~");
 
         // 움직임 입력이 없으면 Idle 상태로 변경
         if (moveDirection.magnitude < 0.1)
