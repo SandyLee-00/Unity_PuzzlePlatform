@@ -16,7 +16,7 @@ public class PlayerAttributes
     public float costStaminaRun = 1;
 
     public float heartChangeDelay = 0.5f;
-    public float staminaChangeDelay = 0.1f;
+    public float staminaChangeDelay = 0.5f;
     public float staminaFillAmount = 5f;
 
 }
