@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1596412466641767552}
   - component: {fileID: 7484446412097099587}
   - component: {fileID: 3438091127000383696}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StaminaItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 8627030528468206057}
   - component: {fileID: 4473614390911949015}
   - component: {fileID: 2671118894650062393}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: jewel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

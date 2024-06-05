@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7745826295801776947}
   - component: {fileID: 3259396379939330490}
   - component: {fileID: 1649050387770259292}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform_hexagon_midium
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,6 +118,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8f4b2969c009c554b978b6eead37045e, type: 3}
       propertyPath: m_Name
       value: block-grass-overhang-hexagon
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8f4b2969c009c554b978b6eead37045e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

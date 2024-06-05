@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 224b800d981b53f46b2c7e66ac52d1a4, type: 3}
-  m_Name: TestEquippableItemData
+  m_Name: SpeedItemData
   m_EditorClassIdentifier: 
-  itemName: Test
-  description: Test
+  itemName: "\uC2E0\uBC1C"
+  description: "\uC774\uB3D9\uC18D\uB3C4 \uC99D\uAC00"
   type: 0
+  itemPrefab: {fileID: 7147727462433221886, guid: e0c8303f2204a484eaa95a4d56959c0e, type: 3}
+  icon: {fileID: 21300000, guid: fb7fb47f84ebdc34dbe76617a93839f4, type: 3}
   increaseValue: 10

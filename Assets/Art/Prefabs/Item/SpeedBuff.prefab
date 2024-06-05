@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7481474575357088340}
   - component: {fileID: 8842905143254700936}
   - component: {fileID: 6503914665511807906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpeedBuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 775750746414115376}
   - component: {fileID: 7934252749522025635}
   - component: {fileID: 4587565697549148957}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: sodaCan
   m_TagString: Untagged
   m_Icon: {fileID: 0}

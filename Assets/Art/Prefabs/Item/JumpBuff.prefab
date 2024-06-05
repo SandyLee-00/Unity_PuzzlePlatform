@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3801532123210180002}
   - component: {fileID: 8429013024714513182}
   - component: {fileID: 6038856731100953373}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cheese
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 7651380249329334623}
   - component: {fileID: 4924173148919126199}
   - component: {fileID: 5363998798624595730}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: JumpBuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 3330245313818479103}
   - component: {fileID: 2412919500452636074}
   - component: {fileID: 8463966912038957807}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: patty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 7270080198221819097}
   - component: {fileID: 7015017191463939783}
   - component: {fileID: 3335011977199258765}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bunTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 2662484211621478323}
   - component: {fileID: 8385980576675032744}
   - component: {fileID: 7683007281731639725}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: salad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 8366635270804177220}
   - component: {fileID: 1867990142869659065}
   - component: {fileID: 6608049100106147894}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bunBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 8858266351185660753}
   - component: {fileID: 3118897721084171225}
   - component: {fileID: 7930506429158105607}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8578189537725523289}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: burger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

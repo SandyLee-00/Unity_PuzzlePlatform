@@ -4,7 +4,7 @@ using UnityEngine;
 public class Interaction : MonoBehaviour
 {
     public float checkRate = 0.05f;
-    public float maxCheckDistance = 3.0f;
+    public float maxCheckDistance = 10.0f;
     public LayerMask layerMask;
     private float lastCheckTime;
 
