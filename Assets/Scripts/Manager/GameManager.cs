@@ -19,12 +19,16 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField]
-    private GameObject GameOverPanel;
+    private GameObject _gameOverPanel;
+
+    [SerializeField]
+    private GameObject _gameClearPanel;
 
     public bool IsGamePlaying;
 
     public TextMeshProUGUI timeText;
     private float _playTime;
+    public TextMeshProUGUI clearTimeText;
     private bool _isTimeOver;
 
 
@@ -47,29 +51,43 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         IsGamePlaying = true;
-        GameOverPanel.SetActive(false);
+        _gameOverPanel.SetActive(false);
+        _gameClearPanel.SetActive(false);
         _playTime = 0f;
     }
 
     void Update()
     {
-        _playTime += Time.deltaTime;
-        UpdatePlayTimeText();
+        if (IsGamePlaying)
+        {
+            _playTime += Time.deltaTime;
+            UpdatePlayTimeText(timeText);
+        }
     }
 
     public void GameOver()
     {
         IsGamePlaying = false;
         _isTimeOver = true;
-        GameOverPanel.SetActive(true);
+        _gameOverPanel.SetActive(true);
         Time.timeScale = 0;
     }
 
-    private void UpdatePlayTimeText()
+    public void GameClear()
+    {
+        IsGamePlaying = false;
+        _isTimeOver = true;
+        _gameClearPanel.SetActive(true);
+        UpdatePlayTimeText(clearTimeText);
+        Time.timeScale = 0;
+    }
+
+    private void UpdatePlayTimeText(TextMeshProUGUI text)
     {
         int minutes = Mathf.FloorToInt(_playTime / 60F);
         int seconds = Mathf.FloorToInt(_playTime % 60F);
-        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        text.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
 
 }
