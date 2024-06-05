@@ -15,6 +15,10 @@ public class PlayerInputController : MonoBehaviour
     public event Action OnInteractEvent;
     public event Action<float> OnShiftEvent;
 
+    // 인벤토리 관련
+    //public event Action inventory;
+    //public bool canLook = true;
+
     private Camera _camera;
 
     private PlayerInput _playerInput;
@@ -66,4 +70,14 @@ public class PlayerInputController : MonoBehaviour
     {
         OnShiftEvent?.Invoke(value.Get<float>());
     }
+
+
+    /// <summary>
+    /// Tab 키 눌러서 인벤토리창 열기
+    /// </summary>
+    /// <param name="value"></param>
+    //public void OnInventory(InputValue value)
+    //{
+    //    OnInteractEvent?.Invoke();
+    //}
 }

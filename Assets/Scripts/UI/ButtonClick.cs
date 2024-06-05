@@ -25,10 +25,11 @@ public class ButtonClick : MonoBehaviour
                 SceneManager.LoadScene("PlayScene");
                 break;
             case "ContinueButton":
+                gameObject.transform.parent.gameObject.SetActive(false);
                 Time.timeScale = 1;
                 break;
             case "CloseButton":
-                gameObject.SetActive(false);
+                gameObject.transform.parent.gameObject.SetActive(false);
                 break;
         }
     }
