@@ -11,7 +11,7 @@ public class PauseButton : MonoBehaviour
     public Sprite pauseImage;
 
     private Image _pauseButtonImage;
-    private bool isPaused = false;
+    private bool _isPaused = false;
     private Button _button;
 
 
@@ -27,18 +27,18 @@ public class PauseButton : MonoBehaviour
 
     public void TogglePause()
     {
-        if (isPaused)
+        if (_isPaused)
         {
             
             Time.timeScale = 1;
-            isPaused = false;
+            _isPaused = false;
             _pauseButtonImage.sprite = pauseImage;
             pausePanel.SetActive(false);
         }
         else
         {
             Time.timeScale = 0;
-            isPaused = true;
+            _isPaused = true;
             _pauseButtonImage.sprite = playImage;
             pausePanel.SetActive(true);
         }

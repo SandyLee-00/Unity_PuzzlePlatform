@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIInventory : MonoBehaviour
@@ -19,13 +20,13 @@ public class UIInventory : MonoBehaviour
     public GameObject unEquipButton;
     public GameObject dropButton;
 
-    private PlayerInputController playerInputController;
-    private PlayerAttributeHandler playerAttributeHandler;
+    private PlayerInputController _playerInputController;
+    private PlayerAttributeHandler _playerAttributeHandler;
 
     void Start()
     {
-        playerInputController = GetComponent<PlayerInputController>();
-        playerAttributeHandler = GetComponent<PlayerAttributeHandler>();
+        _playerInputController = gameObject.GetOrAddComponent<PlayerInputController>();
+        _playerAttributeHandler = gameObject.GetOrAddComponent<PlayerAttributeHandler>();
 
         //playerInputController.inventory += Toggle;
 
