@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: "\uC2A4\uD0DC\uBBF8\uB098"
   description: "\uC2A4\uD0DC\uBBF8\uB098 \uC99D\uAC00"
-  type: 1
+  type: 0
   increaseValue: 10

@@ -153,8 +153,8 @@ public class UIInventory : MonoBehaviour
         }
 
         slots[_selectedItemIdx].equipped = true;
-        _attributeHandler.ApplyItemValue(slots[_selectedItemIdx].itemData, true);
         _curEquipIdx = _selectedItemIdx;
+        _attributeHandler.ApplyItemValue(_selectedItem, true);
         UpdateUI();
 
         SelectedItem(_selectedItemIdx);
@@ -168,7 +168,7 @@ public class UIInventory : MonoBehaviour
     private void UnEquip(int idx)
     {
         slots[idx].equipped = false;
-        _attributeHandler.ApplyItemValue(slots[idx].itemData, false);
+        _attributeHandler.ApplyItemValue(_selectedItem, false);
         UpdateUI();
 
         if (_selectedItemIdx == idx)
