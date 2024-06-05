@@ -14,6 +14,7 @@ public class PlayerInputController : MonoBehaviour
     public event Action OnJumpEvent;
     public event Action OnInteractEvent;
     public event Action<float> OnShiftEvent;
+    public event Action OnTabEvent;
 
     private Camera _camera;
 
@@ -53,7 +54,7 @@ public class PlayerInputController : MonoBehaviour
     /// E 키 눌러서 오브젝트와 상호작용
     /// </summary>
     /// <param name="value"></param>
-    public void OnInteract(InputValue value)
+    public void OnPressE(InputValue value)
     {
         OnInteractEvent?.Invoke();
     }
@@ -62,8 +63,18 @@ public class PlayerInputController : MonoBehaviour
     /// Shift 키 눌러서 달리기
     /// </summary>
     /// <param name="value"></param>
-    public void OnShift(InputValue value)
+    public void OnHoldShift(InputValue value)
     {
         OnShiftEvent?.Invoke(value.Get<float>());
     }
+
+    /// <summary>
+    /// Tab 키 눌러서 인벤토리 열기
+    /// </summary>
+    /// <param name="value"></param>
+    public void OnPressTab(InputValue value)
+    {
+        OnTabEvent?.Invoke();
+    }
+
 }

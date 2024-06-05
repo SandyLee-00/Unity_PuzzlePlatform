@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "PressE",
                     "type": "Button",
                     "id": "08771eb0-605d-4f74-a8f8-600d9177e3bc",
                     "expectedControlType": "Button",
@@ -42,13 +42,22 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Shift",
+                    "name": "HoldShift",
                     "type": "Value",
                     "id": "761b4843-e91e-49a5-a99c-13e75f0ff2b2",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PressTab",
+                    "type": "Button",
+                    "id": "dc650a87-779f-4e87-beb5-9f759b8a398e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -136,7 +145,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Interact",
+                    "action": "PressE",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -147,7 +156,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Shift",
+                    "action": "HoldShift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bc4a32b0-66b5-4b6f-86eb-fba5fdc4eb49",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "PressTab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

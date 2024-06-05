@@ -6,15 +6,18 @@ using UnityEngine;
 
 public enum PlayerState
 {
-    Idle = 0,
-    Walk,
-    Jump,
-    GetHit,
-    Die,
-    Interact,
-    Run,
-    Fall,
-    Climb,
+    Default = 0,
+    Idle = 1 << 0,
+    Walk = 1 << 1,
+    Jump = 1 << 2,
+    GetHit = 1 << 3,
+    Die = 1 << 4,
+    Interact = 1 << 5,
+    Run = 1 << 6,
+    Fall = 1 << 7,
+    Climb = 1 << 8,
+
+    Jumpable = Walk | Idle | Run,
 }
 
 /// <summary>
@@ -30,8 +33,11 @@ public class PlayerStateController : MonoBehaviour
         get { return _playerState; }
         set
         {
-            _playerState = value;
-            InvokeStateChangeEvent();
+            if (_playerState != value)
+            {
+                _playerState = value;
+                InvokeStateChangeEvent();
+            }
         }
     }
 
