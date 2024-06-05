@@ -1721,9 +1721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2739f0d6ad5f6ef4abe329acaf286dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpChangeDelay: 0.5
-  mpChangeDelay: 0.5
-  mpUpAmount: 5
 --- !u!33 &5534060349763500433
 MeshFilter:
   m_ObjectHideFlags: 0

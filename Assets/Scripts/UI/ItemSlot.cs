@@ -6,7 +6,7 @@ public class ItemSlot : MonoBehaviour
 {
     public UIInventory inventory;
 
-    public EquippableItemData item;
+    public EquippableItemData itemData;
     public Image icon;
     public TextMeshProUGUI equipText;
     private Outline _outline;
@@ -28,7 +28,7 @@ public class ItemSlot : MonoBehaviour
     public void Set()
     {
         icon.gameObject.SetActive(true);
-        icon.sprite = item.icon;
+        icon.sprite = itemData.icon;
 
         _outline.enabled = equipped;
         equipText.enabled = equipped;
@@ -36,7 +36,7 @@ public class ItemSlot : MonoBehaviour
 
     public void Clear()
     {
-        item = null;
+        itemData = null;
         icon.gameObject.SetActive(false);
         equipText.gameObject.SetActive(false);
     }
