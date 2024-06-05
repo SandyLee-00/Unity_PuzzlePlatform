@@ -10,5 +10,5 @@ public class PlayerAttributes
     public float moveSpeed = 5;
     public float jumpForce = 2.5f;
     public float runSpeed = 10;
-    public float costMPRun = 1;
+    public float costStaminaRun = 1;
 }
