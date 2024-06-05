@@ -11,12 +11,12 @@ public class ConsumableItem : ItemObject
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerHealthMana playerStatus))
+        if (other.TryGetComponent(out PlayerHeartStamina playerStatus))
         {
             switch (consumableItemData.type)
             {
                 case ConsumableItemType.Health:
-                    playerStatus.ChangeHP(consumableItemData.increaseValue);
+                    playerStatus.ChangeHeart(consumableItemData.increaseValue);
                     Destroy(gameObject);
                     break;
 

@@ -11,6 +11,6 @@ public class ConsumableItemData : ItemData
 {
     [Header("Consum Info")]
     public ConsumableItemType type;
-    public float increaseValue;
+    public int increaseValue;
 }
 
