@@ -6,9 +6,9 @@ public class TrapHole : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out PlayerHealthMana player))
+        if(other.gameObject.TryGetComponent(out PlayerHeartStamina player))
         {
-            if (player.ChangeHP(-1))
+            if (player.ChangeHeart(-1))
             {
                 Debug.Log("처음부터 시작");
                 player.transform.position = new Vector3(-4, 3, -2); //시작 지점으로 추가

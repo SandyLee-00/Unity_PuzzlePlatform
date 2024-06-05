@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInputController _inputController;
     private PlayerAttributeHandler _playerAttributeHandler;
     private PlayerStateController _playerStateController;
-    private PlayerHealthMana _playerHealthMana;
+    private PlayerHeartStamina _playerHealthMana;
 
     #region Move
     private Vector3 moveDirection;
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         _inputController = gameObject.GetOrAddComponent<PlayerInputController>();
         _playerAttributeHandler = gameObject.GetOrAddComponent<PlayerAttributeHandler>();
         _playerStateController = gameObject.GetOrAddComponent<PlayerStateController>();
-        _playerHealthMana = gameObject.GetOrAddComponent<PlayerHealthMana>();
+        _playerHealthMana = gameObject.GetOrAddComponent<PlayerHeartStamina>();
     }
 
     void Start()

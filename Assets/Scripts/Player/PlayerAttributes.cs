@@ -5,10 +5,18 @@
 [System.Serializable]
 public class PlayerAttributes
 {
-    public float maxHP = 100;
-    public float maxMP = 200;
-    public float moveSpeed = 5;
+    public int maxHeart = 3;
+
     public float jumpForce = 2.5f;
+
+    public float moveSpeed = 5;
+
+    public float maxStamina = 200;
     public float runSpeed = 10;
     public float costStaminaRun = 1;
+
+    public float heartChangeDelay = 0.5f;
+    public float staminaChangeDelay = 0.1f;
+    public float staminaFillAmount = 5f;
+
 }
