@@ -15,12 +15,12 @@ public class TrapPlatform : Platform, IInspectable
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out PlayerHealthMana playerState))
+        if(other.gameObject.TryGetComponent(out PlayerHeartStamina playerHeartStamina))
         {
             //체력 감소 (IDamagable이 추가되면 이동할 예정)
-            if (playerState.ChangeHP(-trapPlatform.damage))
+            if (playerHeartStamina.ChangeHeart(-trapPlatform.damage))
             {
-                Debug.Log(playerState.CurrentHP);
+                Debug.Log(playerHeartStamina.CurrentHeart);
             }
             else
             {
