@@ -11,6 +11,7 @@ public class MovablePlatform : Platform
     private float nowTime = 0;
     private Vector3 startPos;
     private Vector3 endPos;
+    private Vector3 moveDirection;  //이동하려는 방향
 
     private bool isReverse;
 
@@ -18,10 +19,13 @@ public class MovablePlatform : Platform
     {
         startPos = transform.localPosition;  //원래 자리로 돌아오기 위한 위치
 
-        if(moveData.movableType == MovablePlatformType.Horizontal)
-            endPos.x = transform.localPosition.x + maxDistance;
-        else if(moveData.movableType == MovablePlatformType.Vertical)
-            endPos.y = transform.localPosition.y + maxDistance;
+        endPos = transform.TransformPoint(new Vector3(maxDistance, 0f, 0f));
+        //Debug.Log(Vector3.Distance(startPos, endPos));
+
+        if (moveData.movableType == MovablePlatformType.Horizontal)
+            moveDirection = Vector3.right;
+        else if (moveData.movableType == MovablePlatformType.Vertical)
+            moveDirection = Vector3.up;
     }
 
     private void Update()
@@ -33,30 +37,14 @@ public class MovablePlatform : Platform
     {
         int moveReverse = isReverse ? -1 : 1;
 
-        if (moveData.movableType == MovablePlatformType.Horizontal)
+        //현재 위치에서 최대 거리보다 넘어가면
+        if (Vector3.Distance(startPos, transform.position) > maxDistance && !isReverse)
+            WaitToReverse();
+        else if(Vector3.Distance(transform.position, startPos) < 0.1f && isReverse)
+            WaitToReverse();
+        else
         {
-            //x축 이동
-            //현재 위치에서 최대 거리보다 넘어가면
-            if (transform.position.x >= endPos.x && !isReverse)
-                WaitToReverse();
-            else if(transform.position.x <= startPos.x && isReverse)
-                WaitToReverse();
-            else
-            {
-                transform.Translate(Vector3.right * moveData.platformSpeed * moveReverse * Time.deltaTime);
-            }
-        }
-        else if (moveData.movableType == MovablePlatformType.Vertical)
-        {
-            //y축 이동
-            if (transform.position.y >= endPos.y && !isReverse)
-                WaitToReverse();
-            else if (transform.position.y <= startPos.y && isReverse)
-                WaitToReverse();
-            else
-            {
-                transform.Translate(Vector3.up * moveData.platformSpeed * moveReverse * Time.deltaTime);
-            }
+            transform.Translate(moveDirection * moveData.platformSpeed * moveReverse * Time.deltaTime);
         }
     }
 

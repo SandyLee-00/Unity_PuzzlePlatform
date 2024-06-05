@@ -16,4 +16,4 @@ MonoBehaviour:
   platformName: "\uAC00\uC2DC\uBC2D"
   description: "\uB2FF\uC73C\uBA74 \uCC14\uB9BD\uB2C8\uB2E4"
   trapType: 1
-  damage: 5
+  damage: 1
