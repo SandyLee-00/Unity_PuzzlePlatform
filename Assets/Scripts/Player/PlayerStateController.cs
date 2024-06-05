@@ -48,12 +48,12 @@ public class PlayerStateController : MonoBehaviour
 
     private PlayerInputController _playerInputController;
 
-    private PlayerHealthMana _playerHealthMana;
+    private PlayerHeartStamina _playerHealthMana;
 
     private void Awake()
     {
         _playerInputController = gameObject.GetOrAddComponent<PlayerInputController>();
-        _playerHealthMana = gameObject.GetOrAddComponent<PlayerHealthMana>();
+        _playerHealthMana = gameObject.GetOrAddComponent<PlayerHeartStamina>();
 
         _playerHealthMana.OnDamage += () => { State = PlayerState.GetHit; };
         _playerHealthMana.OnDeath += () => { State = PlayerState.Die; };

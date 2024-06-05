@@ -41,7 +41,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4751669220000727801}
-  m_Material: {fileID: 13400000, guid: 5d893267ccb9d4f4786acae3c716829c, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -70,6 +70,7 @@ MonoBehaviour:
   moveData: {fileID: 11400000, guid: fd7a2c485b1881e45bf83611d9165e31, type: 2}
   maxDistance: 5
   watingTime: 0
+  platformPivot: {fileID: 3994421509169562382}
 --- !u!1001 &3523416134680716517
 PrefabInstance:
   m_ObjectHideFlags: 0
