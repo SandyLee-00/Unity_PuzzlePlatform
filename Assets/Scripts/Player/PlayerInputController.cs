@@ -13,6 +13,7 @@ public class PlayerInputController : MonoBehaviour
     public event Action<Vector2> OnLookEvent;
     public event Action OnJumpEvent;
     public event Action OnInteractEvent;
+    public event Action<float> OnShiftEvent;
 
     private Camera _camera;
 
@@ -48,8 +49,21 @@ public class PlayerInputController : MonoBehaviour
         OnJumpEvent?.Invoke();
     }
 
+    /// <summary>
+    /// E 키 눌러서 오브젝트와 상호작용
+    /// </summary>
+    /// <param name="value"></param>
     public void OnInteract(InputValue value)
     {
         OnInteractEvent?.Invoke();
+    }
+
+    /// <summary>
+    /// Shift 키 눌러서 달리기
+    /// </summary>
+    /// <param name="value"></param>
+    public void OnShift(InputValue value)
+    {
+        OnShiftEvent?.Invoke(value.Get<float>());
     }
 }
