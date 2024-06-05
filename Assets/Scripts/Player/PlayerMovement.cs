@@ -116,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
             _playerStateController.State = _previousState;
         }
 
+        // 디버깅용 임시 코드
         IsGrounded();
     }
 
@@ -126,13 +127,14 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="moveDirection"></param>
     private void MoveFixedUpdate(Vector3 moveDirection)
     {
+        Debug.Log($"MoveFixedUpdate IsGrounded() : {IsGrounded()}");
         // 땅에서 떨어져있으면 Jump or Fall, 움직이지 못함
         if (IsGrounded() == false)
         {
             return;
         }
 
-        // 움직임이 없으면 Idle 상태로 변경
+        // 움직임 입력이 없으면 Idle 상태로 변경
         if (moveDirection.magnitude < 0.1)
         {
             _playerStateController.State = PlayerState.Idle;
