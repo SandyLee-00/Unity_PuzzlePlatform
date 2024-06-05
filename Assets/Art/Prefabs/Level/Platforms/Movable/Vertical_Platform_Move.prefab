@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2179246355922287718}
   - component: {fileID: 5741451957026117272}
   - component: {fileID: 5096580054458259699}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Vertical_Platform_Move
-  m_TagString: MovePlatform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,6 +121,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 36b44752f89ea0744956f252cc34ae36, type: 3}
       propertyPath: m_Name
       value: block-moving
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 36b44752f89ea0744956f252cc34ae36, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

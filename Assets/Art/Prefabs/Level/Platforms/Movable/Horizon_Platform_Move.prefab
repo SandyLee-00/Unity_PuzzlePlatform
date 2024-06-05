@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6832128785681611532}
   - component: {fileID: 8750514139881708834}
   - component: {fileID: 2838232660690829290}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Horizon_Platform_Move
-  m_TagString: MovePlatform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,7 +70,6 @@ MonoBehaviour:
   moveData: {fileID: 11400000, guid: fd7a2c485b1881e45bf83611d9165e31, type: 2}
   maxDistance: 5
   watingTime: 0
-  platformPivot: {fileID: 3994421509169562382}
 --- !u!1001 &3523416134680716517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -122,6 +121,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 321057d1ed3fcf34184dc5411a2880cb, type: 3}
       propertyPath: m_Name
       value: block-moving-blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 321057d1ed3fcf34184dc5411a2880cb, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
