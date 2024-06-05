@@ -27,7 +27,6 @@ public class PauseButton : MonoBehaviour
 
     public void TogglePause()
     {
-        Debug.Log("클릭");
         if (isPaused)
         {
             

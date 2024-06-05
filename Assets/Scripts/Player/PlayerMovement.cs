@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         _inputController.OnJumpEvent += Jump;
         _inputController.OnLookEvent += Look;
         _inputController.OnShiftEvent += Run;
+        _inputController.OnTabEvent += ToggleCursor;
 
         Cursor.lockState = CursorLockMode.Locked;
         _camera = Camera.main;
@@ -168,8 +169,9 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
-    public void ToggleCursor(bool toggle)
+    public void ToggleCursor()
     {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         isLookable = !toggle;
     }
