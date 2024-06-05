@@ -20,10 +20,10 @@ public class ConsumableItem : ItemObject
                     Destroy(gameObject);
                     break;
 
-                //case ConsumableItemType.Stamina:
-                //    playerStatus. 스테미나 처리
-                //    Destroy(gameObject);
-                //    break;
+                case ConsumableItemType.Stamina:
+                    playerStatus.ChangeMP(consumableItemData.increaseValue);
+                    Destroy(gameObject);
+                    break;
             }
         }
     }

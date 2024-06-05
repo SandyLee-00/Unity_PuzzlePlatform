@@ -13,18 +13,8 @@ public class BuffItem : ItemObject
     {
         if (other.TryGetComponent(out PlayerAttributeHandler attributeHandler))
         {
-            switch (buffItemData.type)
-            {
-                case BuffItemType.Speed:
-                    attributeHandler.OnSpeedBuff(buffItemData);
-                    Destroy(gameObject);
-                    break;
-
-                //case BuffItemType.Speed:
-                //    점프 처리
-                //    Destroy(gameObject);
-                //    break;
-            }
+            attributeHandler.OnBuff(buffItemData);
+            Destroy(gameObject);
         }
     }
 }

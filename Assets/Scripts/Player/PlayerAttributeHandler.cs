@@ -14,9 +14,18 @@ public class PlayerAttributeHandler : MonoBehaviour
         CurrentAttribute = new PlayerAttributes();
     }
 
-    public void OnSpeedBuff(BuffItemData buffItemData)
+    public void OnBuff(BuffItemData buffItemData)
     {
-        StartCoroutine(ApplySpeedBuff(buffItemData));
+        switch (buffItemData.type)
+        {
+            case BuffItemType.Speed:
+                StartCoroutine(ApplySpeedBuff(buffItemData));
+                break;
+
+            case BuffItemType.Jump:
+                StartCoroutine(ApplyJumpBuff(buffItemData));
+                break;
+        }
     }
 
     private IEnumerator ApplySpeedBuff(BuffItemData buffItemData)
@@ -27,5 +36,15 @@ public class PlayerAttributeHandler : MonoBehaviour
         yield return new WaitForSeconds(buffItemData.duration);
 
         CurrentAttribute.moveSpeed = baseMoveSpeed;
+    }
+
+    private IEnumerator ApplyJumpBuff(BuffItemData buffItemData)
+    {
+        float baseJumpForce = CurrentAttribute.jumpForce;
+        CurrentAttribute.jumpForce *= buffItemData.multiplierValue;
+
+        yield return new WaitForSeconds(buffItemData.duration);
+
+        CurrentAttribute.jumpForce = baseJumpForce;
     }
 }

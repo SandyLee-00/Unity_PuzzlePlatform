@@ -7,13 +7,14 @@ using UnityEngine;
 public enum PlayerState
 {
     Idle = 0,
-    Move,
+    Walk,
     Jump,
-    Attack,
-    Defend,
     GetHit,
     Die,
-    Interact
+    Interact,
+    Run,
+    Fall,
+    Climb,
 }
 
 /// <summary>
@@ -21,7 +22,18 @@ public enum PlayerState
 /// </summary>
 public class PlayerStateController : MonoBehaviour
 {
-    public PlayerState State { get { return _playerState; } set { _playerState = value; } }
+    /// <summary>
+    /// State 바뀌면 InvokeStateChangeEvent로 애니메이션 변경해주기
+    /// </summary>
+    public PlayerState State
+    {
+        get { return _playerState; }
+        set
+        {
+            _playerState = value;
+            InvokeStateChangeEvent();
+        }
+    }
 
     public event Action<PlayerState> OnStateChangeEvent;
 
@@ -32,26 +44,18 @@ public class PlayerStateController : MonoBehaviour
 
     private PlayerHealthMana _playerHealthMana;
 
-
     private void Awake()
     {
         _playerInputController = gameObject.GetOrAddComponent<PlayerInputController>();
         _playerHealthMana = gameObject.GetOrAddComponent<PlayerHealthMana>();
 
-        _playerHealthMana.OnDamage += () => { _playerState = PlayerState.GetHit; };
-        _playerHealthMana.OnDeath += () => { _playerState = PlayerState.Die; };
+        _playerHealthMana.OnDamage += () => { State = PlayerState.GetHit; };
+        _playerHealthMana.OnDeath += () => { State = PlayerState.Die; };
 
-        _playerInputController.OnInteractEvent += () =>
-        {
-            if (_playerState == PlayerState.Idle)
-            {
-                _playerState = PlayerState.Interact;
-                Debug.Log($"PlayerState: {_playerState}");
-            }
-        };
+        _playerInputController.OnInteractEvent += () => { State = PlayerState.Interact; };
     }
 
-    public void InvokeStateChangeEvent()
+    private void InvokeStateChangeEvent()
     {
         OnStateChangeEvent?.Invoke(_playerState);
     }

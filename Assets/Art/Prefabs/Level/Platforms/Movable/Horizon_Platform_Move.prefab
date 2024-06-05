@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2838232660690829290}
   m_Layer: 0
   m_Name: Horizon_Platform_Move
-  m_TagString: Untagged
+  m_TagString: MovePlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4751669220000727801}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5d893267ccb9d4f4786acae3c716829c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
