@@ -47,4 +47,18 @@ public class PlayerAttributeHandler : MonoBehaviour
 
         CurrentAttribute.jumpForce = baseJumpForce;
     }
+
+    public void ApplyItemValue(EquippableItemData itemData, bool isEquipping)
+    {
+        switch(itemData.type)
+        {
+            case EquippableItemType.Speed:
+                CurrentAttribute.moveSpeed += isEquipping ? itemData.increaseValue : -itemData.increaseValue;
+                break;
+
+            case EquippableItemType.Jump:
+                CurrentAttribute.jumpForce += isEquipping ? itemData.increaseValue : -itemData.increaseValue;
+                break;
+        }
+    }
 }

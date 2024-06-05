@@ -19,6 +19,7 @@ public class UIInventory : MonoBehaviour
     public GameObject dropButton;
 
     private PlayerInputController _controller;
+    private PlayerAttributeHandler _attributeHandler;
     private EquippableItemData _selectedItem;
 
     private int _selectedItemIdx = 0;
@@ -27,6 +28,7 @@ public class UIInventory : MonoBehaviour
     private void Awake()
     {
         _controller = GameObject.FindWithTag(Define.PlayerTag).GetComponent<PlayerInputController>();
+        _attributeHandler = GameObject.FindWithTag(Define.PlayerTag).GetComponent<PlayerAttributeHandler>();
     }
 
     void Start()
@@ -82,7 +84,7 @@ public class UIInventory : MonoBehaviour
 
         if (emptySlot != null)
         {
-            emptySlot.item = data;
+            emptySlot.itemData = data;
             UpdateUI();
             return;
         }
@@ -94,7 +96,7 @@ public class UIInventory : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            if (slots[i].item == null)
+            if (slots[i].itemData == null)
             {
                 return slots[i];
             }
@@ -107,7 +109,7 @@ public class UIInventory : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            if (slots[i].item != null)
+            if (slots[i].itemData != null)
             {
                 slots[i].Set();
             }
@@ -120,12 +122,12 @@ public class UIInventory : MonoBehaviour
 
     public void SelectedItem(int idx)
     {
-        if (slots[idx].item == null)
+        if (slots[idx].itemData == null)
         {
             return;
         }
 
-        _selectedItem = slots[idx].item;
+        _selectedItem = slots[idx].itemData;
         _selectedItemIdx = idx;
 
         selectedItemName.text = _selectedItem.itemName;
@@ -140,10 +142,9 @@ public class UIInventory : MonoBehaviour
 
         equipButton.SetActive(!slots[idx].equipped);
         unEquipButton.SetActive(slots[idx].equipped);
-        dropButton.SetActive(true);
+        dropButton.SetActive(!slots[idx].equipped); // TODO: 버리기 버튼을 비활성화하지 말고, 버리면서 장비 해제하는 쪽으로 수정
     }
 
-    // TODO: 플레이어 스텟 변경 추가
     public void OnEquipButton()
     {
         if (slots[_curEquipIdx].equipped)
@@ -152,6 +153,7 @@ public class UIInventory : MonoBehaviour
         }
 
         slots[_selectedItemIdx].equipped = true;
+        _attributeHandler.ApplyItemValue(slots[_selectedItemIdx].itemData, true);
         _curEquipIdx = _selectedItemIdx;
         UpdateUI();
 
@@ -163,10 +165,10 @@ public class UIInventory : MonoBehaviour
         UnEquip(_selectedItemIdx);
     }
 
-    // TODO: 플레이어 스텟 변경 추가
     private void UnEquip(int idx)
     {
         slots[idx].equipped = false;
+        _attributeHandler.ApplyItemValue(slots[idx].itemData, false);
         UpdateUI();
 
         if (_selectedItemIdx == idx)
@@ -189,7 +191,7 @@ public class UIInventory : MonoBehaviour
     private void RemoveSelectedItem()
     {
         _selectedItem = null;
-        slots[_selectedItemIdx].item = null;
+        slots[_selectedItemIdx].itemData = null;
         _selectedItemIdx = -1;
 
         ClearSelectedItemWindow();
