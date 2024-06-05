@@ -3,6 +3,8 @@ using UnityEngine;
 public class EquippableItem : ItemObject, IInteractable
 {
     public EquippableItemData equippableItemData;
+    // TODO: 태그로 찾을 수 있도록 수정
+    public UIInventory inventory;
 
     public override string GetPrompt()
     {
@@ -11,7 +13,7 @@ public class EquippableItem : ItemObject, IInteractable
 
     public void Interact()
     {
-        // TODO: 데이터 처리
+        inventory.AddItem(equippableItemData);
         Destroy(gameObject);
     }
 }

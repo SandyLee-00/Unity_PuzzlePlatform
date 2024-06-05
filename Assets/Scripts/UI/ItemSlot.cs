@@ -1,24 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ItemSlot : MonoBehaviour
 {
-    public ItemData item;
-
     public UIInventory inventory;
 
-    public int index;
-    public bool equpped;
-    public int quantity;
+    public EquippableItemData item;
+    public Image icon;
+    public TextMeshProUGUI equipText;
+    private Outline _outline;
 
-    void Start()
+    public int index;
+    public bool equipped;
+
+    private void Awake()
     {
-        
+        _outline = GetComponent<Outline>();
     }
 
-    void Update()
+    private void OnEnable()
     {
-        
+        _outline.enabled = equipped;
+        equipText.enabled = equipped;
+    }
+
+    public void Set()
+    {
+        icon.gameObject.SetActive(true);
+        icon.sprite = item.icon;
+
+        _outline.enabled = equipped;
+        equipText.enabled = equipped;
+    }
+
+    public void Clear()
+    {
+        item = null;
+        icon.gameObject.SetActive(false);
+        equipText.gameObject.SetActive(false);
+    }
+
+    public void OnClickButton()
+    {
+        inventory.SelectedItem(index);
     }
 }

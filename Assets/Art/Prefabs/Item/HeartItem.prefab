@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7929584567080519615}
   - component: {fileID: 885250542687418571}
   - component: {fileID: 1511526765483754570}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeartItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 4918182887499246673}
   - component: {fileID: 4889887943770624021}
   - component: {fileID: 1459286618761491727}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
