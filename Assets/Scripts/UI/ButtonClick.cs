@@ -11,6 +11,7 @@ public class ButtonClick : MonoBehaviour
     {
         _button = gameObject.GetComponent<Button>();
         _button.onClick.AddListener(OnButtonClick);
+
     }
 
     private void OnButtonClick()
@@ -36,4 +37,6 @@ public class ButtonClick : MonoBehaviour
     {
         _button.onClick.RemoveListener(OnButtonClick);
     }
+
+    
 }
