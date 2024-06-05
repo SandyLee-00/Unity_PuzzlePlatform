@@ -17,4 +17,5 @@ public class Define
     public const string GroundTag = "Ground";
     public const string PlayerTag = "Player";
 
+    public const string GroundLayer = "Ground";
 }

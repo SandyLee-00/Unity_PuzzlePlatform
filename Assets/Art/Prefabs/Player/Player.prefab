@@ -136,6 +136,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPitchAngle: 20
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1649176027470859937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +302,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5045598590763160248}
     m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 7b437248f5fa5184899e2ef1e446e2a9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7b437248f5fa5184899e2ef1e446e2a9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7b437248f5fa5184899e2ef1e446e2a9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7b437248f5fa5184899e2ef1e446e2a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

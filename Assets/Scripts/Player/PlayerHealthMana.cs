@@ -63,7 +63,7 @@ public class PlayerHealthMana : MonoBehaviour
         // TODO : 마나 회복 코루틴 써서 구현하기
         if (CurrentMP < MaxMP && MPtimeSinceLastChange >= mpChangeDelay)
         {
-            ChangeMP(mpUpAmount);
+            ChangeStamina(mpUpAmount);
             MPtimeSinceLastChange = 0f;
         }
     }
@@ -99,7 +99,7 @@ public class PlayerHealthMana : MonoBehaviour
         return true;
     }
 
-    public bool ChangeMP(float change)
+    public bool ChangeStamina(float change)
     {
         // 마나가 부족하면 false 반환
         if (change < 0 && CurrentMP < Mathf.Abs(change))

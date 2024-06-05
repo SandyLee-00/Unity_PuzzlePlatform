@@ -21,7 +21,7 @@ public class ConsumableItem : ItemObject
                     break;
 
                 case ConsumableItemType.Stamina:
-                    playerStatus.ChangeMP(consumableItemData.increaseValue);
+                    playerStatus.ChangeStamina(consumableItemData.increaseValue);
                     Destroy(gameObject);
                     break;
             }

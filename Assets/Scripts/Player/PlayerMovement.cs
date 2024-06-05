@@ -16,8 +16,11 @@ public class PlayerMovement : MonoBehaviour
     private PlayerStateController _playerStateController;
     private PlayerHealthMana _playerHealthMana;
 
+    #region Move
     private Vector3 moveDirection;
+    #endregion
 
+    #region Look
     private Vector2 mouseDelta;
     private const float mouseSensitivity = 1;
     private float pitch = 0f;
@@ -25,10 +28,16 @@ public class PlayerMovement : MonoBehaviour
     public float maxPitchAngle = 20f;
     Camera _camera;
     bool isLookable = true;
+    #endregion
 
+    #region Jump
     public LayerMask groundLayerMask;
+    private PlayerState _previousState;
+    #endregion
 
+    #region Run
     bool isShift = false;
+    #endregion
 
     private void Awake()
     {
@@ -50,35 +59,26 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _camera = Camera.main;
 
-        groundLayerMask = LayerMask.GetMask("Ground");
+        groundLayerMask = LayerMask.GetMask(Define.GroundLayer);
     }
 
     private void Move(Vector2 moveInput)
     {
         moveDirection = new Vector3(moveInput.x, moveInput.y, 0);
-
-        if (moveDirection.magnitude > 0.01)
-        {
-            _playerStateController.State = PlayerState.Walk;
-        }
-        else
-        {
-            _playerStateController.State = PlayerState.Idle;
-        }
     }
 
     /// <summary>
     /// jumpForce만큼 점프한다
+    /// Idle, Walk, Run 상태에서만 점프 가능
     /// </summary>
     private void Jump()
     {
-        if (!IsGrounded())
+        if (IsGrounded() && (_playerStateController.State & PlayerState.Jumpable) != 0)
         {
-            return;
+            _rigidbody.AddForce(Vector3.up * _playerAttributeHandler.CurrentAttribute.jumpForce, ForceMode.Impulse);
+            _previousState = _playerStateController.State;
+            _playerStateController.State = PlayerState.Jump;
         }
-
-        _rigidbody.AddForce(Vector3.up * _playerAttributeHandler.CurrentAttribute.jumpForce, ForceMode.Impulse);
-        _playerStateController.State = PlayerState.Jump;
     }
 
     /// <summary>
@@ -104,40 +104,73 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // WASD -> 플레이어 이동, Shift -> 달리기
         MoveFixedUpdate(moveDirection);
-        
-        if (isLookable)
-        {
-            LookFixedUpdate(mouseDelta);
-        }
 
+        // 마우스 움직임 -> 플레이어 회전, 카메라 회전
+        LookFixedUpdate(mouseDelta);
+
+        // 점프 하고 땅에 닿으면 이전 상태로 변경
         if (_playerStateController.State == PlayerState.Jump && IsGrounded())
         {
-            _playerStateController.State = PlayerState.Idle;
+            _playerStateController.State = _previousState;
         }
 
+        IsGrounded();
     }
 
+    /// <summary>
+    /// 플레이어 움직임을 FixedUpdate에서 처리
+    /// WASD -> 플레이어 이동, Shift -> 달리기
+    /// </summary>
+    /// <param name="moveDirection"></param>
     private void MoveFixedUpdate(Vector3 moveDirection)
     {
+        // 땅에서 떨어져있으면 Jump or Fall, 움직이지 못함
+        if (IsGrounded() == false)
+        {
+            return;
+        }
+
+        // 움직임이 없으면 Idle 상태로 변경
+        if (moveDirection.magnitude < 0.1)
+        {
+            _playerStateController.State = PlayerState.Idle;
+            return;
+        }
+
+        // 플레이어 이동 방향
         Vector3 direction = transform.forward * moveDirection.y + transform.right * moveDirection.x;
 
-        Vector3 move;
-        if (isShift && _playerHealthMana.ChangeMP(_playerAttributeHandler.CurrentAttribute.costMPRun))
+        // Shift 누르고 Mp 소모 가능하면 달리기
+        if (isShift && _playerHealthMana.ChangeStamina(_playerAttributeHandler.CurrentAttribute.costStaminaRun))
         {
-            move = direction * _playerAttributeHandler.CurrentAttribute.runSpeed;
+            Vector3 move = direction * _playerAttributeHandler.CurrentAttribute.runSpeed;
+            _rigidbody.velocity = new Vector3(move.x, _rigidbody.velocity.y, move.z);
             _playerStateController.State = PlayerState.Run;
+            return;
         }
+        // Shift 누르지 않거나 Mp 소모 불가능하면 걷기
         else
         {
-            move = direction * _playerAttributeHandler.CurrentAttribute.moveSpeed;
+            Vector3 move = direction * _playerAttributeHandler.CurrentAttribute.moveSpeed;
+            _rigidbody.velocity = new Vector3(move.x, _rigidbody.velocity.y, move.z);
+            _playerStateController.State = PlayerState.Walk;
+            return;
         }
-
-        _rigidbody.velocity = new Vector3(move.x, _rigidbody.velocity.y, move.z);
     }
 
+    /// <summary>
+    /// 마우스 움직임을 FixedUpdate에서 처리
+    /// </summary>
+    /// <param name="mouseDelta"></param>
     private void LookFixedUpdate(Vector2 mouseDelta)
     {
+        if (isLookable == false)
+        {
+            return;
+        }
+
         yaw += mouseDelta.x * mouseSensitivity;
         pitch -= mouseDelta.y * mouseSensitivity;
 
@@ -147,6 +180,10 @@ public class PlayerMovement : MonoBehaviour
         _camera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
     }
 
+    /// <summary>
+    /// Jump 후에 GroundLayer에 닿았는지 확인
+    /// </summary>
+    /// <returns></returns>
     bool IsGrounded()
     {
         Ray[] rays = new Ray[4]
@@ -161,14 +198,22 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
             {
-                Debug.DrawRay(rays[i].origin, rays[i].direction * 0.1f, Color.red);
+                Debug.DrawRay(rays[i].origin, rays[i].direction * 0.5f, Color.magenta);
                 return true;
             }
         }
 
+        Debug.DrawRay(rays[0].origin, rays[0].direction * 0.5f, Color.magenta);
+        Debug.DrawRay(rays[1].origin, rays[1].direction * 0.5f, Color.magenta);
+        Debug.DrawRay(rays[2].origin, rays[2].direction * 0.5f, Color.magenta);
+        Debug.DrawRay(rays[3].origin, rays[3].direction * 0.5f, Color.magenta);
+
         return false;
     }
 
+    /// <summary>
+    /// UI 사용할 때 커서 보이게 하기, 플레이어 움직임 멈추기
+    /// </summary>
     public void ToggleCursor()
     {
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
