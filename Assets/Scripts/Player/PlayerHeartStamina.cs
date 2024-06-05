@@ -53,19 +53,16 @@ public class PlayerHeartStamina : MonoBehaviour
             }
         }
 
-        Debug.Log($"Heart : {CurrentHeart} / {MaxHeart}, Stamina : {CurrentStamina} / {MaxStamina}");  
+        // Debug.Log($"Heart : {CurrentHeart} / {MaxHeart}, Stamina : {CurrentStamina} / {MaxStamina}");  
 
         // TODO : 마나 회복 코루틴 써서 구현하기
+        _staminatimeSinceLastChange += Time.deltaTime;
+
         if (CurrentStamina < MaxStamina && _staminatimeSinceLastChange >= _playerStatHandler.CurrentAttribute.staminaChangeDelay)
         {
-            _staminatimeSinceLastChange += Time.deltaTime;
-
-            Debug.Log($"Stamina : {CurrentStamina} -> {CurrentStamina + _playerStatHandler.CurrentAttribute.staminaFillAmount}");
             ChangeStamina(_playerStatHandler.CurrentAttribute.staminaFillAmount);
             _staminatimeSinceLastChange = 0f;
         }
-
-
     }
 
     public bool ChangeHeart(int change)
@@ -101,6 +98,8 @@ public class PlayerHeartStamina : MonoBehaviour
 
     public bool ChangeStamina(float change)
     {
+        Debug.Log($"CurrentStamina : {CurrentStamina}, change : {change}");
+
         // 마나가 부족하면 false 반환
         if (change < 0 && CurrentStamina < Mathf.Abs(change))
         {
@@ -109,6 +108,7 @@ public class PlayerHeartStamina : MonoBehaviour
 
         OnChangeHealthMana?.Invoke();
 
+        _staminatimeSinceLastChange = 0f;
         CurrentStamina += change;
         CurrentStamina = Mathf.Clamp(CurrentStamina, 0, MaxStamina);
 
