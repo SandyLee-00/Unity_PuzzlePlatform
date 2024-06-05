@@ -178,7 +178,8 @@ public class PlayerMovement : MonoBehaviour
 
         pitch = Mathf.Clamp(pitch, -maxPitchAngle, maxPitchAngle);
 
-        transform.localEulerAngles = new Vector3(0, yaw, 0);
+        //transform.localEulerAngles = new Vector3(0, yaw, 0);
+        transform.rotation = Quaternion.Euler(0, yaw, 0);
         _camera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
     }
 
