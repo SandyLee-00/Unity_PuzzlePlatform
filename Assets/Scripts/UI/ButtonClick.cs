@@ -7,11 +7,12 @@ public class ButtonClick : MonoBehaviour
 {
     private Button _button;
 
+    public GameObject canvas;
+
     void Start()
     {
         _button = gameObject.GetComponent<Button>();
         _button.onClick.AddListener(OnButtonClick);
-
     }
 
     private void OnButtonClick()
@@ -30,6 +31,14 @@ public class ButtonClick : MonoBehaviour
                 break;
             case "CloseButton":
                 gameObject.transform.parent.gameObject.SetActive(false);
+                break;
+            case "CreditButton":
+                Transform creditPanelTransform = canvas.transform.Find("CreditPanel");
+                creditPanelTransform.gameObject.SetActive(true);
+                break;
+            case "SettingButton":
+                Transform settingPanelTransform = canvas.transform.Find("SettingPanel");
+                settingPanelTransform.gameObject.SetActive(true);
                 break;
         }
     }
