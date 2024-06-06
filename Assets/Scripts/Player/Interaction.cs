@@ -23,6 +23,8 @@ public class Interaction : MonoBehaviour
     private void Start()
     {
         _inputController.OnInteractEvent += GetInteract;
+
+        layerMask = LayerMask.GetMask(Define.InteractableLayer);
     }
 
     private void Update()
