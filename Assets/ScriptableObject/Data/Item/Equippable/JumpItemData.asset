@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 224b800d981b53f46b2c7e66ac52d1a4, type: 3}
-  m_Name: SpeedItemData
+  m_Name: JumpItemData
   m_EditorClassIdentifier: 
-  itemName: "\uC2E0\uBC1C"
-  description: "\uC774\uB3D9\uC18D\uB3C4 \uC99D\uAC00"
-  type: 0
-  itemPrefab: {fileID: 7147727462433221886, guid: e0c8303f2204a484eaa95a4d56959c0e, type: 3}
-  icon: {fileID: 21300000, guid: fb7fb47f84ebdc34dbe76617a93839f4, type: 3}
-  increaseValue: 10
+  itemName: "\uBC84\uC12F"
+  description: "\uC7A5\uCC29 \uC2DC \uC810\uD504\uB825 \uC99D\uAC00"
+  type: 1
+  itemPrefab: {fileID: 4336285813925859489, guid: 14f09ebe5c8875b4ab506bd1ce14ce66, type: 3}
+  icon: {fileID: 21300000, guid: 789991b513dfd3b4fb79689a70e9a22d, type: 3}
+  increaseValue: 2.5

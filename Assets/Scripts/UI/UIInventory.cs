@@ -3,12 +3,7 @@ using UnityEngine;
 
 public class UIInventory : MonoBehaviour
 {
-    public ItemSlot[] slots;
-    public GameObject inventoryWindow;
-    public Transform slotPanel;
-    public Transform dropPosition;
-
-    [Header("Select Item")]
+    [Header("Item Info UI")]
     public TextMeshProUGUI selectedItemName;
     public TextMeshProUGUI selectedItemDescription;
     public TextMeshProUGUI selectedStatLabel;
@@ -18,12 +13,16 @@ public class UIInventory : MonoBehaviour
     public GameObject unEquipButton;
     public GameObject dropButton;
 
-    private PlayerInputController _controller;
-    private PlayerAttributeHandler _attributeHandler;
-    private EquippableItemData _selectedItem;
+    public Transform slotPanel;
+    public Transform dropPosition;
 
+    private ItemSlot[] _slots;
+    private EquippableItemData _selectedItem;
     private int _selectedItemIdx = 0;
     private int _curEquipIdx;
+
+    private PlayerInputController _controller;
+    private PlayerAttributeHandler _attributeHandler;
 
     private void Awake()
     {
@@ -35,17 +34,30 @@ public class UIInventory : MonoBehaviour
     {
         _controller.OnTabEvent += Toggle;
 
-        inventoryWindow.SetActive(false);
-        slots = new ItemSlot[slotPanel.childCount];
+        gameObject.SetActive(false);
 
-        for (int i = 0; i < slots.Length; i++)
+        _slots = new ItemSlot[slotPanel.childCount];
+
+        for (int i = 0; i < _slots.Length; i++)
         {
-            slots[i] = slotPanel.GetChild(i).GetComponent<ItemSlot>();
-            slots[i].index = i;
-            slots[i].inventory = this;
+            _slots[i] = slotPanel.GetChild(i).GetComponent<ItemSlot>();
+            _slots[i].index = i;
+            _slots[i].inventory = this;
         }
 
         ClearSelectedItemWindow();
+    }
+    
+    public void Toggle()
+    {
+        if (gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+        }
     }
 
     private void ClearSelectedItemWindow()
@@ -59,23 +71,6 @@ public class UIInventory : MonoBehaviour
         equipButton.SetActive(false);
         unEquipButton.SetActive(false);
         dropButton.SetActive(false);
-    }
-
-    public void Toggle()
-    {
-        if (IsOpen())
-        {
-            inventoryWindow.SetActive(false);
-        }
-        else
-        {
-            inventoryWindow.SetActive(true);
-        }
-    }
-
-    public bool IsOpen()
-    {
-        return inventoryWindow.activeInHierarchy;
     }
 
     public void AddItem(EquippableItemData data)
@@ -94,11 +89,11 @@ public class UIInventory : MonoBehaviour
 
     private ItemSlot GetEmptySlot()
     {
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < _slots.Length; i++)
         {
-            if (slots[i].itemData == null)
+            if (_slots[i].itemData == null)
             {
-                return slots[i];
+                return _slots[i];
             }
         }
 
@@ -107,53 +102,55 @@ public class UIInventory : MonoBehaviour
 
     private void UpdateUI()
     {
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < _slots.Length; i++)
         {
-            if (slots[i].itemData != null)
+            if (_slots[i].itemData != null)
             {
-                slots[i].Set();
+                _slots[i].Set();
             }
             else
             {
-                slots[i].Clear();
+                _slots[i].Clear();
             }
         }
+    }
+
+    private void ThrowItem(EquippableItemData data)
+    {
+        Instantiate(data.itemPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360));
     }
 
     public void SelectedItem(int idx)
     {
-        if (slots[idx].itemData == null)
+        if (_slots[idx].itemData == null)
         {
             return;
         }
 
-        _selectedItem = slots[idx].itemData;
+        _selectedItem = _slots[idx].itemData;
         _selectedItemIdx = idx;
 
         selectedItemName.text = _selectedItem.itemName;
         selectedItemDescription.text = _selectedItem.description;
-
-        selectedStatName.text = string.Empty;
-        selectedStatValue.text = string.Empty;
-
         selectedStatLabel.gameObject.SetActive(true);
-        selectedStatName.text += _selectedItem.type.ToString();
-        selectedStatValue.text += _selectedItem.increaseValue.ToString();
+        selectedStatName.text = _selectedItem.type.ToString();
+        selectedStatValue.text = _selectedItem.increaseValue.ToString();
 
-        equipButton.SetActive(!slots[idx].equipped);
-        unEquipButton.SetActive(slots[idx].equipped);
-        dropButton.SetActive(!slots[idx].equipped); // TODO: 버리기 버튼을 비활성화하지 말고, 버리면서 장비 해제하는 쪽으로 수정
+        equipButton.SetActive(!_slots[idx].equipped);
+        unEquipButton.SetActive(_slots[idx].equipped);
+        dropButton.SetActive(!_slots[idx].equipped); // TODO: 버리기 버튼을 비활성화하지 말고, 버리면서 장비 해제하는 쪽으로 수정
     }
 
     public void OnEquipButton()
     {
-        if (slots[_curEquipIdx].equipped)
+        if (_slots[_curEquipIdx].equipped)
         {
-            UnEquip(_curEquipIdx);
+            _attributeHandler.ApplyItemValue(_slots[_curEquipIdx].itemData, false);
+            _slots[_curEquipIdx].equipped = false;
         }
 
-        slots[_selectedItemIdx].equipped = true;
-        _attributeHandler.ApplyItemValue(slots[_selectedItemIdx].itemData, true);
+        _attributeHandler.ApplyItemValue(_selectedItem, true);
+        _slots[_selectedItemIdx].equipped = true;
         _curEquipIdx = _selectedItemIdx;
         UpdateUI();
 
@@ -162,17 +159,12 @@ public class UIInventory : MonoBehaviour
 
     public void OnUnEquipButton()
     {
-        UnEquip(_selectedItemIdx);
-    }
-
-    private void UnEquip(int idx)
-    {
-        slots[idx].equipped = false;
-        _attributeHandler.ApplyItemValue(slots[idx].itemData, false);
-        UpdateUI();
-
-        if (_selectedItemIdx == idx)
+        if (_slots[_selectedItemIdx].equipped)
         {
+            _attributeHandler.ApplyItemValue(_slots[_selectedItemIdx].itemData, false);
+            _slots[_selectedItemIdx].equipped = false;
+            UpdateUI();
+
             SelectedItem(_selectedItemIdx);
         }
     }
@@ -183,15 +175,10 @@ public class UIInventory : MonoBehaviour
         RemoveSelectedItem();
     }
 
-    private void ThrowItem(EquippableItemData data)
-    {
-        Instantiate(data.itemPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360));
-    }
-
     private void RemoveSelectedItem()
     {
         _selectedItem = null;
-        slots[_selectedItemIdx].itemData = null;
+        _slots[_selectedItemIdx].itemData = null;
         _selectedItemIdx = -1;
 
         ClearSelectedItemWindow();

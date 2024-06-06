@@ -22,7 +22,7 @@ public class ItemSlot : MonoBehaviour
     private void OnEnable()
     {
         _outline.enabled = equipped;
-        equipText.enabled = equipped;
+        equipText.gameObject.SetActive(equipped);
     }
 
     public void Set()
@@ -31,7 +31,7 @@ public class ItemSlot : MonoBehaviour
         icon.sprite = itemData.icon;
 
         _outline.enabled = equipped;
-        equipText.enabled = equipped;
+        equipText.gameObject.SetActive(equipped);
     }
 
     public void Clear()

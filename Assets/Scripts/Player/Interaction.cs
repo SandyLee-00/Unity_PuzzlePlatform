@@ -6,14 +6,13 @@ public class Interaction : MonoBehaviour
     public float checkRate = 0.05f;
     public float maxCheckDistance = 10.0f;
     public LayerMask layerMask;
-    private float lastCheckTime;
+    private float _lastCheckTime;
 
-    private GameObject curInteractGameObject;
+    private GameObject _curInteractGameObject;
 
     public TextMeshProUGUI promptText;
-    private Camera _camera;
-
     private PlayerInputController _inputController;
+    private Camera _camera;
 
     private void Awake()
     {
@@ -28,23 +27,23 @@ public class Interaction : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time - lastCheckTime > checkRate)
+        if (Time.time - _lastCheckTime > checkRate)
         {
-            lastCheckTime = Time.time;
+            _lastCheckTime = Time.time;
 
             Ray ray = _camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
 
             if (Physics.Raycast(ray, out RaycastHit hit, maxCheckDistance, layerMask))
             {
-                if (hit.collider.gameObject != curInteractGameObject && hit.collider.gameObject.TryGetComponent(out IInspectable inspectable))
+                if (hit.collider.gameObject != _curInteractGameObject && hit.collider.gameObject.TryGetComponent(out IInspectable inspectable))
                 {
-                    curInteractGameObject = hit.collider.gameObject;
+                    _curInteractGameObject = hit.collider.gameObject;
                     SetPrompt(inspectable);
                 }
             }
             else
             {
-                curInteractGameObject = null;
+                _curInteractGameObject = null;
                 promptText.gameObject.SetActive(false);
             }
         }
@@ -58,10 +57,10 @@ public class Interaction : MonoBehaviour
 
     private void GetInteract()
     {
-        if (curInteractGameObject.TryGetComponent(out IInteractable interactable))
+        if (_curInteractGameObject.TryGetComponent(out IInteractable interactable))
         {
             interactable.Interact();
-            curInteractGameObject = null;
+            _curInteractGameObject = null;
             promptText.gameObject.SetActive(false);
         }
     }
