@@ -59,7 +59,7 @@ public class Interaction : MonoBehaviour
 
     private void GetInteract()
     {
-        if (_curInteractGameObject.TryGetComponent(out IInteractable interactable))
+        if (_curInteractGameObject != null && _curInteractGameObject.TryGetComponent(out IInteractable interactable))
         {
             interactable.Interact();
             _curInteractGameObject = null;
