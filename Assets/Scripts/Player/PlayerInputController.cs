@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,9 @@ public class PlayerInputController : MonoBehaviour
     private Camera _camera;
 
     private PlayerInput _playerInput;
+
+    [Header("Character Input Values")]
+    public bool sprint;
 
     private void Start()
     {
@@ -66,6 +70,11 @@ public class PlayerInputController : MonoBehaviour
     public void OnHoldShift(InputValue value)
     {
         OnShiftEvent?.Invoke(value.Get<float>());
+        SprintInput(value.isPressed);
+    }
+    public void SprintInput(bool newSprintState)
+    {
+        sprint = newSprintState;
     }
 
     /// <summary>
