@@ -9,7 +9,9 @@ using UnityEngine.Windows;
 /// <summary>
 /// 플레이어 움직임 컴포넌트
 /// Walk, Run, Jump, Idle 상태를 관리한다
+/// 주석 부분은 PlayerMovementCharacterController를 사용한 코드 + 3인칭 시점을 위한 코드 (전체 플젝 7일 중 1일 사용, 하다가 못했다)
 /// </summary>
+/*
 public class PlayerMovementCharacterController : MonoBehaviour
 {
     private Rigidbody _rigidbody;
@@ -215,7 +217,7 @@ public class PlayerMovementCharacterController : MonoBehaviour
 
     private void CameraRotationLateUpdate()
     {
-        if(isLookable == false)
+        if (isLookable == false)
         {
             return;
         }
@@ -228,3 +230,5 @@ public class PlayerMovementCharacterController : MonoBehaviour
         _camera.transform.rotation = Quaternion.Euler(pitch, yaw, 0.0f);
     }
 }
+
+*/
