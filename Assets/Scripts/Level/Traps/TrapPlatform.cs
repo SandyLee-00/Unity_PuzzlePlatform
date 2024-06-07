@@ -17,16 +17,11 @@ public class TrapPlatform : Platform, IInspectable
     {
         if(other.gameObject.TryGetComponent(out PlayerHeartStamina playerHeartStamina))
         {
-            //체력 감소 (IDamagable이 추가되면 이동할 예정)
-            if (playerHeartStamina.ChangeHeart(-trapPlatform.damage))
-            {
-                Debug.Log(playerHeartStamina.CurrentHeart);
-            }
-            else
-            {
-                //gameOver
-            }
-            //트랩마다 종류가 있을텐데 trapPlatform에서 타입을 확인하고 결정
+            playerHeartStamina.ChangeHeart(-trapPlatform.damage);
+        }
+        else
+        {
+            Debug.LogError("PlayerHeartStamina 컴포넌트를 찾을 수 없습니다.");
         }
     }
 }
