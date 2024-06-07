@@ -45,24 +45,48 @@ public class PlayerStateController : MonoBehaviour
 
     [SerializeField]
     private PlayerState _playerState;
+    private PlayerState _previousState;
 
     private PlayerInputController _playerInputController;
-
+    private PlayerMovement _playerMovement;
     private PlayerHeartStamina _playerHealthMana;
+    private PlayerAttributeHandler _playerAttributeHandler;
 
     private void Awake()
     {
         _playerInputController = gameObject.GetOrAddComponent<PlayerInputController>();
         _playerHealthMana = gameObject.GetOrAddComponent<PlayerHeartStamina>();
+        _playerMovement = gameObject.GetOrAddComponent<PlayerMovement>();
+        _playerAttributeHandler = gameObject.GetOrAddComponent<PlayerAttributeHandler>();
 
-        _playerHealthMana.OnDamage += () => { State = PlayerState.GetHit; };
-        _playerHealthMana.OnDeath += () => { State = PlayerState.Die; };
+        _playerHealthMana.OnDamage += () => 
+        { 
+            StartCoroutine(ResetStateAfterDelayCoroutine(PlayerState.GetHit, _playerAttributeHandler.CurrentAttribute.heartChangeDelay));
+        };
 
-        _playerInputController.OnInteractEvent += () => { State = PlayerState.Interact; };
+        _playerHealthMana.OnDeath += () => { StartCoroutine(ResetStateAfterDelayCoroutine(PlayerState.Die, 5f)); };
+
+        _playerInputController.OnInteractEvent += () => { StartCoroutine(ResetStateAfterDelayCoroutine(PlayerState.Interact)); };
+
     }
 
     private void InvokeStateChangeEvent()
     {
         OnStateChangeEvent?.Invoke(_playerState);
+    }
+
+    private IEnumerator ResetStateAfterDelayCoroutine(PlayerState newState, float delay = 0.5f)
+    {
+        _previousState = _playerState;
+        State = newState;
+        PlayerState tempState = _playerState;
+        _playerMovement.IsMoveable = false;
+
+        yield return new WaitForSeconds(delay);
+        if (_playerState == tempState) // 이 동안 상태가 변하지 않았는지 확인
+        {
+            State = _previousState;
+        }
+        _playerMovement.IsMoveable = true;
     }
 }

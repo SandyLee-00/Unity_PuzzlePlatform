@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Move")]
     private Vector3 moveDirection;
+    public bool IsMoveable { get; set; } = true;
 
     [Header("Look")]
     private Vector2 mouseDelta;
@@ -113,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // WASD -> 플레이어 이동, Shift -> 달리기
-        if (IsGrounded() && jumpKeepingCount <= 0)
+        if (IsGrounded() && jumpKeepingCount <= 0 && IsMoveable)
         {
             MoveFixedUpdate(moveDirection);
         }
