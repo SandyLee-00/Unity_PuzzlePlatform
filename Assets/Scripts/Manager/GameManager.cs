@@ -3,21 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    private static GameManager _instance;
-    public static GameManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new GameObject("GameManager").AddComponent<GameManager>();
-            }
-            return _instance;
-        }
-    }
-
     [SerializeField]
     private GameObject _gameOverPanel;
 
@@ -34,14 +21,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance == null)
+        if (_componentInstance == null)
         {
-            _instance = this;
+            _componentInstance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
         {
-            if (_instance != this)
+            if (_componentInstance != this)
             {
                 Destroy(gameObject);
             }
