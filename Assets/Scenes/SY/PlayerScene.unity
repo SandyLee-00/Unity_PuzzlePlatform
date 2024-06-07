@@ -486,28 +486,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3758713152701678814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &901845649897679221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4634217803206531638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 777e311b009c57b43917c9641f39a48e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPitchAngle: 20
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  Grounded: 1
-  GroundedOffset: -0.14
-  GroundedRadius: 0.28
-  GroundLayers:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!4 &913473906373300599
 Transform:
   m_ObjectHideFlags: 0
@@ -697,7 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 23d415c4b50c3d64e9f5be0646bb860b, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 746cf5bcec8e1ca4b93abd2c25807e62, type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -711,8 +689,8 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: PC
-  m_DefaultActionMap: PlayerActionMap
+  m_DefaultControlScheme: KeyboardMouse
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &1503573896036925181
@@ -1096,19 +1074,6 @@ Transform:
   - {fileID: 6487994599310726103}
   m_Father: {fileID: 4644820829063539608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3330595603963570163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4634217803206531638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3234afb0092ec14d947c4020534e110, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprint: 0
 --- !u!4 &3358235249186702769
 Transform:
   m_ObjectHideFlags: 0
@@ -1314,13 +1279,13 @@ GameObject:
   - component: {fileID: 5045598590939233308}
   - component: {fileID: 1461180995448677721}
   - component: {fileID: 8635623142226840647}
-  - component: {fileID: 3330595603963570163}
   - component: {fileID: 1649176027395465221}
   - component: {fileID: 8774793745994515464}
   - component: {fileID: 5792717861732441790}
-  - component: {fileID: 901845649897679221}
   - component: {fileID: 281738873141464927}
   - component: {fileID: 8774793745994515465}
+  - component: {fileID: 8774793745994515467}
+  - component: {fileID: 8774793745994515468}
   m_Layer: 6
   m_Name: Player_CharacterController
   m_TagString: Player
@@ -1416,7 +1381,7 @@ Transform:
   m_GameObject: {fileID: 4634217803206531638}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.052, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2493,6 +2458,47 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8774793745994515467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4634217803206531638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b30c232d9db3d44baf4d1076820f896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move: {x: 0, y: 0}
+  look: {x: 0, y: 0}
+  jump: 0
+  sprint: 0
+  analogMovement: 0
+  cursorLocked: 1
+  cursorInputForLook: 1
+--- !u!114 &8774793745994515468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4634217803206531638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777e311b009c57b43917c9641f39a48e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPitchAngle: 20
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  Grounded: 1
+  GroundedOffset: -0.14
+  GroundedRadius: 0.28
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &8971295889839824207
 GameObject:
   m_ObjectHideFlags: 0

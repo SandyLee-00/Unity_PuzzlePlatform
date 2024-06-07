@@ -22,6 +22,8 @@ public class PlayerInputController : MonoBehaviour
     private PlayerInput _playerInput;
 
     [Header("Character Input Values")]
+    public Vector2 look;
+    public bool jump;
     public bool sprint;
 
     private void Start()
@@ -47,11 +49,24 @@ public class PlayerInputController : MonoBehaviour
         Mathf.Clamp(mouseDelta.x, -1, 1);
         
         OnLookEvent?.Invoke(mouseDelta);
+
+        LookInput(value.Get<Vector2>());
+    }
+
+    public void LookInput(Vector2 newLookDirection)
+    {
+        look = newLookDirection;
     }
 
     public void OnJump(InputValue value)
     {
         OnJumpEvent?.Invoke();
+        JumpInput(value.isPressed);
+    }
+
+    public void JumpInput(bool newJumpState)
+    {
+        jump = newJumpState;
     }
 
     /// <summary>

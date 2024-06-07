@@ -58,7 +58,6 @@ public class PlayerMovementCharacterController : MonoBehaviour
     // player
     private float _verticalVelocity;
 
-
     private GameObject _mainCamera;
 
     private void Awake()
@@ -103,73 +102,6 @@ public class PlayerMovementCharacterController : MonoBehaviour
         isShift = shiftInput > 0.1;
     }
 
-    private void FixedUpdate()
-    {
-        /*// WASD -> 플레이어 이동, Shift -> 달리기
-        MoveFixedUpdate(moveInput);
-
-        // 마우스 움직임 -> 플레이어 회전, 카메라 회전
-        LookFixedUpdate(mouseDelta);*/
-    }
-
-    /// <summary>
-    /// 플레이어 움직임을 FixedUpdate에서 처리
-    /// WASD -> 플레이어 이동, Shift -> 달리기
-    /// </summary>
-    /// <param name="moveDirection"></param>
-    private void MoveFixedUpdate(Vector3 moveDirection)
-    {
-        Debug.Log($"{_playerStateController.State} 점프 상테에서 다른 상태로 안바꿔줘야한다~~~~~~~~~~~");
-
-        // 움직임 입력이 없으면 Idle 상태로 변경
-        if (moveDirection.magnitude < 0.1)
-        {
-            _playerStateController.State = PlayerState.Idle;
-            return;
-        }
-
-        // 플레이어 이동 방향
-        Vector3 direction = transform.forward * moveDirection.y + transform.right * moveDirection.x;
-
-        // Shift 누르고 Mp 소모 가능하면 달리기
-        if (isShift && _playerHealthMana.ChangeStamina(-_playerAttributeHandler.CurrentAttribute.costStaminaRun))
-        {
-            Vector3 move = direction * _playerAttributeHandler.CurrentAttribute.runMultiplier;
-            _rigidbody.velocity = new Vector3(move.x, _rigidbody.velocity.y, move.z);
-            _playerStateController.State = PlayerState.Run;
-            return;
-        }
-        // Shift 누르지 않거나 Mp 소모 불가능하면 걷기
-        else
-        {
-            Vector3 move = direction * _playerAttributeHandler.CurrentAttribute.moveSpeed;
-            _rigidbody.velocity = new Vector3(move.x, _rigidbody.velocity.y, move.z);
-            _playerStateController.State = PlayerState.Walk;
-            return;
-        }
-    }
-
-    /// <summary>
-    /// 마우스 움직임을 FixedUpdate에서 처리
-    /// </summary>
-    /// <param name="mouseDelta"></param>
-    private void LookFixedUpdate(Vector2 mouseDelta)
-    {
-        if (isLookable == false)
-        {
-            return;
-        }
-
-        yaw += mouseDelta.x * mouseSensitivity;
-        pitch -= mouseDelta.y * mouseSensitivity;
-
-        pitch = Mathf.Clamp(pitch, -maxPitchAngle, maxPitchAngle);
-
-        //transform.localEulerAngles = new Vector3(0, yaw, 0);
-        transform.rotation = Quaternion.Euler(0, yaw, 0);
-        _camera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
-    }
-
     /// <summary>
     /// UI 사용할 때 커서 보이게 하기, 플레이어 움직임 멈추기
     /// </summary>
@@ -182,14 +114,18 @@ public class PlayerMovementCharacterController : MonoBehaviour
 
     private void Update()
     {
-        UpdateJumpAndGravity();
-        UpdateGroundedCheck();
-        UpdateMove();
+        JumpAndGravityUpdate();
+        GroundedCheckUpdate();
+        MoveUpdate();
     }
 
-    private void UpdateMove()
+    private void LateUpdate()
     {
-        // set target speed based on move speed, sprint speed and if sprint is pressed
+        CameraRotationLateUpdate();
+    }
+
+    private void MoveUpdate()
+    {
         // 스프린트 상태에 따라 이동 속도 결정
         float targetSpeed = 0;
         if (_inputController.sprint)
@@ -202,7 +138,10 @@ public class PlayerMovementCharacterController : MonoBehaviour
         }
 
         // 이동 입력이 없으면 이동 속도 0으로 설정
-        if (moveInput == Vector2.zero) targetSpeed = 0.0f;
+        if (moveInput == Vector2.zero)
+        {
+            targetSpeed = 0.0f;
+        }
 
         // 현재 수평 속도
         float currentHorizontalSpeed = new Vector3(_characterController.velocity.x, 0.0f, _characterController.velocity.z).magnitude;
@@ -227,23 +166,45 @@ public class PlayerMovementCharacterController : MonoBehaviour
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
         // 플레이어 이동
-        _characterController.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                         new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
+        _characterController.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
     }
 
-    private void UpdateJumpAndGravity()
+    private void JumpAndGravityUpdate()
     {
+        // 중력 상수 설정 (기본 중력 값)
+        const float Gravity = -9.81f;
+
         // 이미 땅에서 떨어져 있으면 더 이상 처리하지 않음
-        if (Grounded == false)
+        if (!Grounded)
         {
+            // 떠있으면 점프 불가능
+            _inputController.jump = false;
+
+            // 중력 적용
+            _verticalVelocity += Gravity * Time.deltaTime;
+
             return;
         }
 
+        // 땅에 닿아있을 때 수직 속도가 무한히 떨어지는 것을 방지
+        if (_verticalVelocity < 0.0f)
+        {
+            _verticalVelocity = -2f;
+        }
 
+        // Jump
+        if (_inputController.jump)
+        {
+            // the square root of H * -2 * G = how much velocity needed to reach desired height
+            _verticalVelocity = Mathf.Sqrt(_playerAttributeHandler.CurrentAttribute.jumpForce * -2f * Gravity);
+            _inputController.jump = false; // 점프 입력 초기화
+        }
+
+        // 중력 적용
+        _verticalVelocity += Gravity * Time.deltaTime;
     }
 
-    private void UpdateGroundedCheck()
+    private void GroundedCheckUpdate()
     {
         // set sphere position, with offset
         Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
@@ -252,13 +213,18 @@ public class PlayerMovementCharacterController : MonoBehaviour
             QueryTriggerInteraction.Ignore);
     }
 
-    private void LateUpdate()
+    private void CameraRotationLateUpdate()
     {
-        CameraRotation();
-    }
+        if(isLookable == false)
+        {
+            return;
+        }
 
-    private void CameraRotation()
-    {
+        yaw += mouseDelta.x * mouseSensitivity;
+        pitch += mouseDelta.y * mouseSensitivity;
 
+        pitch = Mathf.Clamp(pitch, -maxPitchAngle, maxPitchAngle);
+
+        _camera.transform.rotation = Quaternion.Euler(pitch, yaw, 0.0f);
     }
 }
