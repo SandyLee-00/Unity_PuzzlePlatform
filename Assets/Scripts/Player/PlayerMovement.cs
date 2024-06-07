@@ -16,29 +16,25 @@ public class PlayerMovement : MonoBehaviour
     private PlayerStateController _playerStateController;
     private PlayerHeartStamina _playerHealthMana;
 
-    #region Move
+    [Header("Move")]
     private Vector3 moveDirection;
-    #endregion
 
-    #region Look
+    [Header("Look")]
     private Vector2 mouseDelta;
     private const float mouseSensitivity = 1;
     private float pitch = 0f;
     private float yaw = 0f;
-    public float maxPitchAngle = 20f;
+    private float maxPitchAngle = 30f;
     Camera _camera;
     bool isLookable = true;
-    #endregion
 
-    #region Jump
-    public LayerMask groundLayerMask;
+    [Header("Jump")]
+    private LayerMask groundLayerMask;
     private PlayerState _previousState;
-    int jumpKeepingCount = 0;
-    #endregion
+    private int jumpKeepingCount = 0;
 
-    #region Run
-    bool isShift = false;
-    #endregion
+    [Header("Run")]
+    private bool isShift = false;
 
     private void Awake()
     {
@@ -79,8 +75,9 @@ public class PlayerMovement : MonoBehaviour
             _rigidbody.AddForce(Vector3.up * _playerAttributeHandler.CurrentAttribute.jumpForce, ForceMode.Impulse);
             _previousState = _playerStateController.State;
             _playerStateController.State = PlayerState.Jump;
+
+            // FixedUpdate 0.02 * 5 = 0.1초 동안 점프 유지 : 점프 시작할 때 땅에 닿아있다고 판단해서 0.1초 동안 점프 유지
             jumpKeepingCount = 5;
-            Debug.Log($" {_playerStateController.State} 점프는 하는데 왜 점프상태로 안해줘~~~");
         }
     }
 
@@ -93,6 +90,9 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         _playerStateController.State = PlayerState.Jump;
+
+        // FixedUpdate 0.02 * 5 = 0.1초 동안 점프 유지 : 점프 시작할 때 땅에 닿아있다고 판단해서 0.1초 동안 점프 유지
+        jumpKeepingCount = 5;
     }
 
     private void Look(Vector2 mouseDelta)
@@ -107,7 +107,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        JumpFixedUpdate();
+        if(_playerStateController.State == PlayerState.Jump)
+        {
+            JumpFixedUpdate();
+        }
 
         // WASD -> 플레이어 이동, Shift -> 달리기
         if (IsGrounded() && jumpKeepingCount <= 0)
@@ -122,14 +125,14 @@ public class PlayerMovement : MonoBehaviour
     private void JumpFixedUpdate()
     {
         // 땅에서 떨어져있으면 Jump or Fall, 움직이지 못함
-        if (_playerStateController.State == PlayerState.Jump && jumpKeepingCount > 0)
+        if (jumpKeepingCount > 0)
         {
             jumpKeepingCount--;
             return;
         }
 
         // 점프 하고 땅에 닿으면 이전 상태로 변경
-        if (_playerStateController.State == PlayerState.Jump && IsGrounded())
+        if (IsGrounded())
         {
             _playerStateController.State = _previousState;
         }
@@ -152,9 +155,11 @@ public class PlayerMovement : MonoBehaviour
         // 플레이어 이동 방향
         Vector3 direction = transform.forward * moveDirection.y + transform.right * moveDirection.x;
 
-        // Shift 누르고 Mp 소모 가능하면 달리기
-        if (isShift && _playerHealthMana.ChangeStamina(-_playerAttributeHandler.CurrentAttribute.costStaminaRun))
+        // Shift 누르고 Mp 소모
+        // 전체 스테미나 중 20% 이상 남아있어야 달리기 가능
+        if (isShift && _playerHealthMana.CurrentStamina > _playerAttributeHandler.CurrentAttribute.maxStamina / 5)
         {
+            _playerHealthMana.ChangeStamina(-_playerAttributeHandler.CurrentAttribute.costStaminaRun);
             Vector3 move = direction * _playerAttributeHandler.CurrentAttribute.moveSpeed * _playerAttributeHandler.CurrentAttribute.runMultiplier;
             _rigidbody.velocity = new Vector3(move.x, _rigidbody.velocity.y, move.z);
             _playerStateController.State = PlayerState.Run;
@@ -186,7 +191,6 @@ public class PlayerMovement : MonoBehaviour
 
         pitch = Mathf.Clamp(pitch, -maxPitchAngle, maxPitchAngle);
 
-        //transform.localEulerAngles = new Vector3(0, yaw, 0);
         transform.rotation = Quaternion.Euler(0, yaw, 0);
         _camera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
     }
@@ -209,7 +213,6 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
             {
-                Debug.DrawRay(rays[i].origin, rays[i].direction * 0.5f, Color.magenta);
                 return true;
             }
         }
