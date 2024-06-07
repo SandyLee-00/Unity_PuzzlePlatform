@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private const float mouseSensitivity = 1;
     private float pitch = 0f;
     private float yaw = 0f;
-    private float maxPitchAngle = 30f;
+    private float maxPitchAngle = 70f;
     Camera _camera;
     bool isLookable = true;
 
