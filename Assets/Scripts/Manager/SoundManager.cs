@@ -44,6 +44,16 @@ public class SoundManager : Singleton<SoundManager>
     }
 
     /// <summary>
+    /// 사운드 채널에 맞게 볼륨 설정
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="volume"></param>
+    public void SetVolume(Define.Sound type, float volume)
+    {
+        _audioSources[(int)type].volume = volume;
+    }
+
+    /// <summary>
     /// 사운드 채널에 맞게 사운드 재생 
     /// </summary>
     /// <param name="type"></param>
@@ -51,7 +61,7 @@ public class SoundManager : Singleton<SoundManager>
     /// <param name="volume"></param>
     /// <param name="pitch"></param>
     /// <returns></returns>
-    public bool Play(Define.Sound type, string path, float volume = 1.0f, float pitch = 1.0f)
+    public bool Play(Define.Sound type, string path, float pitch = 1.0f)
     {
         if (string.IsNullOrEmpty(path))
         {
@@ -65,7 +75,6 @@ public class SoundManager : Singleton<SoundManager>
         }
 
         AudioSource audioSource = _audioSources[(int)type];
-        audioSource.volume = volume;
         audioSource.pitch = pitch;
 
         if (type == Define.Sound.Bgm)
