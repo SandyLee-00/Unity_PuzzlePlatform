@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4546262415364091841}
   - component: {fileID: 2871837158183694602}
   - component: {fileID: 132535022112783994}
+  - component: {fileID: 2720351115186428897}
+  - component: {fileID: 630015859619811517}
   m_Layer: 5
   m_Name: PlayerStamina
   m_TagString: Untagged
@@ -76,6 +78,34 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2720351115186428897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2786701024152739035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c23d2871fc9d4da9733db41f5dd5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHeartStamina: {fileID: 0}
+  staminaImage: {fileID: 8092307586030223735}
+--- !u!114 &630015859619811517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2786701024152739035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c23d2871fc9d4da9733db41f5dd5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHeartStamina: {fileID: 0}
+  staminaImage: {fileID: 8092307586030223735}
 --- !u!1 &8104879945753143418
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +118,7 @@ GameObject:
   - component: {fileID: 3468552597659465267}
   - component: {fileID: 8092307586030223735}
   m_Layer: 5
-  m_Name: Image
+  m_Name: StaminaImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
