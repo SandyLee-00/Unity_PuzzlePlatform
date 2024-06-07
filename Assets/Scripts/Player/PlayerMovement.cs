@@ -156,10 +156,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = transform.forward * moveDirection.y + transform.right * moveDirection.x;
 
         // Shift 누르고 Mp 소모
-        // 전체 스테미나 중 20% 이상 남아있어야 달리기 가능
-        if (isShift && _playerHealthMana.CurrentStamina > _playerAttributeHandler.CurrentAttribute.maxStamina / 5)
+        if (isShift && _playerHealthMana.ChangeStamina(-_playerAttributeHandler.CurrentAttribute.costStaminaRun))
         {
-            _playerHealthMana.ChangeStamina(-_playerAttributeHandler.CurrentAttribute.costStaminaRun);
             Vector3 move = direction * _playerAttributeHandler.CurrentAttribute.moveSpeed * _playerAttributeHandler.CurrentAttribute.runMultiplier;
             _rigidbody.velocity = new Vector3(move.x, _rigidbody.velocity.y, move.z);
             _playerStateController.State = PlayerState.Run;
