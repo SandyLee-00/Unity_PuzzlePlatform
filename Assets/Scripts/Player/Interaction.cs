@@ -10,7 +10,8 @@ public class Interaction : MonoBehaviour
 
     private GameObject _curInteractGameObject;
 
-    public TextMeshProUGUI promptText;
+    public GameObject promptImage;
+    private TextMeshProUGUI _promptText;
     private PlayerInputController _inputController;
     private Camera _camera;
 
@@ -18,6 +19,7 @@ public class Interaction : MonoBehaviour
     {
         _camera = Camera.main;
         _inputController = GetComponent<PlayerInputController>();
+        _promptText = promptImage.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Start()
@@ -48,15 +50,15 @@ public class Interaction : MonoBehaviour
             else
             {
                 _curInteractGameObject = null;
-                promptText.gameObject.SetActive(false);
+                promptImage.gameObject.SetActive(false);
             }
         }
     }
 
     private void SetPrompt(IInspectable inspectable)
     {
-        promptText.gameObject.SetActive(true);
-        promptText.text = inspectable.GetPrompt();
+        promptImage.gameObject.SetActive(true);
+        _promptText.text = inspectable.GetPrompt();
     }
 
     private void GetInteract()
@@ -65,7 +67,7 @@ public class Interaction : MonoBehaviour
         {
             interactable.Interact();
             _curInteractGameObject = null;
-            promptText.gameObject.SetActive(false);
+            promptImage.gameObject.SetActive(false);
         }
     }
 }
