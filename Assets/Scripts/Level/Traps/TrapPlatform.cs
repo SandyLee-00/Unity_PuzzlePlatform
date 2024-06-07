@@ -10,6 +10,7 @@ public class TrapPlatform : Platform, IInspectable
 
     public string GetPrompt()
     {
+        //if 이게 돌밭이라면
         return "";
     }
 
@@ -18,6 +19,10 @@ public class TrapPlatform : Platform, IInspectable
         if(other.gameObject.TryGetComponent(out PlayerHeartStamina playerHeartStamina))
         {
             playerHeartStamina.ChangeHeart(-trapPlatform.damage);
+            if(trapPlatform.trapType == TrapPlatformType.Stone)
+            {
+                //속도 감소
+            }
         }
         else
         {
