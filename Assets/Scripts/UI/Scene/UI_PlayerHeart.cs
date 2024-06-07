@@ -6,26 +6,42 @@ public class UI_PlayerHeart : MonoBehaviour
 {
     public GameObject[] Hearts;
 
-    public PlayerHeartStamina playerHeartStamina;
-    int currentHeart = 0;
-
+    private PlayerHeartStamina playerHeartStamina;
+    private PlayerAttributeHandler playerAttributeHandler;
     private void Start()
     {
         playerHeartStamina = GameObject.FindGameObjectWithTag(Define.PlayerTag).GetComponent<PlayerHeartStamina>();
-        currentHeart = playerHeartStamina.CurrentHeart;
+        playerAttributeHandler = GameObject.FindGameObjectWithTag(Define.PlayerTag).GetComponent<PlayerAttributeHandler>();
+
         playerHeartStamina.OnChangeHealthMana += UpdateHeart;
+
+        foreach (GameObject heart in Hearts)
+        {
+            heart.SetActive(true);
+        }
     }
 
     private void UpdateHeart()
     {
-        if (currentHeart == playerHeartStamina.CurrentHeart)
+        Debug.Log($"(CurrentHeart: {playerHeartStamina.CurrentHeart}, MaxHeart: {playerHeartStamina.MaxHeart})");
+        if (playerHeartStamina.CurrentHeart == 2)
         {
-            return;
+            Hearts[2].SetActive(false);
+            Hearts[1].SetActive(true);
+            Hearts[0].SetActive(true);
         }
+        else if (playerHeartStamina.CurrentHeart == 1)
+        {
+            Hearts[2].SetActive(false);
+            Hearts[1].SetActive(false);
+            Hearts[0].SetActive(true);
 
-        currentHeart = playerHeartStamina.CurrentHeart;
-
-        Hearts[currentHeart-1].SetActive(false);
+        }
+        else if (playerHeartStamina.CurrentHeart == 0)
+        {
+            Hearts[2].SetActive(false);
+            Hearts[1].SetActive(false);
+            Hearts[0].SetActive(false);
+        }
     }
-
 }

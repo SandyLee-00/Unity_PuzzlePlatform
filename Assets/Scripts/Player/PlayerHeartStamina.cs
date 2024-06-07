@@ -73,11 +73,11 @@ public class PlayerHeartStamina : MonoBehaviour
             return false;
         }
 
-        OnChangeHealthMana?.Invoke();
-
         _hearttimeSinceLastChange = 0f;
         CurrentHeart += change;
         CurrentHeart = Mathf.Clamp(CurrentHeart, 0, MaxHeart);
+
+        OnChangeHealthMana?.Invoke();
 
         if (CurrentHeart <= 0)
         {
