@@ -16,7 +16,6 @@ public class SoundManager : Singleton<SoundManager>
     {
         if (_componentInstance == null)
         {
-            Debug.Log("SoundManager::Awake() _componentInstance is null.");
             _componentInstance = SoundManager.Instance;
         }
 
