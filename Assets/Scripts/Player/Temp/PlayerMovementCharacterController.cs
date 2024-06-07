@@ -3,21 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
+using UnityEngine.Windows;
 
 /// <summary>
 /// 플레이어 움직임 컴포넌트
 /// Walk, Run, Jump, Idle 상태를 관리한다
 /// </summary>
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementCharacterController : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     private PlayerInputController _inputController;
     private PlayerAttributeHandler _playerAttributeHandler;
     private PlayerStateController _playerStateController;
     private PlayerHeartStamina _playerHealthMana;
+    private CharacterController _characterController;
 
     #region Move
-    private Vector3 moveDirection;
+    private Vector2 moveInput;
     #endregion
 
     #region Look
@@ -39,19 +42,42 @@ public class PlayerMovement : MonoBehaviour
     bool isShift = false;
     #endregion
 
+    [Header("Player Grounded")]
+    [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
+    public bool Grounded = true;
+
+    [Tooltip("Useful for rough ground")]
+    public float GroundedOffset = -0.14f;
+
+    [Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
+    public float GroundedRadius = 0.28f;
+
+    [Tooltip("What layers the character uses as ground")]
+    public LayerMask GroundLayers;
+
+    // player
+    private float _verticalVelocity;
+
+
+    private GameObject _mainCamera;
+
     private void Awake()
     {
-        _rigidbody = gameObject.GetOrAddComponent<Rigidbody>();
+        if (_mainCamera == null)
+        {
+            _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        }
+
         _inputController = gameObject.GetOrAddComponent<PlayerInputController>();
         _playerAttributeHandler = gameObject.GetOrAddComponent<PlayerAttributeHandler>();
         _playerStateController = gameObject.GetOrAddComponent<PlayerStateController>();
         _playerHealthMana = gameObject.GetOrAddComponent<PlayerHeartStamina>();
+        _characterController = gameObject.GetOrAddComponent<CharacterController>();
     }
 
     void Start()
     {
         _inputController.OnMoveEvent += Move;
-        _inputController.OnJumpEvent += Jump;
         _inputController.OnLookEvent += Look;
         _inputController.OnShiftEvent += Run;
         _inputController.OnTabEvent += ToggleCursor;
@@ -59,38 +85,12 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _camera = Camera.main;
 
-        groundLayerMask = LayerMask.GetMask(Define.GroundLayer);
+        GroundLayers = LayerMask.GetMask(Define.GroundLayer);
     }
 
     private void Move(Vector2 moveInput)
     {
-        moveDirection = new Vector3(moveInput.x, moveInput.y, 0);
-    }
-
-    /// <summary>
-    /// jumpForce만큼 점프한다
-    /// Idle, Walk, Run 상태에서만 점프 가능
-    /// </summary>
-    private void Jump()
-    {
-        if (IsGrounded() && (_playerStateController.State & PlayerState.Jumpable) != 0)
-        {
-            _rigidbody.AddForce(Vector3.up * _playerAttributeHandler.CurrentAttribute.jumpForce, ForceMode.Impulse);
-            _previousState = _playerStateController.State;
-            _playerStateController.State = PlayerState.Jump;
-            Debug.Log($" {_playerStateController.State} 점프는 하는데 왜 점프상태로 안해줘~~~");
-        }
-    }
-
-    /// <summary>
-    /// 점프 플랫폼에서 호출하는 점프 함수
-    /// State Jump로 변경해준다 
-    /// </summary>
-    /// <param name="jumpForce"></param>
-    public void JumpByOther(float jumpForce)
-    {
-        _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        _playerStateController.State = PlayerState.Jump;
+        this.moveInput = new Vector3(moveInput.x, moveInput.y, 0);
     }
 
     private void Look(Vector2 mouseDelta)
@@ -105,21 +105,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // WASD -> 플레이어 이동, Shift -> 달리기
-        MoveFixedUpdate(moveDirection);
+        /*// WASD -> 플레이어 이동, Shift -> 달리기
+        MoveFixedUpdate(moveInput);
 
         // 마우스 움직임 -> 플레이어 회전, 카메라 회전
-        LookFixedUpdate(mouseDelta);
-
-        // 점프 하고 땅에 닿으면 이전 상태로 변경
-        if (_playerStateController.State == PlayerState.Jump && IsGrounded())
-        {
-            Debug.Log("점프하고 땅에 닿으면 이전상태로 바꿔준다~~~~~~~~~~~");
-            _playerStateController.State = _previousState;
-        }
-
-        // 디버깅용 임시 코드
-        IsGrounded();
+        LookFixedUpdate(mouseDelta);*/
     }
 
     /// <summary>
@@ -129,14 +119,6 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="moveDirection"></param>
     private void MoveFixedUpdate(Vector3 moveDirection)
     {
-        Debug.Log($"MoveFixedUpdate IsGrounded() : {IsGrounded()}");
-        // 땅에서 떨어져있으면 Jump or Fall, 움직이지 못함
-        if (_rigidbody.velocity.y > 0 || IsGrounded() == false)
-        {
-            Debug.Log($"{_playerStateController.State} 점프 상테에서 다른 상태로 안바꿔줘야한다~~~~~~~~~~~");
-            return;
-        }
-
         Debug.Log($"{_playerStateController.State} 점프 상테에서 다른 상태로 안바꿔줘야한다~~~~~~~~~~~");
 
         // 움직임 입력이 없으면 Idle 상태로 변경
@@ -189,37 +171,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// Jump 후에 GroundLayer에 닿았는지 확인
-    /// </summary>
-    /// <returns></returns>
-    bool IsGrounded()
-    {
-        Ray[] rays = new Ray[4]
-        {
-            new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (transform.right * 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (-transform.right * 0.2f) +(transform.up * 0.01f), Vector3.down)
-        };
-
-        for (int i = 0; i < rays.Length; i++)
-        {
-            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
-            {
-                Debug.DrawRay(rays[i].origin, rays[i].direction * 0.5f, Color.magenta);
-                return true;
-            }
-        }
-
-        Debug.DrawRay(rays[0].origin, rays[0].direction * 0.5f, Color.magenta);
-        Debug.DrawRay(rays[1].origin, rays[1].direction * 0.5f, Color.magenta);
-        Debug.DrawRay(rays[2].origin, rays[2].direction * 0.5f, Color.magenta);
-        Debug.DrawRay(rays[3].origin, rays[3].direction * 0.5f, Color.magenta);
-
-        return false;
-    }
-
-    /// <summary>
     /// UI 사용할 때 커서 보이게 하기, 플레이어 움직임 멈추기
     /// </summary>
     public void ToggleCursor()
@@ -227,5 +178,87 @@ public class PlayerMovement : MonoBehaviour
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         isLookable = !toggle;
+    }
+
+    private void Update()
+    {
+        UpdateJumpAndGravity();
+        UpdateGroundedCheck();
+        UpdateMove();
+    }
+
+    private void UpdateMove()
+    {
+        // set target speed based on move speed, sprint speed and if sprint is pressed
+        // 스프린트 상태에 따라 이동 속도 결정
+        float targetSpeed = 0;
+        if (_inputController.sprint)
+        {
+            targetSpeed = _playerAttributeHandler.CurrentAttribute.moveSpeed * _playerAttributeHandler.CurrentAttribute.runMultiplier;
+        }
+        else
+        {
+            targetSpeed = _playerAttributeHandler.CurrentAttribute.moveSpeed;
+        }
+
+        // 이동 입력이 없으면 이동 속도 0으로 설정
+        if (moveInput == Vector2.zero) targetSpeed = 0.0f;
+
+        // 현재 수평 속도
+        float currentHorizontalSpeed = new Vector3(_characterController.velocity.x, 0.0f, _characterController.velocity.z).magnitude;
+
+        float _speed = targetSpeed;
+
+        // 입력 방향을 정규화
+        Vector3 inputDirection = new Vector3(moveInput.x, 0.0f, moveInput.y).normalized;
+
+        // 입력이 있으면 플레이어 회전
+        float _targetRotation = 0.0f;
+        if (moveInput != Vector2.zero)
+        {
+            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
+                              _mainCamera.transform.eulerAngles.y;
+
+            // 플레이어가 카메라를 기준으로 입력 방향을 바라보도록 회전
+            transform.rotation = Quaternion.Euler(0.0f, _targetRotation, 0.0f);
+        }
+
+
+        Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
+        // 플레이어 이동
+        _characterController.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+                         new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
+    }
+
+    private void UpdateJumpAndGravity()
+    {
+        // 이미 땅에서 떨어져 있으면 더 이상 처리하지 않음
+        if (Grounded == false)
+        {
+            return;
+        }
+
+
+    }
+
+    private void UpdateGroundedCheck()
+    {
+        // set sphere position, with offset
+        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
+            transform.position.z);
+        Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
+            QueryTriggerInteraction.Ignore);
+    }
+
+    private void LateUpdate()
+    {
+        CameraRotation();
+    }
+
+    private void CameraRotation()
+    {
+
     }
 }

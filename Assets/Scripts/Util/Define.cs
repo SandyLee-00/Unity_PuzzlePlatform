@@ -19,4 +19,5 @@ public class Define
     public const string InventoryTag = "Inventory";
 
     public const string GroundLayer = "Ground";
+    public const string InteractableLayer = "Interactable";
 }

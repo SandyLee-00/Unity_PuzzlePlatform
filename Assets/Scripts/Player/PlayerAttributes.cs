@@ -12,7 +12,7 @@ public class PlayerAttributes
     public float moveSpeed = 5;
 
     public float maxStamina = 200;
-    public float runSpeed = 10;
+    public float runMultiplier = 2;
     public float costStaminaRun = 1;
 
     public float heartChangeDelay = 0.5f;
