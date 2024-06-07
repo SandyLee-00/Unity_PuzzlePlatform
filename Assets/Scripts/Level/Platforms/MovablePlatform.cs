@@ -17,7 +17,7 @@ public class MovablePlatform : Platform
 
     private void Start()
     {
-        startPos = transform.localPosition;  //원래 자리로 돌아오기 위한 위치
+        startPos = transform.position;  //원래 자리로 돌아오기 위한 위치
 
         endPos = transform.TransformPoint(new Vector3(maxDistance, 0f, 0f));
         //Debug.Log(Vector3.Distance(startPos, endPos));
