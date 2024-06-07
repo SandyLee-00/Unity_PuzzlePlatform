@@ -37,6 +37,8 @@ public class Interaction : MonoBehaviour
 
             if (Physics.Raycast(ray, out RaycastHit hit, maxCheckDistance, layerMask))
             {
+                Debug.DrawRay(ray.origin, ray.direction * maxCheckDistance, Color.red);
+
                 if (hit.collider.gameObject != _curInteractGameObject && hit.collider.gameObject.TryGetComponent(out IInspectable inspectable))
                 {
                     _curInteractGameObject = hit.collider.gameObject;
