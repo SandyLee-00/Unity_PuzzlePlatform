@@ -8,9 +8,9 @@ public class TrapPlatform : Platform, IInspectable
 
     //지속 데미지 릴레이 추가
 
-    public string GetPrompt()
+    public override string GetPrompt()
     {
-        return "";
+        return $"{trapPlatform.platformName}\n{trapPlatform.description}";
     }
 
     private void OnTriggerEnter(Collider other)

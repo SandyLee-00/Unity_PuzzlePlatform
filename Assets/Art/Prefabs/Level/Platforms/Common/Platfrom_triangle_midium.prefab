@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6260786275655971982}
   - component: {fileID: 309468144266567328}
-  - component: {fileID: 6313815156368794012}
   m_Layer: 7
   m_Name: Platfrom_triangle_midium
   m_TagString: Ground
@@ -56,18 +55,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6194954292865869724, guid: 43248c4b5a3b56645add5f685a955b62, type: 3}
---- !u!114 &6313815156368794012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7101123083804275741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32b5904030b0644428864c2cc886f480, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5708576309473572265
 PrefabInstance:
   m_ObjectHideFlags: 0

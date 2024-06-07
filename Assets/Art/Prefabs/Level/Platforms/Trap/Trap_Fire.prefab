@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4493203816693908099}
   - component: {fileID: 7072259373280326940}
   - component: {fileID: 1295252616533679490}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FireParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4904,7 +4904,7 @@ GameObject:
   - component: {fileID: 7599303821629458999}
   - component: {fileID: 2005231331838874664}
   - component: {fileID: 8261753774895539864}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trap_Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}

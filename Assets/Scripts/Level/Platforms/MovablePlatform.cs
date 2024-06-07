@@ -78,4 +78,9 @@ public class MovablePlatform : Platform
             movement.transform.SetParent(null);
         }
     }
+
+    public override string GetPrompt()
+    {
+        return $"{moveData.platformName}\n{moveData.description}";
+    }
 }

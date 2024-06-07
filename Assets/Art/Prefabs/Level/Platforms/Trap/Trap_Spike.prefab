@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6944208727297446390}
   - component: {fileID: 5583149961696774818}
   - component: {fileID: 2642640383152380655}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trap_Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,6 +116,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7139261109480557378, guid: d1117ee077ccf7c49b1edade347a574e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -6210141383899247147, guid: d1117ee077ccf7c49b1edade347a574e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -123,6 +127,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d1117ee077ccf7c49b1edade347a574e, type: 3}
       propertyPath: m_Name
       value: trap-spikes-large
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d1117ee077ccf7c49b1edade347a574e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
