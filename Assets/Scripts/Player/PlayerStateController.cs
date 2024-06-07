@@ -27,6 +27,7 @@ public class PlayerStateController : MonoBehaviour
 {
     /// <summary>
     /// State 바뀌면 InvokeStateChangeEvent로 애니메이션 변경해주기
+    /// Sound 중 Efect는 여기서 재생
     /// </summary>
     public PlayerState State
     {
@@ -60,13 +61,22 @@ public class PlayerStateController : MonoBehaviour
         _playerAttributeHandler = gameObject.GetOrAddComponent<PlayerAttributeHandler>();
 
         _playerHealthMana.OnDamage += () => 
-        { 
+        {
+            SoundManager.Instance.Play(Define.Sound.Effect, "knifeSlice");
             StartCoroutine(ResetStateAfterDelayCoroutine(PlayerState.GetHit, _playerAttributeHandler.CurrentAttribute.heartChangeDelay));
         };
 
-        _playerHealthMana.OnDeath += () => { StartCoroutine(ResetStateAfterDelayCoroutine(PlayerState.Die, 5f)); };
+        _playerHealthMana.OnDeath += () => 
+        {
+            SoundManager.Instance.Play(Define.Sound.Effect, "metalPot3");
+            StartCoroutine(ResetStateAfterDelayCoroutine(PlayerState.Die, 5f)); 
+        };
 
-        _playerInputController.OnInteractEvent += () => { StartCoroutine(ResetStateAfterDelayCoroutine(PlayerState.Interact)); };
+        _playerInputController.OnInteractEvent += () => 
+        {
+            SoundManager.Instance.Play(Define.Sound.Effect, "handleSmallLeather");
+            StartCoroutine(ResetStateAfterDelayCoroutine(PlayerState.Interact)); 
+        };
 
     }
 
