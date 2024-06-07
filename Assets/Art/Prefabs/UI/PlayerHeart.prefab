@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1841172159328003149}
   - component: {fileID: 8721119980759349383}
+  - component: {fileID: 4431825473311901797}
   m_Layer: 5
   m_Name: PlayerHeart
   m_TagString: Untagged
@@ -63,6 +64,23 @@ MonoBehaviour:
   m_Spacing: {x: -30, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &4431825473311901797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299905485277812184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda43f7232cee344094bd31541d30c5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hearts:
+  - {fileID: 3964473428560021089}
+  - {fileID: 4578738632542403908}
+  - {fileID: 8945315638992690571}
+  playerHeartStamina: {fileID: 0}
 --- !u!1001 &281903311478674371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,7 +171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4351452607881768583, guid: c6c23629ea280b94d8db6a317ec58e74, type: 3}
       propertyPath: m_Name
-      value: HPIcon (1)
+      value: HPIcon2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -163,6 +181,11 @@ PrefabInstance:
 --- !u!224 &3790304443185676875 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3994790031622115720, guid: c6c23629ea280b94d8db6a317ec58e74, type: 3}
+  m_PrefabInstance: {fileID: 281903311478674371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4578738632542403908 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4351452607881768583, guid: c6c23629ea280b94d8db6a317ec58e74, type: 3}
   m_PrefabInstance: {fileID: 281903311478674371}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &821859118732470502
@@ -255,13 +278,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4351452607881768583, guid: c6c23629ea280b94d8db6a317ec58e74, type: 3}
       propertyPath: m_Name
-      value: HPIcon
+      value: HPIcon1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6c23629ea280b94d8db6a317ec58e74, type: 3}
+--- !u!1 &3964473428560021089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4351452607881768583, guid: c6c23629ea280b94d8db6a317ec58e74, type: 3}
+  m_PrefabInstance: {fileID: 821859118732470502}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4330084450918300014 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3994790031622115720, guid: c6c23629ea280b94d8db6a317ec58e74, type: 3}
@@ -357,7 +385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4351452607881768583, guid: c6c23629ea280b94d8db6a317ec58e74, type: 3}
       propertyPath: m_Name
-      value: HPIcon (2)
+      value: HPIcon3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -367,5 +395,10 @@ PrefabInstance:
 --- !u!224 &8590346239906751108 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3994790031622115720, guid: c6c23629ea280b94d8db6a317ec58e74, type: 3}
+  m_PrefabInstance: {fileID: 4631761152653308684}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8945315638992690571 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4351452607881768583, guid: c6c23629ea280b94d8db6a317ec58e74, type: 3}
   m_PrefabInstance: {fileID: 4631761152653308684}
   m_PrefabAsset: {fileID: 0}
