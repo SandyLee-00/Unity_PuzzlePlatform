@@ -14,6 +14,13 @@ public class Define
         Max,
     }
 
+    public enum Scene
+    {
+        Title = 0,
+        Play,
+        Max,
+    }
+
     public const string GroundTag = "Ground";
     public const string PlayerTag = "Player";
     public const string InventoryTag = "Inventory";
