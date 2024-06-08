@@ -5146,10 +5146,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 7216922057942631722, guid: 048fdf3ee768181428a9aaeb243eb466, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8936370748618135345, guid: 048fdf3ee768181428a9aaeb243eb466, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -11618,10 +11614,6 @@ PrefabInstance:
     - target: {fileID: 8885747038281998847, guid: 5b59bef0bc7a4cd4c88bc9acec1ca6e8, type: 3}
       propertyPath: m_Name
       value: GameClearPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 8885747038281998847, guid: 5b59bef0bc7a4cd4c88bc9acec1ca6e8, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -27,6 +27,9 @@ public class ButtonClick : MonoBehaviour
                     Application.Quit();
                 #endif
                 break;
+            case "MainButton":
+                SceneManager.LoadScene("IntroScene");
+                break;
             case "PlayButton" or "RetryButton":
                 SceneManager.LoadScene("PlayScene");
                 break;
@@ -46,6 +49,8 @@ public class ButtonClick : MonoBehaviour
             case "SettingButton":
                 Transform settingPanelTransform = canvas.transform.Find("SettingPanel");
                 settingPanelTransform.gameObject.SetActive(true);
+                break;
+            case "SaveButton":
                 break;
         }
     }
