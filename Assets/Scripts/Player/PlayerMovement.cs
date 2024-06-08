@@ -234,4 +234,9 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         isLookable = !toggle;
     }
+
+    public void PlayFootstepSound()
+    {
+        SoundManager.Instance.Play(Define.Sound.Effect, "footstep00");
+    }
 }
