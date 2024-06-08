@@ -235,8 +235,5 @@ public class PlayerMovement : MonoBehaviour
         isLookable = !toggle;
     }
 
-    public void PlayFootstepSound()
-    {
-        SoundManager.Instance.Play(Define.Sound.Effect, "footstep00");
-    }
+    
 }
