@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class ButtonClick : MonoBehaviour
 {
     private Button _button;
-
+    private PlayerMovement _playerMovement;
     public GameObject canvas;
 
     void Start()
     {
         _button = gameObject.GetComponent<Button>();
         _button.onClick.AddListener(OnButtonClick);
+        _playerMovement = GameObject.FindWithTag(Define.PlayerTag).GetOrAddComponent<PlayerMovement>();
     }
 
     private void OnButtonClick()
@@ -28,6 +29,7 @@ public class ButtonClick : MonoBehaviour
             case "ContinueButton":
                 GameManager.Instance.IsPaused = false; // Pause 상태 해제
                 gameObject.transform.parent.gameObject.SetActive(false);
+                _playerMovement.ToggleCursor();
                 break;
             case "CloseButton":
                 GameManager.Instance.IsPaused = false; // Pause 상태 해제

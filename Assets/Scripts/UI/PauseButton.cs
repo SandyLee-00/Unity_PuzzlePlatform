@@ -8,7 +8,6 @@ public class PauseButton : MonoBehaviour
 {
     private Button _button;
 
-
     void Start()
     {
         _button = gameObject.GetComponent<Button>();
@@ -18,7 +17,6 @@ public class PauseButton : MonoBehaviour
     public void TogglePause()
     {
         GameManager.Instance.TogglePause(); // GameManager의 TogglePause 메서드를 호출
-
     }
 
     private void OnDestroy()
