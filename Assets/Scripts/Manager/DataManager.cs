@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.IO;
+using System.Collections.Generic;
 
 public class DataManager : MonoBehaviour
 {
@@ -19,6 +20,13 @@ public class DataManager : MonoBehaviour
         var json = File.ReadAllText(Application.persistentDataPath + savePath);
 
         saveData = JsonUtility.FromJson<UserData>(json);
+
+        //saveData에 저장된 데이터를 플레이어에 추가
+        /*
+         * player.position = saveData.Position;
+         * player.rotation = saveData.Rotation;
+         * player.inventory = items;
+         */
     }
 }
 
@@ -31,4 +39,5 @@ public class UserData
     public Quaternion Rotation;
 
     //인벤토리
+    List<ItemData> items;
 }
