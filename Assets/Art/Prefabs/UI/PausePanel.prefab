@@ -144,7 +144,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit
+  m_text: Main
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 166e3f2416e60874592ce89117097294, type: 2}
   m_sharedMaterial: {fileID: -253778707811189924, guid: 166e3f2416e60874592ce89117097294, type: 2}
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 399737882509766540}
   - component: {fileID: 6192510786422252108}
   m_Layer: 5
-  m_Name: MainButton
+  m_Name: SaveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -841,7 +841,7 @@ GameObject:
   - component: {fileID: 1606290778103351302}
   - component: {fileID: 2746802308904300657}
   m_Layer: 5
-  m_Name: ExitButton
+  m_Name: MainButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1027,9 +1027,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Main
-
-'
+  m_text: Save
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 166e3f2416e60874592ce89117097294, type: 2}
   m_sharedMaterial: {fileID: -253778707811189924, guid: 166e3f2416e60874592ce89117097294, type: 2}

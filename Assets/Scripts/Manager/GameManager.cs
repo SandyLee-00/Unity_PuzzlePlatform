@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -57,6 +58,7 @@ public class GameManager : Singleton<GameManager>
         _gameClearPanel.SetActive(false);
         _pausePanel.SetActive(false);
         _playTime = 0f;
+
     }
 
     void Update()
