@@ -26,10 +26,11 @@ public class ButtonClick : MonoBehaviour
                 SceneManager.LoadScene("PlayScene");
                 break;
             case "ContinueButton":
+                GameManager.Instance.IsPaused = false; // Pause 상태 해제
                 gameObject.transform.parent.gameObject.SetActive(false);
-                Time.timeScale = 1;
                 break;
             case "CloseButton":
+                GameManager.Instance.IsPaused = false; // Pause 상태 해제
                 gameObject.transform.parent.gameObject.SetActive(false);
                 break;
             case "CreditButton":

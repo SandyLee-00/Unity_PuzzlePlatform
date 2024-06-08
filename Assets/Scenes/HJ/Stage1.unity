@@ -9812,10 +9812,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PausePanel
       objectReference: {fileID: 0}
-    - target: {fileID: 11364647175417574, guid: d6b860742d5798e49a7b54a090f9e2d7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3267807283510561788, guid: d6b860742d5798e49a7b54a090f9e2d7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10494,6 +10490,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 333610203405419954, guid: 4cac9b102ae44e2419293eae0730a6e6, type: 3}
   m_PrefabInstance: {fileID: 1435915973}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1442043860 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 756131149674665608, guid: 53eb094b8e605e344bc85c05fb860154, type: 3}
+  m_PrefabInstance: {fileID: 782816283}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1449619348
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16237,6 +16244,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameOverPanel: {fileID: 668437833}
   _gameClearPanel: {fileID: 1583703824}
+  _pausePanel: {fileID: 427956704}
+  _pauseButtonImage: {fileID: 1442043860}
+  playImage: {fileID: 21300000, guid: 3bc5200bb7475b446b7311a749178472, type: 3}
+  pauseImage: {fileID: 21300000, guid: 4ef8b0be9ecf12a428c584d33a0e323b, type: 3}
   IsGamePlaying: 0
   timeText: {fileID: 1548536790}
   clearTimeText: {fileID: 1583703822}
