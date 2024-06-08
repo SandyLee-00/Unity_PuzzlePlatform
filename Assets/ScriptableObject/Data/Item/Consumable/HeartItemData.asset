@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: HeartItemData
   m_EditorClassIdentifier: 
   itemName: "\uD558\uD2B8"
-  description: "\uCCB4\uB825 1 \uC99D\uAC00"
+  description: "\uD68D\uB4DD \uC2DC \uCCB4\uB825 1 \uC99D\uAC00"
   type: 0
   increaseValue: 1

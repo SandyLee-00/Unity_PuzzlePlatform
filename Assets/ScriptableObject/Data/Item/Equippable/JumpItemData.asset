@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: JumpItemData
   m_EditorClassIdentifier: 
   itemName: "\uBC84\uC12F"
-  description: "\uC7A5\uCC29 \uC2DC \uC810\uD504\uB825 \uC99D\uAC00"
+  description: "\uC7A5\uCC29 \uC2DC \uC810\uD504\uB825 3 \uC99D\uAC00"
   type: 1
   itemPrefab: {fileID: 4336285813925859489, guid: 14f09ebe5c8875b4ab506bd1ce14ce66, type: 3}
   icon: {fileID: 21300000, guid: 789991b513dfd3b4fb79689a70e9a22d, type: 3}
-  increaseValue: 2.5
+  increaseValue: 3

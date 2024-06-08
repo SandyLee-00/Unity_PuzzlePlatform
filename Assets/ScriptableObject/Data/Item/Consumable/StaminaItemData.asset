@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: StaminaItemData
   m_EditorClassIdentifier: 
   itemName: "\uC2A4\uD0DC\uBBF8\uB098"
-  description: "\uC2A4\uD0DC\uBBF8\uB098 \uC99D\uAC00"
-  type: 0
-  increaseValue: 10
+  description: "\uD68D\uB4DD \uC2DC \uC2A4\uD0DC\uBBF8\uB098  50 \uC99D\uAC00"
+  type: 1
+  increaseValue: 50
