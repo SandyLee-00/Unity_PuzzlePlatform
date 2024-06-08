@@ -27,7 +27,6 @@ public class PlayerStateController : MonoBehaviour
 {
     /// <summary>
     /// State 바뀌면 InvokeStateChangeEvent로 애니메이션 변경해주기
-    /// Sound 중 Efect는 여기서 재생
     /// </summary>
     public PlayerState State
     {
