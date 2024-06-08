@@ -31,7 +31,7 @@ public class ButtonClick : MonoBehaviour
                 SceneManager.LoadScene("IntroScene");
                 break;
             case "PlayButton" or "RetryButton":
-                SceneManager.LoadScene("PlayScene");
+                SceneManager.LoadScene("Stage1");
                 break;
             case "ContinueButton":
                 GameManager.Instance.IsPaused = false; // Pause 상태 해제

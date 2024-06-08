@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -34,6 +34,7 @@ public class GameManager : Singleton<GameManager>
 
     private bool _isPaused = false;
 
+    private Canvas canvas;
 
     private void Awake()
     {
@@ -51,14 +52,55 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    void Start()
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        Transform APanelTransform = canvas.transform.Find("GameOverPanel");
+        _gameOverPanel = APanelTransform.gameObject;
+
+        Transform BPanelTransform = canvas.transform.Find("GameClearPanel");
+        _gameClearPanel = BPanelTransform.gameObject;
+
+        Transform CPanelTransform = canvas.transform.Find("PausePanel");
+        _pausePanel = CPanelTransform.gameObject;
+
+        _pauseButtonImage = GameObject.Find("PauseButton").GetComponent<Image>();
+
+        timeText = GameObject.Find("TimeText").GetComponent<TextMeshProUGUI>();
+
+        Transform DTransform = BPanelTransform.Find("ClearTimeBG");
+        Transform ETransform = DTransform.Find("ClearTimeText");
+        clearTimeText = ETransform.gameObject.GetComponent<TextMeshProUGUI>();
+
+        // 초기화
+        InitializeGame();
+    }
+
+    private void InitializeGame()
     {
         IsGamePlaying = true;
-        _gameOverPanel.SetActive(false);
-        _gameClearPanel.SetActive(false);
-        _pausePanel.SetActive(false);
+        _gameOverPanel?.SetActive(false);
+        _gameClearPanel?.SetActive(false);
+        _pausePanel?.SetActive(false);
         _playTime = 0f;
+        Time.timeScale = 1;
+        _isPaused = false;
+        _isTimeOver = false;
+    }
 
+    void Start()
+    {
+        InitializeGame();
     }
 
     void Update()
@@ -74,7 +116,7 @@ public class GameManager : Singleton<GameManager>
     {
         IsGamePlaying = false;
         _isTimeOver = true;
-        _gameOverPanel.SetActive(true);
+        _gameOverPanel?.SetActive(true);
         Time.timeScale = 0;
     }
 
@@ -82,7 +124,7 @@ public class GameManager : Singleton<GameManager>
     {
         IsGamePlaying = false;
         _isTimeOver = true;
-        _gameClearPanel.SetActive(true);
+        _gameClearPanel?.SetActive(true);
         UpdatePlayTimeText(clearTimeText);
         Time.timeScale = 0;
     }
@@ -115,7 +157,6 @@ public class GameManager : Singleton<GameManager>
     private void UpdatePauseUI()
     {
         _pauseButtonImage.sprite = _isPaused ? playImage : pauseImage;
-        _pausePanel.SetActive(_isPaused);
+        _pausePanel?.SetActive(_isPaused);
     }
-
 }
