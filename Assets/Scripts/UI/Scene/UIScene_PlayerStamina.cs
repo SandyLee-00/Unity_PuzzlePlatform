@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_PlayerStamina : MonoBehaviour
+public class UIScene_PlayerStamina : MonoBehaviour
 {
     public PlayerHeartStamina playerHeartStamina;
     public Image staminaImage;

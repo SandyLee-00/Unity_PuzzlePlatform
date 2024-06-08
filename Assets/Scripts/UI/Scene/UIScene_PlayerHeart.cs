@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_PlayerHeart : MonoBehaviour
+public class UIScene_PlayerHeart : MonoBehaviour
 {
     public GameObject[] Hearts;
 

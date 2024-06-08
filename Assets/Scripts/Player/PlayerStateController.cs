@@ -85,7 +85,7 @@ public class PlayerStateController : MonoBehaviour
         OnStateChangeEvent?.Invoke(_playerState);
     }
 
-    private IEnumerator ResetStateAfterDelayCoroutine(PlayerState newState, float delay = 0.5f)
+    private IEnumerator ResetStateAfterDelayCoroutine(PlayerState newState, float delay = 1f)
     {
         _previousState = _playerState;
         State = newState;
