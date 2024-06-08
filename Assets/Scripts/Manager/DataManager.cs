@@ -1,18 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class DataManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public UserData saveData;
+
+    const string savePath = "/Data.txt";    //저장경로
+
+    public void SaveData()
     {
-        
+        var json = JsonUtility.ToJson(saveData);
+
+        File.WriteAllText(Application.persistentDataPath + savePath, json);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadData()
     {
-        
+        var json = File.ReadAllText(Application.persistentDataPath + savePath);
+
+        saveData = JsonUtility.FromJson<UserData>(json);
     }
+}
+
+[System.Serializable]
+public class UserData
+{
+    //위치
+    [Header("Player Transform")]
+    public Vector3 Position;
+    public Quaternion Rotation;
+
+    //인벤토리
 }
