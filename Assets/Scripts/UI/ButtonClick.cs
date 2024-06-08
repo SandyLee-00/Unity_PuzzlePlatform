@@ -19,8 +19,12 @@ public class ButtonClick : MonoBehaviour
     {
         switch (gameObject.name)
         {
-            case "BackButton" or "ExitButton":
-                SceneManager.LoadScene("IntroScene");
+            case "ExitButton":
+                #if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+                #else
+                    Application.Quit();
+                #endif
                 break;
             case "PlayButton" or "RetryButton":
                 SceneManager.LoadScene("PlayScene");
