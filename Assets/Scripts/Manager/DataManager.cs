@@ -38,6 +38,12 @@ public class UserData
     public Vector3 Position;
     public Quaternion Rotation;
 
+    //플레이어 속성
+    [Header("Player Status")]
+    public int Heart;
+    public float Stamina;
+
     //인벤토리
-    List<ItemData> items;
+    [Header("Player Inventory")]
+    public List<ItemData> items;
 }
