@@ -52,6 +52,11 @@ public class SoundManager : Singleton<SoundManager>
         _audioSources[(int)type].volume = volume;
     }
 
+    public float GetVolume(Define.Sound type)
+    {
+        return _audioSources[(int)type].volume;
+    }
+
     /// <summary>
     /// 사운드 채널에 맞게 사운드 재생 
     /// </summary>

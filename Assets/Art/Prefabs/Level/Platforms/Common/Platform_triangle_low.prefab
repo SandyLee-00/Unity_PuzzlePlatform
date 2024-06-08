@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3153306863235735453}
   - component: {fileID: 6732398164529327922}
-  - component: {fileID: 893964506173932101}
   m_Layer: 7
   m_Name: Platform_triangle_low
   m_TagString: Ground
@@ -56,18 +55,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8338272244258157853, guid: 9a42ccead67d1dd45b912e0b03bd1db9, type: 3}
---- !u!114 &893964506173932101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8569256408120942987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32b5904030b0644428864c2cc886f480, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7922010620677837303
 PrefabInstance:
   m_ObjectHideFlags: 0

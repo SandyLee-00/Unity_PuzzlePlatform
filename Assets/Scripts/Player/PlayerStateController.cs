@@ -27,7 +27,6 @@ public class PlayerStateController : MonoBehaviour
 {
     /// <summary>
     /// State 바뀌면 InvokeStateChangeEvent로 애니메이션 변경해주기
-    /// Sound 중 Efect는 여기서 재생
     /// </summary>
     public PlayerState State
     {
@@ -85,7 +84,7 @@ public class PlayerStateController : MonoBehaviour
         OnStateChangeEvent?.Invoke(_playerState);
     }
 
-    private IEnumerator ResetStateAfterDelayCoroutine(PlayerState newState, float delay = 0.5f)
+    private IEnumerator ResetStateAfterDelayCoroutine(PlayerState newState, float delay = 1f)
     {
         _previousState = _playerState;
         State = newState;

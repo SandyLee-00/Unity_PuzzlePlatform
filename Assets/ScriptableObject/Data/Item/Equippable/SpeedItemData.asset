@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SpeedItemData
   m_EditorClassIdentifier: 
   itemName: "\uACE0\uCD94"
-  description: "\uC7A5\uCC29 \uC2DC \uC774\uB3D9\uC18D\uB3C4 \uC99D\uAC00"
+  description: "\uC7A5\uCC29 \uC2DC \uC2A4\uD53C\uB4DC 1.5 \uC99D\uAC00"
   type: 0
   itemPrefab: {fileID: 7147727462433221886, guid: e0c8303f2204a484eaa95a4d56959c0e, type: 3}
   icon: {fileID: 21300000, guid: 57b13fcb01c52704eb4cb7b795497a45, type: 3}
-  increaseValue: 10
+  increaseValue: 1.5

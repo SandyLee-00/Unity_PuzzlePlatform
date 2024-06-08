@@ -17,6 +17,7 @@ public class PlayerInputController : MonoBehaviour
     public event Action OnInteractEvent;
     public event Action<float> OnShiftEvent;
     public event Action OnTabEvent;
+    public event Action OnESCEvent;
 
 /*    private Camera _camera;
 
@@ -102,4 +103,12 @@ public class PlayerInputController : MonoBehaviour
         OnTabEvent?.Invoke();
     }
 
+    /// <summary>
+    /// ESC 키 눌러서 커서 토글
+    /// </summary>
+    /// <param name="value"></param>
+    public void OnPressESC(InputValue value)
+    {
+        OnESCEvent?.Invoke();
+    }
 }

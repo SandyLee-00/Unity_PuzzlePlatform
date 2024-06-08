@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77bc69e0c92fd9c4c819401e176dac8f, type: 3}
   m_Name: SpeedBuffData
   m_EditorClassIdentifier: 
-  itemName: "\uC2A4\uD53C\uB4DC"
-  description: "\uC2A4\uD53C\uB4DC 2\uBC30 \uC99D\uAC00"
+  itemName: "\uC2A4\uD53C\uB4DC \uBC84\uD504"
+  description: "\uD68D\uB4DD \uC2DC 5\uCD08\uAC04 \uC2A4\uD53C\uB4DC 1.5\uBC30 \uC99D\uAC00"
   type: 0
   duration: 5
-  multiplierValue: 2
+  multiplierValue: 1.5

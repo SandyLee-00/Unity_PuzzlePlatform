@@ -28,10 +28,12 @@ public class PlayerHeartStamina : MonoBehaviour
     public float MaxStamina => _playerStatHandler.CurrentAttribute.maxStamina;
 
     private PlayerAttributeHandler _playerStatHandler;
+    private PlayerMovement _playerMovement;
 
     private void Awake()
     {
         _playerStatHandler = gameObject.GetOrAddComponent<PlayerAttributeHandler>();
+        _playerMovement = gameObject.GetComponent<PlayerMovement>();
     }
 
     private void Start()
@@ -73,11 +75,11 @@ public class PlayerHeartStamina : MonoBehaviour
             return false;
         }
 
-        OnChangeHealthMana?.Invoke();
-
         _hearttimeSinceLastChange = 0f;
         CurrentHeart += change;
         CurrentHeart = Mathf.Clamp(CurrentHeart, 0, MaxHeart);
+
+        OnChangeHealthMana?.Invoke();
 
         if (CurrentHeart <= 0)
         {
@@ -118,5 +120,7 @@ public class PlayerHeartStamina : MonoBehaviour
     private void CallDeath()
     {
         OnDeath?.Invoke();
+        GameManager.Instance.GameOver();
+        _playerMovement.ToggleCursor();
     }
 }

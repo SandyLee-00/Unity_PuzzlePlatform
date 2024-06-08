@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7745826295801776947}
   - component: {fileID: 3259396379939330490}
-  - component: {fileID: 1649050387770259292}
   m_Layer: 7
   m_Name: Platform_hexagon_midium
   m_TagString: Ground
@@ -55,18 +54,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &1649050387770259292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8412424311295866043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32b5904030b0644428864c2cc886f480, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5103913776123727345
 PrefabInstance:
   m_ObjectHideFlags: 0

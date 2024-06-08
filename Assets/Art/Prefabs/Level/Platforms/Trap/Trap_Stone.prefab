@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5996541841061543735}
   - component: {fileID: 8695423481994840289}
   - component: {fileID: 5460610883193792034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trap_Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,6 +119,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1dc963d406f87ff40b07688d07d564b3, type: 3}
       propertyPath: m_Name
       value: stones
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1dc963d406f87ff40b07688d07d564b3, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
