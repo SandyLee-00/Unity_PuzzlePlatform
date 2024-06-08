@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
+/// @@@@ Character Controller 버전 카메라 구현이 안되서 못쓴다 지워도 되지만 남겨놓기 @@@@
 /// 플레이어 움직임 컴포넌트
 /// Walk, Run, Jump, Idle 상태를 관리한다
 /// </summary>

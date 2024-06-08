@@ -5,6 +5,7 @@ using UnityEngine;
 
 /// <summary>
 /// Player의 State에 따라 애니메이션을 변경하는 클래스
+/// 애니메이션 관련 이벤트 받아서 처리 : PlayFootstepSound
 /// </summary>
 public class PlayerAnimationController : MonoBehaviour
 {
