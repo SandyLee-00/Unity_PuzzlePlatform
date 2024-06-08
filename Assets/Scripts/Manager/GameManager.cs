@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -11,12 +12,26 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject _gameClearPanel;
 
+    [SerializeField]
+    private GameObject _pausePanel;
+
+    [SerializeField]
+    private Image _pauseButtonImage;
+
+    [SerializeField]
+    private Sprite playImage;
+
+    [SerializeField]
+    private Sprite pauseImage;
+
     public bool IsGamePlaying;
 
     public TextMeshProUGUI timeText;
     private float _playTime;
     public TextMeshProUGUI clearTimeText;
     private bool _isTimeOver;
+
+    private bool _isPaused = false;
 
 
     private void Awake()
@@ -40,12 +55,13 @@ public class GameManager : Singleton<GameManager>
         IsGamePlaying = true;
         _gameOverPanel.SetActive(false);
         _gameClearPanel.SetActive(false);
+        _pausePanel.SetActive(false);
         _playTime = 0f;
     }
 
     void Update()
     {
-        if (IsGamePlaying)
+        if (IsGamePlaying && !_isPaused)
         {
             _playTime += Time.deltaTime;
             UpdatePlayTimeText(timeText);
@@ -76,5 +92,28 @@ public class GameManager : Singleton<GameManager>
         text.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
+    public void TogglePause()
+    {
+        _isPaused = !_isPaused;
+        Time.timeScale = _isPaused ? 0 : 1;
+        UpdatePauseUI();
+    }
+
+    public bool IsPaused
+    {
+        get { return _isPaused; }
+        set
+        {
+            _isPaused = value;
+            Time.timeScale = _isPaused ? 0 : 1;
+            UpdatePauseUI();
+        }
+    }
+
+    private void UpdatePauseUI()
+    {
+        _pauseButtonImage.sprite = _isPaused ? playImage : pauseImage;
+        _pausePanel.SetActive(_isPaused);
+    }
 
 }
