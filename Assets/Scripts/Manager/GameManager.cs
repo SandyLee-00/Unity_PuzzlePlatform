@@ -30,7 +30,6 @@ public class GameManager : Singleton<GameManager>
     public TextMeshProUGUI timeText;
     private float _playTime;
     public TextMeshProUGUI clearTimeText;
-    private bool _isTimeOver;
 
     private bool _isPaused = false;
 
@@ -95,7 +94,6 @@ public class GameManager : Singleton<GameManager>
         _playTime = 0f;
         Time.timeScale = 1;
         _isPaused = false;
-        _isTimeOver = false;
     }
 
     void Start()
@@ -115,7 +113,6 @@ public class GameManager : Singleton<GameManager>
     public void GameOver()
     {
         IsGamePlaying = false;
-        _isTimeOver = true;
         _gameOverPanel?.SetActive(true);
         Time.timeScale = 0;
     }
@@ -123,7 +120,6 @@ public class GameManager : Singleton<GameManager>
     public void GameClear()
     {
         IsGamePlaying = false;
-        _isTimeOver = true;
         _gameClearPanel?.SetActive(true);
         UpdatePlayTimeText(clearTimeText);
         Time.timeScale = 0;
