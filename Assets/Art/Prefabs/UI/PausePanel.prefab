@@ -301,7 +301,6 @@ GameObject:
   - component: {fileID: 5184567392675342760}
   - component: {fileID: 7344295624116161315}
   - component: {fileID: 399737882509766540}
-  - component: {fileID: 6192510786422252108}
   m_Layer: 5
   m_Name: SaveButton
   m_TagString: Untagged
@@ -411,19 +410,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6192510786422252108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2082400540549827582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b00bf853adb39c44da93dfa32838451a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
 --- !u!1 &2867386687575207816
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,7 +690,6 @@ GameObject:
   - component: {fileID: 3331973107791011981}
   - component: {fileID: 8856224401470863039}
   - component: {fileID: 9147321385429895886}
-  - component: {fileID: 9037847199862479461}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -814,19 +799,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &9037847199862479461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4883033807561885534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b00bf853adb39c44da93dfa32838451a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
 --- !u!1 &7773136971869407167
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,7 +811,6 @@ GameObject:
   - component: {fileID: 313189107572052574}
   - component: {fileID: 8410343671312793556}
   - component: {fileID: 1606290778103351302}
-  - component: {fileID: 2746802308904300657}
   m_Layer: 5
   m_Name: MainButton
   m_TagString: Untagged
@@ -949,19 +920,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2746802308904300657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7773136971869407167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b00bf853adb39c44da93dfa32838451a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
 --- !u!1 &9098932285432927500
 GameObject:
   m_ObjectHideFlags: 0
