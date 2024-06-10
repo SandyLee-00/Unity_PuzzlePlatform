@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseButton : MonoBehaviour
+public class UIPopup_PauseButton : MonoBehaviour
 {
     private Button _button;
 

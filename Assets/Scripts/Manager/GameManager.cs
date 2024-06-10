@@ -74,7 +74,7 @@ public class GameManager : Singleton<GameManager>
         Transform ETransform = DTransform.Find("ClearTimeText");
         clearTimeText = ETransform.gameObject.GetComponent<TextMeshProUGUI>();
 
-        _pauseButtonImage = _canvas.transform.Find("PauseButton").GetComponent<Image>();
+        _pauseButtonImage = _canvas.transform.Find("UIPopup_PauseButton").GetComponent<Image>();
 
         _playImage = Resources.Load<Sprite>("Sprites/play");
         _pauseImage = Resources.Load<Sprite>("Sprites/pause");

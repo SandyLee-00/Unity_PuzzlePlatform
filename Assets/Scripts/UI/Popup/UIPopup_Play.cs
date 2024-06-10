@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIScene_Play : MonoBehaviour
+public class UIPopup_Play : MonoBehaviour
 {
     private PlayerMovement _playerMovement;
 
@@ -27,10 +27,5 @@ public class UIScene_Play : MonoBehaviour
     {
         GameManager.Instance.IsPaused = false; // Pause 상태 해제
         _playerMovement.ToggleCursor();
-    }
-
-    public void OnSaveButton()
-    {
-
     }
 }

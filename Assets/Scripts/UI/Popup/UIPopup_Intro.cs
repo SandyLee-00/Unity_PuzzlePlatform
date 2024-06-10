@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIScene_Intro : MonoBehaviour
+public class UIPopup_Intro : MonoBehaviour
 {
     private void Start()
     {
