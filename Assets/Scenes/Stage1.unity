@@ -11074,11 +11074,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ffc9470f006f054f84900feadd19132, type: 3}
---- !u!1 &1521617856 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4634217803382535314, guid: 2ffc9470f006f054f84900feadd19132, type: 3}
-  m_PrefabInstance: {fileID: 1521617855}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1524501456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14494,8 +14489,8 @@ MonoBehaviour:
     Heart: 0
     Stamina: 0
     Inventory: []
-  Player: {fileID: 1521617856}
-  inventory: {fileID: 498129521}
+  _player: {fileID: 0}
+  _inventory: {fileID: 498129521}
 --- !u!1001 &1876018413
 PrefabInstance:
   m_ObjectHideFlags: 0

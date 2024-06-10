@@ -2,8 +2,11 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using System;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
+using UnityEditor;
 
-public class DataManager : MonoBehaviour
+public class DataManager : Singleton<DataManager>
 {
     public UserData saveData;
     public GameObject _player;
@@ -16,16 +19,29 @@ public class DataManager : MonoBehaviour
 
     private void Awake()
     {
-        heartStamina = _player.GetComponent<PlayerHeartStamina>();
+        if (_componentInstance == null)
+            _componentInstance = DataManager.Instance;
+        else
+            Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
+
     }
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().buildIndex == (int)Define.Scene.Play)
+        {
+            _player = GameObject.FindGameObjectWithTag("Player");
+            heartStamina = _player.GetComponent<PlayerHeartStamina>();
+        }
+
         saveData.Inventory.Clear();
 
-        //데이터가 없으면 기본세팅
-        //있으면 json로드
-        LoadData();
+        if (GameManager.Instance.IsLoadData)
+        {
+            Debug.Log("데이터 로드");
+            LoadData();
+        }
     }
 
     private void SavePlayerProperties()
@@ -48,18 +64,18 @@ public class DataManager : MonoBehaviour
     private void LoadPlayerProperties()
     {
         //플레이어
-        transform.position = saveData.Position;
-        transform.rotation = saveData.Rotation;
+        _player.transform.position = saveData.Position;
+        _player.transform.rotation = saveData.Rotation;
 
         heartStamina.LoadFromSaveData(saveData.Heart, saveData.Stamina);
 
         //인벤토리
-        foreach (EquippableItemData data in saveData.Inventory)
-        {
-            Debug.Log(data.itemName);
-            _inventory.AddItem(data);
-            Debug.Log(_inventory.GetItems()[0].itemName);
-        }
+        //foreach (EquippableItemData data in saveData.Inventory)
+        //{
+        //    Debug.Log(data.itemName);
+        //    _inventory.AddItem(data);
+        //    Debug.Log(_inventory.GetItems()[0].itemName);
+        //}
     }
 
     public void SaveData()

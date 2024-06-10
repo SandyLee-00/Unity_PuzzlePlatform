@@ -17,6 +17,7 @@ public class GameManager : Singleton<GameManager>
     private bool _isPaused = false;
     private Canvas _canvas;
 
+    public bool IsLoadData;
     public bool IsGamePlaying;
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI clearTimeText;

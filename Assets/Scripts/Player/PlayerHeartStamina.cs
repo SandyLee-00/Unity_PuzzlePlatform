@@ -38,7 +38,7 @@ public class PlayerHeartStamina : MonoBehaviour
 
     private void Start()
     {
-        //LoadHeartStamina();
+        LoadHeartStamina();
     }
 
     void Update()
