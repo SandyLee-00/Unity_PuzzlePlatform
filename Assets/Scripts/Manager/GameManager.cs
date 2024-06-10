@@ -51,6 +51,12 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // 현재 씬이 Title 이면 OnSceneLoaded 함수 종료
+        if(SceneManager.GetSceneByBuildIndex(0) == scene)
+        {
+            return;
+        }
+
         _canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
 
         Transform APanelTransform = _canvas.transform.Find("GameOverPanel");
