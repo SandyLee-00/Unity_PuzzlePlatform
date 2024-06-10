@@ -38,8 +38,7 @@ public class PlayerHeartStamina : MonoBehaviour
 
     private void Start()
     {
-        CurrentHeart = MaxHeart;
-        CurrentStamina = MaxStamina;
+        //SettingBasic();
     }
 
     void Update()
@@ -65,6 +64,20 @@ public class PlayerHeartStamina : MonoBehaviour
             ChangeStamina(_playerStatHandler.CurrentAttribute.staminaFillAmount);
             _staminatimeSinceLastChange = 0f;
         }
+    }
+
+    //파일이 없을 때
+    public void SettingBasic()
+    {
+        CurrentHeart = MaxHeart;
+        CurrentStamina = MaxStamina;
+    }
+
+    //데이터가 불러왔을 때
+    public void LoadFromSaveData(int heart, float stamina)
+    {
+        CurrentHeart = heart;
+        CurrentStamina = stamina;
     }
 
     public bool ChangeHeart(int change)
