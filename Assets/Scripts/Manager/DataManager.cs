@@ -6,8 +6,9 @@ using System;
 public class DataManager : MonoBehaviour
 {
     public UserData saveData;
+    public GameObject _player;
     private PlayerHeartStamina heartStamina;
-    public UIInventory inventory;
+    public UIInventory _inventory;
 
     private string savePath = Path.Combine(Application.dataPath, "Data.json");    //저장경로
 
@@ -15,7 +16,7 @@ public class DataManager : MonoBehaviour
 
     private void Awake()
     {
-        heartStamina = GetComponent<PlayerHeartStamina>();
+        heartStamina = _player.GetComponent<PlayerHeartStamina>();
     }
 
     private void Start()
@@ -30,14 +31,14 @@ public class DataManager : MonoBehaviour
     private void SavePlayerProperties()
     {
         //플레이어
-        saveData.Position = transform.position;
-        saveData.Rotation = transform.rotation;
+        saveData.Position = _player.transform.position;
+        saveData.Rotation = _player.transform.rotation;
         saveData.Heart = heartStamina.CurrentHeart;
         saveData.Stamina = heartStamina.CurrentStamina;
 
         //인벤토리
         saveData.Inventory.Clear();
-        foreach (EquippableItemData data in inventory.GetItems())
+        foreach (EquippableItemData data in _inventory.GetItems())
         {
             if(data != null)
                 saveData.Inventory.Add(data);
@@ -56,8 +57,8 @@ public class DataManager : MonoBehaviour
         foreach (EquippableItemData data in saveData.Inventory)
         {
             Debug.Log(data.itemName);
-            inventory.AddItem(data);
-            Debug.Log(inventory.GetItems()[0].itemName);
+            _inventory.AddItem(data);
+            Debug.Log(_inventory.GetItems()[0].itemName);
         }
     }
 

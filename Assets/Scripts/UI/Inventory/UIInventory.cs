@@ -76,6 +76,7 @@ public class UIInventory : MonoBehaviour
 
     public void AddItem(EquippableItemData data)
     {
+        Debug.Log("아이템 추가");
         ItemSlot emptySlot = GetEmptySlot();
 
         if (emptySlot != null)

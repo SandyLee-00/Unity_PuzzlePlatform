@@ -51,7 +51,6 @@ GameObject:
   - component: {fileID: 5792717861942063130}
   - component: {fileID: 7323565988967672836}
   - component: {fileID: 1862044727739823780}
-  - component: {fileID: 8691769150050776877}
   m_Layer: 6
   m_Name: Player_RIgidbody
   m_TagString: Player
@@ -269,23 +268,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8691769150050776877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4634217803382535314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69aaa5249cad60e459f00e4ae71fce4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveData:
-    Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    Heart: 0
-    Stamina: 0
 --- !u!1 &5079408191716400656
 GameObject:
   m_ObjectHideFlags: 0
