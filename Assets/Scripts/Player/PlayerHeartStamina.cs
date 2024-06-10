@@ -66,17 +66,13 @@ public class PlayerHeartStamina : MonoBehaviour
         }
     }
 
-    //파일이 없을 때
-    public void LoadHeartStamina()
-    {
-        CurrentHeart = MaxHeart;
-        CurrentStamina = MaxStamina;
-    }
-
-    //데이터가 불러왔을 때
-    public void LoadFromSaveData(int heart, float stamina)
+    public void SetHeart(int heart)
     {
         CurrentHeart = heart;
+    }
+
+    public void SetStamina(float stamina)
+    {
         CurrentStamina = stamina;
     }
 

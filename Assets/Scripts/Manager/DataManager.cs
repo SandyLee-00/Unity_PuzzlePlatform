@@ -50,7 +50,8 @@ public class DataManager : MonoBehaviour
         transform.position = saveData.Position;
         transform.rotation = saveData.Rotation;
 
-        heartStamina.LoadFromSaveData(saveData.Heart, saveData.Stamina);
+        heartStamina.SetHeart(saveData.Heart);
+        heartStamina.SetStamina(saveData.Stamina);
 
         //인벤토리
         foreach (EquippableItemData data in saveData.Inventory)
@@ -79,7 +80,8 @@ public class DataManager : MonoBehaviour
         } 
         catch
         {
-            heartStamina.LoadHeartStamina();
+            heartStamina.SetHeart(heartStamina.MaxHeart);
+            heartStamina.SetStamina(heartStamina.MaxStamina);
         }
 
         OnDataLoad?.Invoke();
