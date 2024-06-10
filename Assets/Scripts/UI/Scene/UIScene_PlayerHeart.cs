@@ -6,32 +6,37 @@ public class UIScene_PlayerHeart : MonoBehaviour
 {
     public GameObject[] Hearts;
 
+    private GameObject player;
     private PlayerHeartStamina playerHeartStamina;
     private PlayerAttributeHandler playerAttributeHandler;
+    private DataManager dataManager;
     private void Start()
     {
-        playerHeartStamina = GameObject.FindGameObjectWithTag(Define.PlayerTag).GetComponent<PlayerHeartStamina>();
-        playerAttributeHandler = GameObject.FindGameObjectWithTag(Define.PlayerTag).GetComponent<PlayerAttributeHandler>();
+        player = GameObject.FindGameObjectWithTag(Define.PlayerTag);
+        playerHeartStamina = player.GetComponent<PlayerHeartStamina>();
+        playerAttributeHandler = player.GetComponent<PlayerAttributeHandler>();
 
-        playerHeartStamina.OnChangeHealthMana += UpdateHeart;
+        playerHeartStamina.OnChangeHealthMana += SetHeart;
 
         foreach (GameObject heart in Hearts)
         {
             heart.SetActive(true);
         }
 
-        
+        dataManager = player.GetComponent<DataManager>();
+        dataManager.OnDataLoad += SetHeart;
     }
 
-    private void Update()
-    {
-        UpdateHeart();  //데이터로드시 한번 체크
-    }
-
-    private void UpdateHeart()
+    private void SetHeart()
     {
         Debug.Log($"(CurrentHeart: {playerHeartStamina.CurrentHeart}, MaxHeart: {playerHeartStamina.MaxHeart})");
-        if (playerHeartStamina.CurrentHeart == 2)
+        if (playerHeartStamina.CurrentHeart == 3)
+        {
+            Hearts[2].SetActive(true);
+            Hearts[1].SetActive(true);
+            Hearts[0].SetActive(true);
+        }
+        else if (playerHeartStamina.CurrentHeart == 2)
         {
             Hearts[2].SetActive(false);
             Hearts[1].SetActive(true);

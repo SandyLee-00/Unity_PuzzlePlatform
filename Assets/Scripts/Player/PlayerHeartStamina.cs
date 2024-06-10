@@ -38,7 +38,7 @@ public class PlayerHeartStamina : MonoBehaviour
 
     private void Start()
     {
-        //SettingBasic();
+        //LoadHeartStamina();
     }
 
     void Update()
@@ -67,7 +67,7 @@ public class PlayerHeartStamina : MonoBehaviour
     }
 
     //파일이 없을 때
-    public void SettingBasic()
+    public void LoadHeartStamina()
     {
         CurrentHeart = MaxHeart;
         CurrentStamina = MaxStamina;
