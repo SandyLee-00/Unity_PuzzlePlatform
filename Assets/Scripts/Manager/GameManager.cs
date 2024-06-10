@@ -21,6 +21,8 @@ public class GameManager : Singleton<GameManager>
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI clearTimeText;
 
+    private PlayerStateController _playerStateController;
+
     private void Awake()
     {
         if (_componentInstance == null)
@@ -91,6 +93,9 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         InitializeGame();
+
+        _playerStateController = GameObject.FindGameObjectWithTag(Define.PlayerTag).GetComponent<PlayerStateController>();
+        _playerStateController.OnAfterDeathEvent += GameOver;
     }
 
     void Update()
