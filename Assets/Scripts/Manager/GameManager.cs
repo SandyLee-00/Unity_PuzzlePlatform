@@ -7,33 +7,19 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField]
     private GameObject _gameOverPanel;
-
-    [SerializeField]
     private GameObject _gameClearPanel;
-
-    [SerializeField]
     private GameObject _pausePanel;
-
-    [SerializeField]
     private Image _pauseButtonImage;
-
-    [SerializeField]
-    private Sprite playImage;
-
-    [SerializeField]
-    private Sprite pauseImage;
+    private Sprite _playImage;
+    private Sprite _pauseImage;
+    private float _playTime;
+    private bool _isPaused = false;
+    private Canvas _canvas;
 
     public bool IsGamePlaying;
-
     public TextMeshProUGUI timeText;
-    private float _playTime;
     public TextMeshProUGUI clearTimeText;
-
-    private bool _isPaused = false;
-
-    private Canvas canvas;
 
     private void Awake()
     {
@@ -63,23 +49,29 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        Transform APanelTransform = canvas.transform.Find("GameOverPanel");
+        _canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+
+        Transform APanelTransform = _canvas.transform.Find("GameOverPanel");
         _gameOverPanel = APanelTransform.gameObject;
 
-        Transform BPanelTransform = canvas.transform.Find("GameClearPanel");
+        Transform BPanelTransform = _canvas.transform.Find("GameClearPanel");
         _gameClearPanel = BPanelTransform.gameObject;
 
-        Transform CPanelTransform = canvas.transform.Find("PausePanel");
+        Transform CPanelTransform = _canvas.transform.Find("PausePanel");
         _pausePanel = CPanelTransform.gameObject;
 
-        _pauseButtonImage = GameObject.Find("PauseButton").GetComponent<Image>();
 
         timeText = GameObject.Find("TimeText").GetComponent<TextMeshProUGUI>();
 
         Transform DTransform = BPanelTransform.Find("ClearTimeBG");
         Transform ETransform = DTransform.Find("ClearTimeText");
         clearTimeText = ETransform.gameObject.GetComponent<TextMeshProUGUI>();
+
+        _pauseButtonImage = _canvas.transform.Find("PauseButton").GetComponent<Image>();
+
+        _playImage = Resources.Load<Sprite>("Sprites/play");
+        _pauseImage = Resources.Load<Sprite>("Sprites/pause");
+        _pauseButtonImage.sprite = _pauseImage;
 
         // 초기화
         InitializeGame();
@@ -152,7 +144,7 @@ public class GameManager : Singleton<GameManager>
 
     private void UpdatePauseUI()
     {
-        _pauseButtonImage.sprite = _isPaused ? playImage : pauseImage;
+        _pauseButtonImage.sprite = _isPaused ? _playImage : _pauseImage;
         _pausePanel?.SetActive(_isPaused);
     }
 }
