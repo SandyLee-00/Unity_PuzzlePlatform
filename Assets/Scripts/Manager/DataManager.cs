@@ -21,19 +21,7 @@ public class DataManager : MonoBehaviour
 
         //데이터가 없으면 기본세팅
         //있으면 json로드
-        try
-        {
-            LoadData();
-        }
-        catch
-        {
-            heartStamina.SettingBasic();
-        }
-        finally
-        {
-            Debug.Log(heartStamina.CurrentHeart);
-            Debug.Log(heartStamina.CurrentStamina);
-        }
+        LoadData();
     }
 
     private void SetPlayerProperties()
@@ -58,6 +46,7 @@ public class DataManager : MonoBehaviour
         //플레이어
         transform.position = saveData.Position;
         transform.rotation = saveData.Rotation;
+
         heartStamina.LoadFromSaveData(saveData.Heart, saveData.Stamina);
 
         //인벤토리
@@ -69,7 +58,6 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    [ContextMenu("To JsonData")]
     public void SaveData()
     {
         SetPlayerProperties();
@@ -79,11 +67,17 @@ public class DataManager : MonoBehaviour
 
     public void LoadData()
     {
-        var json = File.ReadAllText(savePath);
+        try
+        {
+            var json = File.ReadAllText(savePath);
 
-        saveData = JsonUtility.FromJson<UserData>(json);
-
-        GetPlayerProperties();
+            saveData = JsonUtility.FromJson<UserData>(json);
+            GetPlayerProperties();
+        } 
+        catch
+        {
+            heartStamina.SettingBasic();
+        }
     }
 }
 
