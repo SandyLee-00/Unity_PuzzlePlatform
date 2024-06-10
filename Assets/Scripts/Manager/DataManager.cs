@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
+using System;
 
 public class DataManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class DataManager : MonoBehaviour
     public UIInventory inventory;
 
     private string savePath = Path.Combine(Application.dataPath, "Data.json");    //저장경로
+
+    public event Action OnDataLoad;
 
     private void Awake()
     {
@@ -24,7 +27,7 @@ public class DataManager : MonoBehaviour
         LoadData();
     }
 
-    private void SetPlayerProperties()
+    private void SavePlayerProperties()
     {
         //플레이어
         saveData.Position = transform.position;
@@ -41,7 +44,7 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    private void GetPlayerProperties()
+    private void LoadPlayerProperties()
     {
         //플레이어
         transform.position = saveData.Position;
@@ -60,7 +63,7 @@ public class DataManager : MonoBehaviour
 
     public void SaveData()
     {
-        SetPlayerProperties();
+        SavePlayerProperties();
         var json = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(savePath, json);
     }
@@ -72,12 +75,14 @@ public class DataManager : MonoBehaviour
             var json = File.ReadAllText(savePath);
 
             saveData = JsonUtility.FromJson<UserData>(json);
-            GetPlayerProperties();
+            LoadPlayerProperties();
         } 
         catch
         {
-            heartStamina.SettingBasic();
+            heartStamina.LoadHeartStamina();
         }
+
+        OnDataLoad?.Invoke();
     }
 }
 
