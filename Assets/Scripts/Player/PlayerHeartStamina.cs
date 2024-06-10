@@ -133,7 +133,5 @@ public class PlayerHeartStamina : MonoBehaviour
     private void CallDeath()
     {
         OnDeath?.Invoke();
-        GameManager.Instance.GameOver();
-        _playerMovement.ToggleCursor();
     }
 }
