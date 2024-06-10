@@ -40,7 +40,6 @@ public class PlayerStateController : MonoBehaviour
     }
 
     public event Action<PlayerState> OnStateChangeEvent;
-    public event Action OnAfterDeathEvent;
 
     [SerializeField]
     private PlayerState _playerState;
@@ -66,6 +65,7 @@ public class PlayerStateController : MonoBehaviour
 
         _playerHealthMana.OnDeath += () => 
         {
+            Debug.Log("PlayerStateController::OnDeath()");
             SoundManager.Instance.Play(Define.Sound.Effect, "metalPot3");
             State = PlayerState.Die;
             StartCoroutine(WaitforDeadAnimation(1.5f));
@@ -101,9 +101,10 @@ public class PlayerStateController : MonoBehaviour
 
     private IEnumerator WaitforDeadAnimation(float delay)
     {
+        Debug.Log("PlayerStateController::WaitforDeadAnimation()");
         yield return new WaitForSeconds(delay);
 
         _playerMovement.ToggleCursor();
-        OnAfterDeathEvent?.Invoke();
+        GameManager.Instance.GameOver();
     }
 }

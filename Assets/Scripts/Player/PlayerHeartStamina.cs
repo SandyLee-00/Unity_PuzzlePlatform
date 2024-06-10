@@ -132,6 +132,7 @@ public class PlayerHeartStamina : MonoBehaviour
 
     private void CallDeath()
     {
+        Debug.Log("PlayerHeartStamina::CallDeath()");
         OnDeath?.Invoke();
     }
 }
