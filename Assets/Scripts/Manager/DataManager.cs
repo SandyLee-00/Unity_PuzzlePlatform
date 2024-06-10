@@ -67,7 +67,8 @@ public class DataManager : Singleton<DataManager>
         _player.transform.position = saveData.Position;
         _player.transform.rotation = saveData.Rotation;
 
-        heartStamina.LoadFromSaveData(saveData.Heart, saveData.Stamina);
+        heartStamina.SetHeart(saveData.Heart);
+        heartStamina.SetStamina(saveData.Stamina);
 
         //인벤토리
         //foreach (EquippableItemData data in saveData.Inventory)
@@ -96,7 +97,8 @@ public class DataManager : Singleton<DataManager>
         } 
         catch
         {
-            heartStamina.LoadHeartStamina();
+            heartStamina.SetHeart(heartStamina.MaxHeart);
+            heartStamina.SetStamina(heartStamina.MaxStamina);
         }
 
         OnDataLoad?.Invoke();
