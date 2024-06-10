@@ -13,13 +13,13 @@ public class UIScene_Play : MonoBehaviour
 
     public void StartIntroScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene((int)Define.Scene.Title);
         GameManager.Instance.IsGamePlaying = false;
     }
 
     public void StartPlayScene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene((int)Define.Scene.Play);
         GameManager.Instance.IsGamePlaying = true;
     }
 
