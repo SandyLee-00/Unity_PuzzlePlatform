@@ -2,9 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using System;
-using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 
 public class DataManager : Singleton<DataManager>
 {
