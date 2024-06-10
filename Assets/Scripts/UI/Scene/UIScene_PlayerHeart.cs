@@ -23,8 +23,7 @@ public class UIScene_PlayerHeart : MonoBehaviour
             heart.SetActive(true);
         }
 
-        dataManager = player.GetComponent<DataManager>();
-        dataManager.OnDataLoad += SetHeart;
+        DataManager.Instance.OnDataLoad += SetHeart;
     }
 
     private void SetHeart()

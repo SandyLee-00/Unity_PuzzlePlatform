@@ -37,6 +37,11 @@ public class DataManager : Singleton<DataManager>
 
         saveData.Inventory.Clear();
 
+        CheckLoadData();
+    }
+
+    private void CheckLoadData()
+    {
         if (GameManager.Instance.IsLoadData)
         {
             Debug.Log("데이터 로드");
@@ -69,6 +74,8 @@ public class DataManager : Singleton<DataManager>
 
         heartStamina.SetHeart(saveData.Heart);
         heartStamina.SetStamina(saveData.Stamina);
+
+        Debug.Log($"Heart : {heartStamina.CurrentHeart}, Stamina : {heartStamina.CurrentStamina}");
 
         //인벤토리
         //foreach (EquippableItemData data in saveData.Inventory)
