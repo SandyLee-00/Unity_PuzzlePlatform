@@ -14,8 +14,6 @@ public enum PlayerState
     Die = 1 << 4,
     Interact = 1 << 5,
     Run = 1 << 6,
-    Fall = 1 << 7,
-    Climb = 1 << 8,
 
     Jumpable = Walk | Idle | Run,
 }
