@@ -7,12 +7,12 @@ public class DataManager : MonoBehaviour
     public UserData saveData;
     private PlayerHeartStamina heartStamina;
 
+    private string savePath = Path.Combine(Application.dataPath, "Data.json");    //저장경로
+
     private void Start()
     {
         heartStamina = GetComponent<PlayerHeartStamina>();
     }
-
-    private string savePath = Path.Combine("/Assets/SaveData/", "Data.json");    //저장경로
 
     private void SetPlayerProperties()
     {
@@ -32,7 +32,7 @@ public class DataManager : MonoBehaviour
         SetPlayerProperties();
         var json = JsonUtility.ToJson(saveData, true);
 
-        File.WriteAllText(Application.dataPath + savePath, json);
+        File.WriteAllText(savePath, json);
     }
 
     public void LoadData()
@@ -64,6 +64,4 @@ public class UserData
     public float Stamina;
 
     //인벤토리
-    [Header("Player Inventory")]
-    public List<ItemData> items;
 }
