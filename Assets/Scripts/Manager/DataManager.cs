@@ -5,12 +5,32 @@ using System.Collections.Generic;
 public class DataManager : MonoBehaviour
 {
     public UserData saveData;
+    private PlayerHeartStamina heartStamina;
 
-    const string savePath = "/Data.txt";    //저장경로
+    private void Start()
+    {
+        heartStamina = GetComponent<PlayerHeartStamina>();
+    }
 
+    private string savePath = "/Data.json";    //저장경로
+
+    private void SetPlayerProperties()
+    {
+        //플레이어
+        saveData.Position = transform.position;
+        saveData.Rotation = transform.rotation;
+        saveData.Heart = heartStamina.CurrentHeart;
+        saveData.Stamina = heartStamina.CurrentStamina;
+
+        //인벤토리
+
+    }
+
+    [ContextMenu("To JsonData")]
     public void SaveData()
     {
-        var json = JsonUtility.ToJson(saveData);
+        SetPlayerProperties();
+        var json = JsonUtility.ToJson(saveData, true);
 
         File.WriteAllText(Application.persistentDataPath + savePath, json);
     }
