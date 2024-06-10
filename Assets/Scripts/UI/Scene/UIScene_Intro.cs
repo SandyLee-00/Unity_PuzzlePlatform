@@ -8,10 +8,12 @@ public class UIScene_Intro : MonoBehaviour
         SoundManager.Instance.Play(Define.Sound.Bgm, "TitleBGM");
     }
 
-    public void StartPlayScene()
+    public void StartPlayScene(int mode)
     {
         SceneManager.LoadScene((int)Define.Scene.Play);
         GameManager.Instance.IsGamePlaying = true;
+        if (mode == 2)
+            GameManager.Instance.IsLoadData = true;
     }
 
     public void OnExitButton()
