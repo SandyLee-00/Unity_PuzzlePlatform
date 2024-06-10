@@ -3,10 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class UIScene_Intro : MonoBehaviour
 {
+    private void Start()
+    {
+        SoundManager.Instance.Play(Define.Sound.Bgm, "PlayBGM");
+    }
+
     public void StartPlayScene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene((int)Define.Scene.Play);
         GameManager.Instance.IsGamePlaying = true;
+        SoundManager.Instance.Play(Define.Sound.Bgm, "PlayBGM");
     }
 
     public void OnExitButton()
