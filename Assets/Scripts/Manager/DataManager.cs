@@ -9,9 +9,28 @@ public class DataManager : MonoBehaviour
 
     private string savePath = Path.Combine(Application.dataPath, "Data.json");    //저장경로
 
-    private void Start()
+    private void Awake()
     {
         heartStamina = GetComponent<PlayerHeartStamina>();
+    }
+
+    private void Start()
+    {
+        //데이터가 없으면 기본세팅
+        //있으면 json로드
+        try
+        {
+            LoadData();
+        }
+        catch
+        {
+            heartStamina.SettingBasic();
+        }
+        finally
+        {
+            Debug.Log(heartStamina.CurrentHeart);
+            Debug.Log(heartStamina.CurrentStamina);
+        }
     }
 
     private void SetPlayerProperties()
@@ -26,6 +45,14 @@ public class DataManager : MonoBehaviour
 
     }
 
+    private void GetPlayerProperties()
+    {
+        //플레이어
+        transform.position = saveData.Position;
+        transform.rotation = saveData.Rotation;
+        heartStamina.LoadFromSaveData(saveData.Heart, saveData.Stamina);
+    }
+
     [ContextMenu("To JsonData")]
     public void SaveData()
     {
@@ -37,16 +64,11 @@ public class DataManager : MonoBehaviour
 
     public void LoadData()
     {
-        var json = File.ReadAllText(Application.persistentDataPath + savePath);
+        var json = File.ReadAllText(savePath);
 
         saveData = JsonUtility.FromJson<UserData>(json);
 
-        //saveData에 저장된 데이터를 플레이어에 추가
-        /*
-         * player.position = saveData.Position;
-         * player.rotation = saveData.Rotation;
-         * player.inventory = items;
-         */
+        GetPlayerProperties();
     }
 }
 
