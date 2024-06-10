@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class UIInventory : MonoBehaviour
 {
@@ -183,5 +184,15 @@ public class UIInventory : MonoBehaviour
 
         ClearSelectedItemWindow();
         UpdateUI();
+    }
+
+    public List<EquippableItemData> GetItems()
+    {
+        List<EquippableItemData> nowEquipItems = new List<EquippableItemData>();
+        for(int i=0;i< _slots.Length;i++)
+        {
+            nowEquipItems.Add(_slots[i].itemData);
+        }
+        return nowEquipItems;
     }
 }
