@@ -17,6 +17,8 @@ public class DataManager : Singleton<DataManager>
 
     public event Action OnDataLoad;
 
+    public EquippableItemData[] equipItems; //데이터를 로드할때
+
     private void Awake()
     {
         if (_componentInstance == null)
@@ -47,6 +49,11 @@ public class DataManager : Singleton<DataManager>
             Debug.Log("데이터 로드");
             LoadData();
         }
+        else
+        {
+            heartStamina.SetHeart(heartStamina.MaxHeart);
+            heartStamina.SetStamina(heartStamina.MaxStamina);
+        }
     }
 
     private void SavePlayerProperties()
@@ -62,7 +69,7 @@ public class DataManager : Singleton<DataManager>
         foreach (EquippableItemData data in _inventory.GetItems())
         {
             if(data != null)
-                saveData.Inventory.Add(data);
+                saveData.Inventory.Add(new UserItemData(data.itemName, (int)data.type));
         }
     }
 
@@ -78,12 +85,17 @@ public class DataManager : Singleton<DataManager>
         Debug.Log($"Heart : {heartStamina.CurrentHeart}, Stamina : {heartStamina.CurrentStamina}");
 
         //인벤토리
-        //foreach (EquippableItemData data in saveData.Inventory)
-        //{
-        //    Debug.Log(data.itemName);
-        //    _inventory.AddItem(data);
-        //    Debug.Log(_inventory.GetItems()[0].itemName);
-        //}
+        foreach(UserItemData data in saveData.Inventory)
+        {
+            if(data.Name == "고추")
+            {
+                _inventory.AddItem(equipItems[1]);
+            }
+            else if(data.Name == "버섯")
+            {
+                _inventory.AddItem(equipItems[0]);
+            }
+        }
     }
 
     public void SaveData()
@@ -127,7 +139,7 @@ public class UserData
 
     //인벤토리
     [Header("Player Inventory")]
-    public List<EquippableItemData> Inventory;
+    public List<UserItemData> Inventory;
 }
 
 [System.Serializable]

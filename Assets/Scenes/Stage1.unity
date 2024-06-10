@@ -14491,6 +14491,9 @@ MonoBehaviour:
     Inventory: []
   _player: {fileID: 0}
   _inventory: {fileID: 498129521}
+  equipItems:
+  - {fileID: 11400000, guid: 2b321e1cb2f89e64f864dfa81acb1bbc, type: 2}
+  - {fileID: 11400000, guid: e24d38a013ba98d499323a0008018976, type: 2}
 --- !u!1001 &1876018413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16322,6 +16325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939c99b609089d1469d2287aa8e2d815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsLoadData: 0
   IsGamePlaying: 0
   timeText: {fileID: 1548536790}
   clearTimeText: {fileID: 1583703822}
