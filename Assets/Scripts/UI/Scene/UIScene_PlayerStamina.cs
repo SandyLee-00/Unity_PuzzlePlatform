@@ -10,6 +10,12 @@ public class UIScene_PlayerStamina : MonoBehaviour
     {
         playerHeartStamina = GameObject.FindGameObjectWithTag(Define.PlayerTag).GetComponent<PlayerHeartStamina>();
         playerHeartStamina.OnChangeHealthMana += UpdateStamina;
+
+    }
+
+    private void Update()
+    {
+        UpdateStamina();  //데이터로드시 한번 체크
     }
 
     private void UpdateStamina()

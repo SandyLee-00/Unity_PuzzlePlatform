@@ -19,6 +19,13 @@ public class UIScene_PlayerHeart : MonoBehaviour
         {
             heart.SetActive(true);
         }
+
+        
+    }
+
+    private void Update()
+    {
+        UpdateHeart();  //데이터로드시 한번 체크
     }
 
     private void UpdateHeart()
