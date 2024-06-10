@@ -14,8 +14,6 @@ public enum PlayerState
     Die = 1 << 4,
     Interact = 1 << 5,
     Run = 1 << 6,
-    Fall = 1 << 7,
-    Climb = 1 << 8,
 
     Jumpable = Walk | Idle | Run,
 }
@@ -42,6 +40,7 @@ public class PlayerStateController : MonoBehaviour
     }
 
     public event Action<PlayerState> OnStateChangeEvent;
+    public event Action OnAfterDeathEvent;
 
     [SerializeField]
     private PlayerState _playerState;
@@ -68,7 +67,8 @@ public class PlayerStateController : MonoBehaviour
         _playerHealthMana.OnDeath += () => 
         {
             SoundManager.Instance.Play(Define.Sound.Effect, "metalPot3");
-            StartCoroutine(ResetStateAfterDelayCoroutine(PlayerState.Die, 5f)); 
+            State = PlayerState.Die;
+            StartCoroutine(WaitforDeadAnimation(1.5f));
         };
 
         _playerInputController.OnInteractEvent += () => 
@@ -97,5 +97,13 @@ public class PlayerStateController : MonoBehaviour
             State = _previousState;
         }
         _playerMovement.IsMoveable = true;
+    }
+
+    private IEnumerator WaitforDeadAnimation(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        _playerMovement.ToggleCursor();
+        OnAfterDeathEvent?.Invoke();
     }
 }

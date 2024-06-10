@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapPlatform : Platform, IInspectable
+public class TrapPlatform : Platform
 {
     public TrapPlatformData trapPlatform;
 
