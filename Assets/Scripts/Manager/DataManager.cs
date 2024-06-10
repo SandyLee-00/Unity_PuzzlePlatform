@@ -5,14 +5,34 @@ using System.Collections.Generic;
 public class DataManager : MonoBehaviour
 {
     public UserData saveData;
+    private PlayerHeartStamina heartStamina;
 
-    const string savePath = "/Data.txt";    //저장경로
+    private string savePath = Path.Combine(Application.dataPath, "Data.json");    //저장경로
 
+    private void Start()
+    {
+        heartStamina = GetComponent<PlayerHeartStamina>();
+    }
+
+    private void SetPlayerProperties()
+    {
+        //플레이어
+        saveData.Position = transform.position;
+        saveData.Rotation = transform.rotation;
+        saveData.Heart = heartStamina.CurrentHeart;
+        saveData.Stamina = heartStamina.CurrentStamina;
+
+        //인벤토리
+
+    }
+
+    [ContextMenu("To JsonData")]
     public void SaveData()
     {
-        var json = JsonUtility.ToJson(saveData);
+        SetPlayerProperties();
+        var json = JsonUtility.ToJson(saveData, true);
 
-        File.WriteAllText(Application.persistentDataPath + savePath, json);
+        File.WriteAllText(savePath, json);
     }
 
     public void LoadData()
@@ -38,6 +58,10 @@ public class UserData
     public Vector3 Position;
     public Quaternion Rotation;
 
+    //플레이어 속성
+    [Header("Player Status")]
+    public int Heart;
+    public float Stamina;
+
     //인벤토리
-    List<ItemData> items;
 }

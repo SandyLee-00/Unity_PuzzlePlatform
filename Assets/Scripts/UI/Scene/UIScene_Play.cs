@@ -8,6 +8,7 @@ public class UIScene_Play : MonoBehaviour
     private void Start()
     {
         _playerMovement = GameObject.FindWithTag(Define.PlayerTag).GetComponent<PlayerMovement>();
+        SoundManager.Instance.Play(Define.Sound.Bgm, "PlayBGM");
     }
 
     public void StartIntroScene()

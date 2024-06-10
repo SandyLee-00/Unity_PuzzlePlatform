@@ -5,16 +5,21 @@ using UnityEngine;
 public class TrapHole : MonoBehaviour
 {
     public Transform startPos;
+    public GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag(Define.PlayerTag);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out PlayerHeartStamina player))
+        if(other.gameObject.TryGetComponent(out PlayerHeartStamina playerHeartStamina))
         {
-            if (player.ChangeHeart(-1))
+            if (playerHeartStamina.ChangeHeart(-1))
             {
                 Debug.Log("처음부터 시작");
-                player.transform.position = startPos.position; //시작 지점으로 추가
-                player.transform.rotation = startPos.rotation;
+                StartCoroutine(GoToStartPosition(1f));
             }
             else
             {
@@ -22,5 +27,13 @@ public class TrapHole : MonoBehaviour
                 //첫 화면으로 돌아가기
             }
         }
+    }
+
+    private IEnumerator GoToStartPosition(float second)
+    {
+        yield return new WaitForSeconds(second);
+
+        player.transform.position = startPos.position; //시작 지점으로 추가
+        player.transform.rotation = startPos.rotation;
     }
 }
