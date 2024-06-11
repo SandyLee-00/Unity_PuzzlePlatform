@@ -41,7 +41,7 @@
 ![와이어프레임](https://github.com/SandyLee-00/Unity_PuzzlePlatformer/assets/159543415/f88ed30f-19e0-4338-9b99-f24041b3b53a)
 
 ## 📹 시연 영상
-(링크)
+[(링크)](https://www.youtube.com/watch?v=Sffyg8J8WI4)
 
 ## 🎮 조작 방법
 - **이동**: W, A, S, D
@@ -61,7 +61,7 @@
 ## 📖 주요 기능
 ### INTRO SCENE
 - Play 버튼을 누르면 게임이 시작됩니다.
-- (   ) 버튼을 누르면 저장된 데이터를 불러올 수 있습니다.
+- Load Data 버튼을 누르면 저장된 데이터를 불러올 수 있습니다.
 - Setting 버튼을 누르면 BGM과 SFX를 개별적으로 조절할 수 있습니다.
 - Credit 버튼을 누르면 게임 제작자들을 볼 수 있습니다.
 - Exit 버튼을 누르면 게임이 종료됩니다.
